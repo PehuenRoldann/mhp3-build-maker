@@ -1,0 +1,27 @@
+<div class="main-container">
+    
+    <div class="item-name">{{item.name}}</div>
+    <div class="armor-item">
+        <div>
+            <div class="title">Stats</div>
+            <div><span>Rare: </span><span>{{item.rare}}</span></div>
+            <div><span>Defense: </span><span>{{item.defense}}</span></div>
+            <div><span>Class: </span><span>{{item.class}}</span></div>
+            <div><span>Slots: </span><span>{{item.slots}}</span></div>
+        </div>
+        <div>
+            <div class="title">Elem Res</div>
+            <div><span>Fire: </span>{{item.fire_res}}</div>
+            <div><span>Water: </span>{{item.water_res}}</div>
+            <div><span>Thunder: </span>{{item.thunder_res}}</div>
+            <div><span>Ice: </span>{{item.ice_res}}</div>
+            <div><span>Dragon: </span>{{item.dragon_res}}</div>
+        </div>
+        <div>
+            <div class="title">Skills</div>
+            <div *ngFor="let skill of skillsMap">
+                {{skill[0]}}: {{skill[1]}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="main-div">
+    <div class="title-container">
+        <img src="../../../assets/images/MHP3rd_Logo.webp" alt="Mhlogo">
+        <h1>Build Maker</h1>
+    </div>
+    <div class="main-container">
+        <p style="font-size: 12px; color: grey;">Mark the checkbox as done if you have the part arleady.</p>
+        <div class="armor-set-container">
+            <app-armor-slot [bodyPart]="'helmet'" [rare]="1" />
+            <app-armor-slot [bodyPart]="'plate'" [rare]="1" />
+            <app-armor-slot [bodyPart]="'guantlets'" [rare]="1" />
+            <app-armor-slot [bodyPart]="'waist'" [rare]="1" />
+            <app-armor-slot [bodyPart]="'leggings'" [rare]="1" />
+        </div>
+        <div class="dashboard-container">
+
+            <div class="stats-container">
+                <h1>Stats</h1>
+                <app-stats-box />
+            </div>
+            <div class="stats-container">
+                <h1>Skills</h1>
+                <app-skills-box />
+            </div>
+            <div class="stats-container">
+                <h1>Resources</h1>
+                <app-resources-box />
+            </div>
+        </div>
+    </div>
+</div>

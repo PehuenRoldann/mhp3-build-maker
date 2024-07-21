@@ -1,0 +1,4 @@
+<div [ngSwitch]="currentView">
+    <app-main-view *ngSwitchDefault=""/>
+    <app-armor-list *ngSwitchCase="'list'" />
+</div>

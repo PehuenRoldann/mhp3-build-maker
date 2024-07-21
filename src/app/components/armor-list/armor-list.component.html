@@ -1,0 +1,71 @@
+<!-- Navigation bar for filters with bootstrap -->
+<nav class="
+navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid filters-bar">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">List of {{typeFilter}}</a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li> -->
+        </ul>
+        <div class="stats-filters-container">
+            <div>
+                <label for="minDefense">Rare &ge;</label>
+                <input class="filterNumberInput" type="number" name="minRare" [(ngModel)]="minRareFilter" min="0" step="1" max="7">
+            </div>
+            <div>
+                <label for="minDefense">Defense &ge;</label>
+                <input class="filterNumberInput" type="number" name="minDefense" [(ngModel)]="minDefenseFilter" min="0" step="1">
+            </div>
+            <div>
+                <label for="minDefense">Slots &ge;</label>
+                <input class="filterNumberInput" type="number" name="minSlots" [(ngModel)]="minSlotsFilter" min="0" step="1" max="3">
+            </div>
+            <div>
+                <label for="minDefense">Fire Res &ge;</label>
+                <input class="filterNumberInput" type="number" name="minFireRes" [(ngModel)]="minFireResFilter" step="1" >
+            </div>
+            <div>
+                <label for="minDefense">Water Res &ge;</label>
+                <input class="filterNumberInput" type="number" name="minWaterRes" [(ngModel)]="minWaterResFilter" step="1">
+            </div>
+            <div>
+                <label for="minDefense">Thunder Res &ge;</label>
+                <input class="filterNumberInput" type="number" name="minThunderRes" [(ngModel)]="minThunderResFilter" step="1">
+            </div>
+            <div>
+                <label for="minDefense">Ice Res &ge;</label>
+                <input class="filterNumberInput" type="number" name="minIceRes" [(ngModel)]="minIceResFilter" step="1">
+            </div>
+            <div>
+                <label for="minDefense">Dragon Res &ge;</label>
+                <input class="filterNumberInput" type="number" name="minDragonRes" [(ngModel)]="minDragonResFilter" step="1">
+            </div>
+        </div>
+        <form class="d-flex search-form" role="search">
+          <input class="form-control me-2" type="search" placeholder="Name or skill name value" aria-label="Search"
+          [(ngModel)]="searchInput" name="searchInput">
+          <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- List of armor elemets -->
+
+<div *ngIf="filteredArmorData.length == 0; else itemsListBlock">Data not found!</div>
+<ng-template #itemsListBlock>
+    <div class="armor-list-container" *ngFor="let item of filteredArmorData">
+        <app-armor-list-item  [item]="item"/>
+    </div>
+</ng-template>

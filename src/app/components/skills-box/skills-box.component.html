@@ -1,0 +1,12 @@
+<div class="skill-box">
+    <p *ngIf="skills.size === 0; else elseBlock">No skills to show</p>
+    <ng-template #elseBlock>
+        <li *ngFor="let item of skillsArray" class="skill-li" 
+        [ngClass]="isPositive(item[1]) ? 'skill-li-positive' : 'skill-li-negative'">
+            <div>
+                <span>{{item[0]}}</span>
+                <span>{{item[1]}}</span>
+            </div>
+        </li>
+    </ng-template>
+</div>
