@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { ArmorData } from '../../types/armorData';
+import { ArmorData } from '../../../types/armorData';
 
 @Component({
   selector: 'app-armor-slot',
