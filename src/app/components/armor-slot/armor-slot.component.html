@@ -1,5 +1,5 @@
 <div class="main-container">
-    <img [src]="imageUrl" alt="">
-    <p>Armor Element Name</p>
+    <img [src]="imageUrl" alt="" (click)="pressedArmorSlot()">
+    <p (click)="pressedArmorSlot()" >Armor Element Name</p>
     <input type="checkbox" (change)="onCheckBoxChange($event)" name="" id="" >
 </div>

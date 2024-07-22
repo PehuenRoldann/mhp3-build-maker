@@ -1,23 +1,13 @@
 <!-- Navigation bar for filters with bootstrap -->
-<nav class="
-navbar navbar-expand-lg bg-body-tertiary">
+<div class="main-container">
+
+    <nav class="navbar navbar-expand-lg nav-bg">
     <div class="container-fluid filters-bar">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">List of {{typeFilter}}</a>
+      <a class="navbar-brand" href="#">List of {{partsToShow}}</a>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <!-- <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li> -->
-        </ul>
         <div class="stats-filters-container">
             <div>
                 <label for="minDefense">Rare &ge;</label>
@@ -63,9 +53,14 @@ navbar navbar-expand-lg bg-body-tertiary">
 
   <!-- List of armor elemets -->
 
-<div *ngIf="filteredArmorData.length == 0; else itemsListBlock">Data not found!</div>
+<div *ngIf="filteredArmorData.length == 0; else itemsListBlock" 
+style="display: flex; justify-content: center; align-items: center;">
+<h1>Data not found</h1>
+</div>
 <ng-template #itemsListBlock>
     <div class="armor-list-container" *ngFor="let item of filteredArmorData">
         <app-armor-list-item  [item]="item"/>
     </div>
 </ng-template>
+
+</div>

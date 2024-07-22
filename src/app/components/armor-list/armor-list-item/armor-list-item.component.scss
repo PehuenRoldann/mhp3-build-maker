@@ -1,32 +1,45 @@
 @import url('../../../../fonts.scss');
+@import '../../../../styles.scss';
 
+
+.flex-div{
+    margin: 10px 0 10px 0;
+    display: flex;
+    flex-direction: column;
+}
 
 .item-name {
-    font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-top: 10px;
-    margin-left: 5px;
-    border-radius: 0px 5px 0px 0px;
-    border: 1px solid black;
+    // border-radius: 0px 5px 0px 0px;
+    // border: 1px solid black;
     border-bottom: 0;
-    background-color: rgb(158, 158, 231);
-    width: fit-content;
-    box-shadow: 1px solid black;
+    background-color: $color1;
+    // margin: 0 5px 0 5px;
+
+    text-align: center;
+    text-justify:distribute;
+    color: white;
+
+    font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+    font-size: 20px;
+
 }
 
 .armor-item {
-    border: 1px solid black;
-    border-radius: 0px 5px 0px 5px;
-    padding: 0 5px 0px 5px;
-    margin: 0 5px 0 5px;
+    background-color: grey;
+    border: 15px solid solid;
+    // border-radius: 0px 5px 0px 5px;
+    padding: 5px 5px 5px 5px;
+    // margin: 0 2px 0 2px;
     font-size: 16px;
     display: flex;
     justify-content: space-between;
+    
+    // border-image: url('./../../../../assets/images/border.png') 30 round;
+    
 
     .title {
         font-weight: bold;
         text-align: center;
-        border: 1px solid black;
+        // border: 1px solid black;
     }
 }

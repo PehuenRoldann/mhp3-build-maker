@@ -9,7 +9,7 @@ import { ArmorData } from '../../types/armorData';
 })
 export class ArmorListComponent implements OnInit {
 
-  @Input() typeFilter = "helmets";
+  @Input() partsToShow = "helmets";
 
   private service = new ArmorDataAccessService();
   private armorData: ArmorData[] = [];
@@ -27,7 +27,7 @@ export class ArmorListComponent implements OnInit {
 
   
   async ngOnInit(): Promise<void> {
-     this.armorData = await this.service.getArmorData(this.typeFilter);
+     this.armorData = await this.service.getArmorData(this.partsToShow);
   }
 
   get filteredArmorData ( ): ArmorData[] {

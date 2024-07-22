@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-armor-slot',
@@ -10,6 +10,8 @@ export class ArmorSlotComponent implements OnInit {
   @Input({required: true}) bodyPart: string = "helmet" || "plate" || "guantlets" || "waist" || "leggings";
   @Input({required: true}) rare: number = 2;
   @Input() done: boolean = false;
+
+  @Output() pressedArmorSlotEvent = new EventEmitter<string>();
 
   imageUrl: string = '';
 
@@ -28,5 +30,9 @@ export class ArmorSlotComponent implements OnInit {
   
   private updateImageUrl() {
     this.imageUrl = `../../../../../assets/ArmorIcons/${this.bodyPart}/rare${this.rare}.png`;
+  }
+
+  public pressedArmorSlot () {
+    this.pressedArmorSlotEvent.emit(this.bodyPart);
   }
 }

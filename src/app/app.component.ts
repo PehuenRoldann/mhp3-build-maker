@@ -8,5 +8,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'mhp3-build-maker';
 
-  currentView = "list";
+  public partsForTheListToShow = "";
+  currentView = "";
+
+  public showPartsHandler(data: string) {
+    this.currentView = "list";
+    this.partsForTheListToShow = data;
+    console.log("Parts to show: " + this.partsForTheListToShow); //Debug
+  }
 }
