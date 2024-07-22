@@ -2,6 +2,13 @@
 @import '../../../../styles.scss';
 
 
+$border-radius-value: 15px;
+
+.main-container {
+    //width: 98%;
+    width: 98vw;
+}
+
 .flex-div{
     margin: 10px 0 10px 0;
     display: flex;
@@ -9,7 +16,7 @@
 }
 
 .item-name {
-    // border-radius: 0px 5px 0px 0px;
+    border-radius: $border-radius-value $border-radius-value 0 0;
     // border: 1px solid black;
     border-bottom: 0;
     background-color: $color1;
@@ -24,22 +31,52 @@
 
 }
 
-.armor-item {
-    background-color: grey;
-    border: 15px solid solid;
-    // border-radius: 0px 5px 0px 5px;
+.armor-item-table {
+    background-color: $color4;
+    // border: 1px solid rgb(204, 199, 199);
+    // border-radius: 0 0 $border-radius-value $border-radius-value;
     padding: 5px 5px 5px 5px;
-    // margin: 0 2px 0 2px;
     font-size: 16px;
-    display: flex;
-    justify-content: space-between;
-    
-    // border-image: url('./../../../../assets/images/border.png') 30 round;
-    
+    font-family: Arial, Helvetica, sans-serif;
 
+
+    th {
+        border-bottom: 1px solid black;
+        padding-left: 5px;
+        // text-align: center;
+        // background-color: $color2;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    td {
+        padding-left: 5px;
+        // border-right: 1px solid black;
+    }
+
+    li {
+        list-style: none;
+        // border-bottom: 1px solid black;
+    }
+    .mid-data-cell {
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+    }
+    
     .title {
         font-weight: bold;
         text-align: center;
         // border: 1px solid black;
     }
+}
+
+.equip-btn {
+    border: 0;
+    border-radius: 0 0 $border-radius-value $border-radius-value;
+    padding: 10px 0 10px 0;
+
+    background-color: $color2;
+
+    color: white;
+    font-weight: bold;
 }

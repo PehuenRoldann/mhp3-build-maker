@@ -1,29 +1,38 @@
 <div class="main-container">
     <div class="flex-div">
         <div class="item-name">{{item.name}}</div>
-        <div class="armor-item">
-            <div>
-                <div class="title">Stats</div>
-                <div><span>Rare: </span><span>{{item.rare}}</span></div>
-                <div><span>Defense: </span><span>{{item.defense}}</span></div>
-                <div><span>Class: </span><span>{{item.class}}</span></div>
-                <div><span>Slots: </span><span>{{item.slots}}</span></div>
-            </div>
-            <div>
-                <div class="title">Elem Res</div>
-                <div><span>Fire: </span>{{item.fire_res}}</div>
-                <div><span>Water: </span>{{item.water_res}}</div>
-                <div><span>Thunder: </span>{{item.thunder_res}}</div>
-                <div><span>Ice: </span>{{item.ice_res}}</div>
-                <div><span>Dragon: </span>{{item.dragon_res}}</div>
-            </div>
-            <div>
-                <div class="title">Skills</div>
-                <div *ngFor="let skill of skillsMap">
-                    {{skill[0]}}: {{skill[1]}}
-                </div>
-            </div>
-        </div>
+        <table class="armor-item-table">
+            <tr>
+                <th>Stats</th>
+                <th>Elem Res</th>
+                <th>Skills</th>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <li>Class: {{item.class}}</li>
+                        <li>Rare: {{item.rare}}</li>
+                        <li>Defense: {{item.defense}}</li>
+                        <li>Slots: {{item.slots}}</li>
+                    </ul>
+                </td>
+                <td class="mid-data-cell">
+                    <ul>
+                        <li>Fire: {{item.fire_res}}</li>
+                        <li>Water: {{item.water_res}}</li>
+                        <li>Thunder: {{item.thunder_res}}</li>
+                        <li>Ice: {{item.ice_res}}</li>
+                        <li>Dragon: {{item.dragon_res}}</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li *ngFor="let skill of skillsMap">{{skill[0]}}: {{skill[1]}}</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <input type="button" value="EQUIP" class="equip-btn">
     </div>
         
 </div>

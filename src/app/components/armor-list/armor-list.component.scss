@@ -2,7 +2,7 @@
 @import './../../../styles.scss';
 
 .main-container {
-    background: #181a1b;
+    background: white;
     
 }
 
@@ -56,5 +56,16 @@
         }
         
     }
+}
+
+.armor-items-container{
+    // background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 

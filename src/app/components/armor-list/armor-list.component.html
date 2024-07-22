@@ -57,9 +57,11 @@
 style="display: flex; justify-content: center; align-items: center;">
 <h1>Data not found</h1>
 </div>
-<ng-template #itemsListBlock>
-    <div class="armor-list-container" *ngFor="let item of filteredArmorData">
-        <app-armor-list-item  [item]="item"/>
+<ng-template #itemsListBlock >
+    <div class="armor-items-container">
+        <div class="armor-list-container" *ngFor="let item of filteredArmorData">
+            <app-armor-list-item  [item]="item"/>
+        </div>
     </div>
 </ng-template>
 
