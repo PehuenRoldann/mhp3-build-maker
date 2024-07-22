@@ -6,11 +6,36 @@
     <div class="main-container">
         <p style="font-size: 12px; color: grey;">Mark the checkbox as done if you have the part arleady.</p>
         <div class="armor-set-container">
-            <app-armor-slot [bodyPart]="'helmet'" [rare]="1" (pressedArmorSlotEvent)="selectPart('helmets')"/>
-            <app-armor-slot [bodyPart]="'plate'" [rare]="1" (pressedArmorSlotEvent)="selectPart('plates')"/>
-            <app-armor-slot [bodyPart]="'guantlets'" [rare]="1" (pressedArmorSlotEvent)="selectPart('guantlets')"/>
-            <app-armor-slot [bodyPart]="'waist'" [rare]="1" (pressedArmorSlotEvent)="selectPart('waists')"/>
-            <app-armor-slot [bodyPart]="'leggings'" [rare]="1" (pressedArmorSlotEvent)="selectPart('leggings')"/>
+            <app-armor-slot 
+                [bodyPart]="'helmet'" 
+                [rare]="EquipedArmor[0] ? EquipedArmor[0].rare : 1" 
+                [name]="EquipedArmor[0] ? EquipedArmor[0].name: 'Click to equip'"
+                (pressedArmorSlotEvent)="selectPart('helmets')"
+                />
+            <app-armor-slot 
+                [bodyPart]="'plate'" 
+                [rare]="EquipedArmor[1] ? EquipedArmor[1].rare : 1" 
+                [name]="EquipedArmor[1] ? EquipedArmor[1].name: 'Click to equip'"
+                (pressedArmorSlotEvent)="selectPart('plates')"
+            />
+            <app-armor-slot 
+                [bodyPart]="'guantlets'" 
+                [rare]="EquipedArmor[2] ? EquipedArmor[2].rare : 1" 
+                [name]="EquipedArmor[2] ? EquipedArmor[2].name: 'Click to equip'"
+                (pressedArmorSlotEvent)="selectPart('guantlets')"
+            />
+            <app-armor-slot 
+                [bodyPart]="'waist'" 
+                [rare]="EquipedArmor[3] ? EquipedArmor[3].rare : 1" 
+                [name]="EquipedArmor[3] ? EquipedArmor[3].name: 'Click to equip'"
+                (pressedArmorSlotEvent)="selectPart('waists')"
+            />
+            <app-armor-slot 
+                [bodyPart]="'leggings'" 
+                [rare]="EquipedArmor[4] ? EquipedArmor[4].rare : 1" 
+                [name]="EquipedArmor[4] ? EquipedArmor[4].name : 'Click to equip'"
+                (pressedArmorSlotEvent)="selectPart('leggings')"
+                />
         </div>
         <div class="dashboard-container">
 

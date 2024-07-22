@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { ArmorData } from '../../types/armorData';
 
 @Component({
   selector: 'app-armor-slot',
@@ -8,7 +9,8 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 export class ArmorSlotComponent implements OnInit {
 
   @Input({required: true}) bodyPart: string = "helmet" || "plate" || "guantlets" || "waist" || "leggings";
-  @Input({required: true}) rare: number = 2;
+  @Input({required: true}) rare: number = 1;
+  @Input({required: true}) name: string = "";
   @Input() done: boolean = false;
 
   @Output() pressedArmorSlotEvent = new EventEmitter<string>();

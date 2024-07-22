@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { ArmorDataAccessService } from '../../services/armor-data-access.service';
 import { ArmorData } from '../../types/armorData';
+import { LocalStorageService } from '../../services/local-storage.service';
+
 
 @Component({
   selector: 'app-armor-list',
@@ -10,6 +12,8 @@ import { ArmorData } from '../../types/armorData';
 export class ArmorListComponent implements OnInit {
 
   @Input() partsToShow = "helmets";
+
+  @Output() armorEquipedEventEmmiter: EventEmitter<ArmorData> = new EventEmitter();
 
   private service = new ArmorDataAccessService();
   private armorData: ArmorData[] = [];
@@ -30,6 +34,25 @@ export class ArmorListComponent implements OnInit {
      this.armorData = await this.service.getArmorData(this.partsToShow);
   }
 
+  // Event that happens when the user clicks on the Equip button
+  public armorEquipedEvent(data: ArmorData){
+    
+    let service = new LocalStorageService();
+    let part = "";
+
+    switch (this.partsToShow){
+      case 'helmets': part = 'helmet'; break;
+      case 'plates': part = 'plate'; break;
+      case 'waists': part = 'waist'; break;
+      case 'guantlets': part = 'guantlets'; break;
+      case 'leggings': part = 'leggings'; break;
+    }
+
+    service.setItem(part, data);
+    return this.armorEquipedEventEmmiter.emit();
+  }
+
+  // Property to only show the filtered data from the armors data
   get filteredArmorData ( ): ArmorData[] {
 
     let filteredData: ArmorData[] = this.armorData;
@@ -76,5 +99,6 @@ export class ArmorListComponent implements OnInit {
 
     return filteredData;
   }
+
 
 }

@@ -43,7 +43,7 @@
             </div>
         </div>
         <form class="d-flex search-form" role="search">
-          <input class="form-control me-2" type="search" placeholder="Name or skill name value" aria-label="Search"
+          <input class="form-control me-2" type="search" placeholder="Search by name or skill" aria-label="Search"
           [(ngModel)]="searchInput" name="searchInput">
           <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
         </form>
@@ -60,7 +60,7 @@ style="display: flex; justify-content: center; align-items: center;">
 <ng-template #itemsListBlock >
     <div class="armor-items-container">
         <div class="armor-list-container" *ngFor="let item of filteredArmorData">
-            <app-armor-list-item  [item]="item"/>
+            <app-armor-list-item  [item]="item" (equipEvent)="armorEquipedEvent($event)"/>
         </div>
     </div>
 </ng-template>

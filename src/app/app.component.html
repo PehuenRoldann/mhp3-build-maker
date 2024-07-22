@@ -1,4 +1,5 @@
 <div [ngSwitch]="currentView">
     <app-main-view *ngSwitchDefault="" (showPartsListEvent)="showPartsHandler($event)"/>
-    <app-armor-list *ngSwitchCase="'list'" [partsToShow]="partsForTheListToShow"/>
+    <app-armor-list *ngSwitchCase="'list'" [partsToShow]="partsForTheListToShow"
+     (armorEquipedEventEmmiter)="changeToMainView()"/>
 </div>

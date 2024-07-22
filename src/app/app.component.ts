@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ArmorData } from './types/armorData';
 
 @Component({
   selector: 'app-root',
@@ -8,15 +9,18 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'mhp3-build-maker';
 
-  // public partsForTheListToShow = "";
-  // currentView = "";
+  public partsForTheListToShow = "";
+  currentView = "";
 
-  public partsForTheListToShow = "helmets"; // Debug
-  currentView = "list"; // Debug
+  public lastEquipedArmor: [string, ArmorData] | undefined;
 
   public showPartsHandler(data: string) {
     this.currentView = "list";
     this.partsForTheListToShow = data;
     console.log("Parts to show: " + this.partsForTheListToShow); //Debug
+  }
+
+  public changeToMainView(){
+    this.currentView = "";
   }
 }
