@@ -1,5 +1,19 @@
 <div class="main-container">
     <img [src]="imageUrl" alt="" (click)="pressedArmorSlot()">
-    <p (click)="pressedArmorSlot()" > {{name}} </p>
-    <input type="checkbox" (change)="onCheckBoxChange($event)" name="" id="" >
+    <div class="mid-container">
+        <p (click)="pressedArmorSlot()" > {{name}}</p>
+        <div class="images-container">
+            <span>
+                <img src="../../../../assets/wepons/greatsword1.png" alt="" 
+                [ngStyle]="{'display': (_class === 0 || _class === 2) ? 'block' : 'none'}"
+                (click)="pressedArmorSlot()">
+            </span>
+            <span>
+                <img src="../../../../assets/wepons/lightbowgun1.png" alt="" 
+                [ngStyle]="{'display': (_class === 1 || _class === 2) ? 'block' : 'none'}"
+                (click)="pressedArmorSlot()">
+            </span>
+        </div>
+    </div>
+    <input class="checkbox" type="checkbox" (change)="onCheckBoxChange($event)" name="" id="" >
 </div>

@@ -5,15 +5,47 @@
     justify-content: space-between;
 
     border-bottom: 1px solid black;
+    cursor: pointer;
 
     img {
         width: 20%;
         height: 20%;
     }
 
+
+}
+
+.mid-container {
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid black;
+    width: 60vw;
+    align-items: center;
+    justify-content: space-around;
+  
     p {
-        font-weight:900;
-        font-family: Arial, Helvetica, sans-serif;
-        margin-left: 10px;
+      font-weight: 900;
+      font-size: 14pt;
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 0;
+      margin: 0;
+      //display: inline-block;
     }
+  
+    
+  }
+
+.images-container {
+  display: flex;
+  
+  img {
+    width: 3vh;
+    height: 3vh;
+    // vertical-align: middle; /* Alinea verticalmente con el texto */
+  }
+}
+
+.checkbox {
+  width: 3vh;
+  height: 3vh;
 }

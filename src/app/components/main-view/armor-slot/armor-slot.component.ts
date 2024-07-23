@@ -11,6 +11,7 @@ export class ArmorSlotComponent implements OnInit {
   @Input({required: true}) bodyPart: string = "helmet" || "plate" || "guantlets" || "waist" || "leggings";
   @Input({required: true}) rare: number = 1;
   @Input({required: true}) name: string = "";
+  @Input({required: true}) _class: number = 0;
   @Input() done: boolean = false;
 
   @Output() pressedArmorSlotEvent = new EventEmitter<string>();
