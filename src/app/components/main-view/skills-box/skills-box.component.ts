@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ArmorData } from '../../../types/armorData';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { DataFormatService } from '../../../services/data-format.service';
+import { setDefaultResultOrder } from 'dns';
 
 @Component({
   selector: 'app-skills-box',
@@ -51,7 +52,44 @@ export class SkillsBoxComponent implements OnInit{
         })
 
       }
+
     })
+
+    this.sortSkills();
+  }
+
+  private sortSkills () {
+    
+    let valuesArrToSort: number [] = [];
+
+    this.skills.forEach((value, key) => {
+      valuesArrToSort.push(value);
+    })
+
+    for (let i = 0; i < valuesArrToSort.length; ++i) {
+      for (let j = 0; j < valuesArrToSort.length; ++j) {
+        if (valuesArrToSort[i] > valuesArrToSort[j]) {
+          let aux = valuesArrToSort[i];
+          valuesArrToSort[i] = valuesArrToSort[j];
+          valuesArrToSort[j] = aux;
+        }
+      }
+    }
+
+    let sortedSkills = new Map<string, number>();
+
+    valuesArrToSort.forEach(val => {
+      this.skills.forEach((v, k) => {
+
+        if (v === val) {
+          sortedSkills.set(k, v);
+        }
+
+      })
+    })
+    this.skills = sortedSkills;
+
+
   }
 
 }
