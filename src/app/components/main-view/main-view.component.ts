@@ -1,8 +1,10 @@
-import { Component, OnInit, AfterViewInit, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { ArmorData } from '../../types/armorData';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { StatsBoxComponent } from './stats-box/stats-box.component';
 import { SkillsBoxComponent } from './skills-box/skills-box.component';
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-main-view',
@@ -17,6 +19,9 @@ export class MainViewComponent implements OnInit, AfterViewInit {
   @Output() showPartsListEvent = new EventEmitter<string>();
   
   public EquipedArmor: Array<ArmorData | null> = new Array<ArmorData | null>(5);
+
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+
 
   public selectPart(value: string) {
     this.showPartsListEvent.emit(value);
@@ -36,8 +41,14 @@ export class MainViewComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.UpdateArmor();
+
+    // Checks if the code is running on a browser to execute
+    if (isPlatformBrowser(this.platformId)) {
+      this.UpdateArmor();
+    }
   }
+
+  
 
   ngAfterViewInit(): void {
     // Asegúrate de que statsBox está disponible
