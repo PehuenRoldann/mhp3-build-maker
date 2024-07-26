@@ -1,0 +1,7 @@
+// Use this template as your production environment for configuration.
+// Create a copy of this file and remove the .dist from the name.
+
+export const environment = {
+    production: true,
+    apiUrl: 'http://localhost:5000/api/armor'
+  };

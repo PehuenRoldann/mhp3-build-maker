@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import {ArmorData} from '../types/armorData';
-import { Dictionary } from '../types/dictionary';
-
+import { environment } from '../../config/environment.dev';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArmorDataAccessService {
 
-  private armorApiUrl: string = "http://localhost:5150/api/armor";
+  private armorApiUrl: string = environment.apiUrl;
 
-  constructor() {}
+  constructor () {}
 
   public async getArmorData(type: string = "helmets", rare: string = "", defense: string = "",
     minRare: string = "", minDefense: string = ""): Promise<ArmorData[]> {

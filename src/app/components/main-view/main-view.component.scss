@@ -1,4 +1,5 @@
 @import url('../../../fonts.scss');
+@import '../../../styles.scss';
 
 $main_color: #17153B;
 
@@ -42,4 +43,38 @@ $main_color: #17153B;
         font-family: 'MonsterHunterFont',Arial, Helvetica, sans-serif;
         font-style: italic;
     }
+}
+
+.dashboard-container-mobile {
+    margin-top: 20px;
+
+    .component-container {
+        border: 1px solid $color1;
+        border-radius: 5px;
+    }
+}
+
+.dash-btn {
+
+    border: 1px solid $color1;
+    border-radius: 0 10px 0 0;
+    margin: 0 1px 0 0;
+    
+    font-size: 14pt;
+    font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+
+    color: grey;
+    background-color: $color1;
+    //padding: 5px 30px 5px 5px;
+    width: 25vw;
+
+
+}
+
+.dash-btn.active {
+    color:white;
+    font-size: 22pt;
+    margin: 0 10px 0 10px;
+    // padding: 0 15px 0 5px;
+    width: 33vw;
 }

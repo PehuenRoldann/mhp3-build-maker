@@ -46,11 +46,14 @@
 
         <div class="dashboard-container-mobile" *ngIf="(isMobile | async); else desktopTemplate">
             <div>
-                <button (click)="[showOnMobile = 0]">Stats</button>
-                <button (click)="[showOnMobile = 1]">Skills</button>
-                <button (click)="[showOnMobile = 2]">Resources</button>
+                <button (click)="[showOnMobile = 0]"
+                [ngClass]="showOnMobile === 0 ? 'dash-btn active' : 'dash-btn'">Stats</button>
+                <button (click)="[showOnMobile = 1]"
+                [ngClass]="showOnMobile === 1 ? 'dash-btn active' : 'dash-btn'">Skills</button>
+                <button (click)="[showOnMobile = 2]"
+                [ngClass]="showOnMobile === 2 ? 'dash-btn active' : 'dash-btn'">Resources</button>
             </div>
-            <div  [ngSwitch]="showOnMobile">
+            <div class="component-container"  [ngSwitch]="showOnMobile">
                 <app-stats-box *ngSwitchCase="0" [armor]="equipedArmor"></app-stats-box>
                 <app-skills-box *ngSwitchCase="1" [armor]="equipedArmor"></app-skills-box>
                 <app-resources-box *ngSwitchCase="2"></app-resources-box>
