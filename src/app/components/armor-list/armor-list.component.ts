@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArmorDataAccessService } from '../../services/armor-data-access.service';
 import { ArmorData } from '../../types/armorData';
 import { LocalStorageService } from '../../services/local-storage.service';
@@ -11,9 +12,9 @@ import { LocalStorageService } from '../../services/local-storage.service';
 })
 export class ArmorListComponent implements OnInit {
 
-  @Input() partsToShow = "helmets";
+  partsToShow = "helmets";
 
-  @Output() armorEquipedEventEmmiter: EventEmitter<ArmorData> = new EventEmitter();
+  // @Output() armorEquipedEventEmmiter: EventEmitter<ArmorData> = new EventEmitter(); NO NEED WITH ROUTER
 
   private service = new ArmorDataAccessService();
   private armorData: ArmorData[] = [];
@@ -29,9 +30,18 @@ export class ArmorListComponent implements OnInit {
   public minIceResFilter?: number;
   public minDragonResFilter?: number;
 
+  constructor (private route: ActivatedRoute, private router: Router) {}
   
   async ngOnInit(): Promise<void> {
-     this.armorData = await this.service.getArmorData(this.partsToShow);
+
+    this.route.paramMap.subscribe(params => {
+      this.partsToShow = params.get('parts')!;
+    })
+    this.armorData = await this.service.getArmorData(this.partsToShow);
+  }
+
+  public changeToHome () {
+    this.router.navigate(['/home']);
   }
 
   // Event that happens when the user clicks on the Equip button
@@ -49,7 +59,8 @@ export class ArmorListComponent implements OnInit {
     }
 
     service.setItem(part, data);
-    return this.armorEquipedEventEmmiter.emit();
+    this.changeToHome();
+    // return this.armorEquipedEventEmmiter.emit();
   }
 
   // Property to only show the filtered data from the armors data

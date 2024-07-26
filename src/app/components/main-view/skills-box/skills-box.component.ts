@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ArmorData } from '../../../types/armorData';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { DataFormatService } from '../../../services/data-format.service';
@@ -9,10 +9,19 @@ import { setDefaultResultOrder } from 'dns';
   templateUrl: './skills-box.component.html',
   styleUrl: './skills-box.component.scss'
 })
-export class SkillsBoxComponent implements OnInit{
+export class SkillsBoxComponent implements OnChanges{
 
   // Hash map with the skills an its values
   skills: Map<string,number> = new Map<string,number>();
+
+  @Input() armor: Array<ArmorData | null> = [];
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    if (this.armor.length > 0) {
+      this.updateSkills(this.armor);
+    }
+  }
 
   get skillsArray() {
     // console.log(Array.from(this.skills.entries())); DEBUG
@@ -22,10 +31,6 @@ export class SkillsBoxComponent implements OnInit{
   isPositive = (num: number): boolean => {
     // console.log(num > 0); #DEBUG
     return num > 0;
-  }
-
-  ngOnInit(): void {
-
   }
 
   public updateSkills (equipedArmor: Array<ArmorData | null>) {

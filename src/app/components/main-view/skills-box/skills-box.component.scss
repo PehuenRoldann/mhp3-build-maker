@@ -1,4 +1,6 @@
 
+$gradients_line_paddings: 2px; // 3px o 2px ?
+
 /* The animation code */
 @keyframes animateBg {
     0% { background-position: 70% 0%; }
@@ -20,7 +22,7 @@
 .skill-li {
     list-style: none;
     margin: 5px 0 5px 0;
-    padding-bottom: 2px;
+    padding-bottom: $gradients_line_paddings;
     // background: linear-gradient(90deg, rgba(22,235,98,1) 0%, rgba(1,194,70,1) 49%, rgba(1,194,70,0.11386552912180492) 100%);
 
     font-family: Arial, Helvetica, sans-serif;

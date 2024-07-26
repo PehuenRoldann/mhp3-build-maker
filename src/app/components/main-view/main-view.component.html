@@ -8,41 +8,60 @@
         <div class="armor-set-container">
             <app-armor-slot 
                 [bodyPart]="'helmet'" 
-                [_class]="EquipedArmor[0] != null ? EquipedArmor[0].class : 0"
-                [rare]="EquipedArmor[0] ? EquipedArmor[0].rare : 1" 
-                [name]="EquipedArmor[0] ? EquipedArmor[0].name: 'Click to equip'"
+                [_class]="equipedArmor[0] != null ? equipedArmor[0].class : 0"
+                [rare]="equipedArmor[0] ? equipedArmor[0].rare : 1" 
+                [name]="equipedArmor[0] ? equipedArmor[0].name: 'Click to equip'"
                 (pressedArmorSlotEvent)="selectPart('helmets')"
                 />
             <app-armor-slot 
                 [bodyPart]="'plate'" 
-                [_class]="EquipedArmor[1] ? EquipedArmor[1].class : 0"
-                [rare]="EquipedArmor[1] ? EquipedArmor[1].rare : 1" 
-                [name]="EquipedArmor[1] ? EquipedArmor[1].name: 'Click to equip'"
+                [_class]="equipedArmor[1] ? equipedArmor[1].class : 0"
+                [rare]="equipedArmor[1] ? equipedArmor[1].rare : 1" 
+                [name]="equipedArmor[1] ? equipedArmor[1].name: 'Click to equip'"
                 (pressedArmorSlotEvent)="selectPart('plates')"
             />
             <app-armor-slot 
                 [bodyPart]="'guantlets'" 
-                [_class]="EquipedArmor[2] ? EquipedArmor[2].class : 0"
-                [rare]="EquipedArmor[2] ? EquipedArmor[2].rare : 1" 
-                [name]="EquipedArmor[2] ? EquipedArmor[2].name: 'Click to equip'"
+                [_class]="equipedArmor[2] ? equipedArmor[2].class : 0"
+                [rare]="equipedArmor[2] ? equipedArmor[2].rare : 1" 
+                [name]="equipedArmor[2] ? equipedArmor[2].name: 'Click to equip'"
                 (pressedArmorSlotEvent)="selectPart('guantlets')"
             />
             <app-armor-slot 
                 [bodyPart]="'waist'" 
-                [_class]="EquipedArmor[3] ? EquipedArmor[3].class : 0" 
-                [rare]="EquipedArmor[3] ? EquipedArmor[3].rare : 1" 
-                [name]="EquipedArmor[3] ? EquipedArmor[3].name: 'Click to equip'"
+                [_class]="equipedArmor[3] ? equipedArmor[3].class : 0" 
+                [rare]="equipedArmor[3] ? equipedArmor[3].rare : 1" 
+                [name]="equipedArmor[3] ? equipedArmor[3].name: 'Click to equip'"
                 (pressedArmorSlotEvent)="selectPart('waists')"
             />
             <app-armor-slot 
                 [bodyPart]="'leggings'" 
-                [_class]="EquipedArmor[4] ? EquipedArmor[4].class : 0"
-                [rare]="EquipedArmor[4] ? EquipedArmor[4].rare : 1" 
-                [name]="EquipedArmor[4] ? EquipedArmor[4].name : 'Click to equip'"
+                [_class]="equipedArmor[4] ? equipedArmor[4].class : 0"
+                [rare]="equipedArmor[4] ? equipedArmor[4].rare : 1" 
+                [name]="equipedArmor[4] ? equipedArmor[4].name : 'Click to equip'"
                 (pressedArmorSlotEvent)="selectPart('leggings')"
                 />
         </div>
-        <div class="dashboard-container">
+
+
+        <div class="dashboard-container-mobile" *ngIf="(isMobile | async); else desktopTemplate">
+            <div>
+                <button (click)="[showOnMobile = 0]">Stats</button>
+                <button (click)="[showOnMobile = 1]">Skills</button>
+                <button (click)="[showOnMobile = 2]">Resources</button>
+            </div>
+            <div  [ngSwitch]="showOnMobile">
+                <app-stats-box *ngSwitchCase="0" [armor]="equipedArmor"></app-stats-box>
+                <app-skills-box *ngSwitchCase="1" [armor]="equipedArmor"></app-skills-box>
+                <app-resources-box *ngSwitchCase="2"></app-resources-box>
+            </div>
+        </div>
+
+        <ng-template #desktopTemplate>
+            Hola pero desktop
+        </ng-template>
+
+        <!-- <div class="dashboard-container">
 
             <div class="stats-container" #StatsBox>
                 <h1>Stats</h1>
@@ -56,6 +75,7 @@
                 <h1>Resources</h1>
                 <app-resources-box />
             </div>
-        </div>
+        </div> -->
+
     </div>
 </div>

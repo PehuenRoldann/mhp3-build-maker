@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { ArmorData } from '../../../types/armorData';
 
 @Component({
@@ -15,9 +15,15 @@ export class StatsBoxComponent implements OnChanges {
   public iceRes = 0;
   public dragonRes = 0;
   
+  @Input() armor: Array<ArmorData | null> = [];
+
   ngOnChanges(changes: SimpleChanges): void {
-    // Aquí puedes manejar los cambios de las propiedades de entrada
+    
+    if (this.armor.length > 0) {
+      this.updateStats(this.armor);
+    }
   }
+
 
   updateStats(data: Array<ArmorData | null>): void {
 
