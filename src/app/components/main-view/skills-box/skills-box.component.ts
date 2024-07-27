@@ -1,8 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ArmorData } from '../../../types/armorData';
-import { LocalStorageService } from '../../../services/local-storage.service';
 import { DataFormatService } from '../../../services/data-format.service';
-import { setDefaultResultOrder } from 'dns';
 
 @Component({
   selector: 'app-skills-box',

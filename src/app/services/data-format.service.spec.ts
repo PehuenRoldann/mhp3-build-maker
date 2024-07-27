@@ -13,4 +13,8 @@ describe('DataFormatService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should split the word', () => {
+    expect(service.separateWord('HolaMundo')).toBe('Hola Mundo');
+  })
 });
