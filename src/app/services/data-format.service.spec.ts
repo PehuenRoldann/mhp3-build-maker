@@ -16,5 +16,11 @@ describe('DataFormatService', () => {
 
   it('should split the word', () => {
     expect(service.separateWord('HolaMundo')).toBe('Hola Mundo');
-  })
+  });
+
+  it ('should create the key', () => {
+    expect(service.getResourcesMap('[YukumoWood:1,GarwaFeather:1]').has('Garwa Feather')).toBeTrue();
+  });
+
+  
 });

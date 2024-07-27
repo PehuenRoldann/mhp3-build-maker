@@ -1,1 +1,5 @@
-<p>resources-box works!</p>
+<div>
+    <ul>
+        <li *ngFor="let resource of resources.keys()">{{resource}}   x{{resources.get(resource)}}</li>
+    </ul>
+</div>

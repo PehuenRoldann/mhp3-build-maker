@@ -10,14 +10,34 @@ import { DataFormatService } from '../../../services/data-format.service';
 export class ResourcesBoxComponent implements OnChanges {
 
   @Input() armor: Array<ArmorData | null> = [];
+  resources: Map<string, number> = new Map<string,number>();
 
   ngOnChanges(changes: SimpleChanges): void {
-    
+    this.updateResources();
   }
 
   private updateResources () {
 
     let service = new DataFormatService();
+    
+    if (this.armor.length > 0) {
+
+      this.armor.forEach(element => {
+
+        let currentResources = service.getResourcesMap(element!.materials);
+
+        currentResources.forEach((v, k) => {
+
+          if (this.resources.has(k)) {
+            this.resources.set(k, v + this.resources.get(k)!);
+          }
+          else {
+            this.resources.set(k, v);
+          }
+
+        })
+      });
+    }
   }
 
 

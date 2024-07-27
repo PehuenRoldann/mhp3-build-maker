@@ -56,7 +56,7 @@
             <div class="component-container"  [ngSwitch]="showOnMobile">
                 <app-stats-box *ngSwitchCase="0" [armor]="equipedArmor"></app-stats-box>
                 <app-skills-box *ngSwitchCase="1" [armor]="equipedArmor"></app-skills-box>
-                <app-resources-box *ngSwitchCase="2"></app-resources-box>
+                <app-resources-box *ngSwitchCase="2" [armor]="equipedArmor"></app-resources-box>
             </div>
         </div>
 
