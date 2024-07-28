@@ -1,5 +1,7 @@
 @import './../../../../styles.scss';
 
+$gradient_size: 3px;
+
 .stat-box {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -14,8 +16,6 @@
         //justify-content: end;
     }
 }
-/* .stat-name{
-} */
 
 .stat-value {
     justify-self: end;
@@ -29,22 +29,20 @@
   }
   
 
-.fire {
-    color: $fire_color;
-    // background: linear-gradient(90deg, rgba(162,64,3,1) 0%, rgba(235,91,0,1) 35%, rgba(235,91,0,0.09145656553637083) 100%);
-    padding-bottom: 2px;
-    // animation: animateBg 1500ms linear;
-    // animation-delay: 2s;
-    
-    background-image: linear-gradient(90deg, rgba(162,64,3,1) 0%, #ffff 50%);
-
-}
-
 .animated-bg {
-    animation: animateBg 1500ms linear;
+    animation-name: animateBg;
+    animation-duration: 1s;
     animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
     background-position: 100% 0%;
     background-size: 200% 100%;
+}
+
+.fire {
+    color: $fire_color;
+    padding-bottom: $gradient_size;
+    background-image: linear-gradient(90deg, rgba(162,64,3,1) 0%, #ffff 50%);
+
 }
 
 
@@ -52,7 +50,7 @@
     color: $ice_color;
     // background: linear-gradient(90deg, rgba(33,61,84,1) 0%, rgba(15,103,177,1) 35%, rgba(15,103,177,0) 100%);
     background-image: linear-gradient(90deg, rgba(33,61,84,1) 0%, #ffff 50%);
-    padding-bottom: 2px;
+    padding-bottom: $gradient_size;
 
 }
 
@@ -60,7 +58,7 @@
     color: $thunder_color;
     // background: linear-gradient(90deg, rgba(88,69,2,1) 0%, rgba(255,199,0,1) 35%, rgba(255,199,0,0) 100%);
     background-image: linear-gradient(90deg, rgba(255,199,0,1) 0%, #ffff 50%);
-    padding-bottom: 2px;
+    padding-bottom: $gradient_size;
 
 }
 
@@ -68,7 +66,7 @@
     color: $water_color;
     // background: linear-gradient(90deg, rgba(10,27,54,1) 0%, rgba(16,44,87,1) 35%, rgba(16,44,87,0) 100%);
     background-image: linear-gradient(90deg, rgba(16,44,87,1) 0%, #ffff 50%);
-    padding-bottom: 2px;
+    padding-bottom: $gradient_size;
 
 }
 
@@ -76,7 +74,7 @@
     color: $dragon_color;
     //background: linear-gradient(90deg, rgba(66,45,116,1) 0%, rgba(92,47,194,1) 35%, rgba(92,47,194,0) 100%);
     background-image: linear-gradient(90deg, rgba(66,45,116,1) 0%, #ffff 50%);
-    padding-bottom: 2px;
+    padding-bottom: $gradient_size;
 
 }
 
@@ -84,7 +82,7 @@
     color: $defense_color;
     // background: linear-gradient(90deg, rgba(30,31,32,1) 0%, rgba(55,58,64,1) 35%, rgba(55,58,64,0) 100%);
     background-image: linear-gradient(90deg, rgba(30,31,32,1) 0%, #ffff 50%);
-    padding-bottom: 2px;
+    padding-bottom: $gradient_size;
 }
 
 .stat-container {
