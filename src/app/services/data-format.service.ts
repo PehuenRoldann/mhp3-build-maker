@@ -48,6 +48,8 @@ export class DataFormatService {
   public getResourcesMap(resources: string): Map<string,number> {
     
     let resourcesMap = new Map<string, number>();
+
+    resources = resources.replace(/\[|\]/g, '');
     
     let resourcesArr = resources.split(",");
     
