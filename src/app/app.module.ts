@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { ArmorListComponent } from './components/armor-list/armor-list.component';
 // REMOVED import { FiltersBarComponent } from './components/filters-bar/filters-bar.component';
 import { ArmorListItemComponent } from './components/armor-list/armor-list-item/armor-list-item.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { IncompatibleModalComponent } from './components/armor-list/incompatible-modal/incompatible-modal.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { ArmorListItemComponent } from './components/armor-list/armor-list-item/
     ArmorListComponent,
     // REMOVED: FiltersBarComponent,
     ArmorListItemComponent,
+    IncompatibleModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { ArmorListItemComponent } from './components/armor-list/armor-list-item/
     FormsModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

@@ -23,7 +23,7 @@ export class ArmorCompatibilityService {
     
     equipedArmor.forEach((v, k) => {
 
-      compatibility = (replace !== k && (piece.class === v.class || v.class === 2));
+      compatibility = (replace !== k && (piece.class === v.class || piece.class === 2));
     });
 
     return compatibility;

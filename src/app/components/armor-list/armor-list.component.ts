@@ -4,7 +4,10 @@ import { ArmorDataAccessService } from '../../services/armor-data-access.service
 import { ArmorData } from '../../types/armorData';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { ArmorCompatibilityService } from '../../services/armor-compatibility.service';
+import { bootstrapApplication } from '@angular/platform-browser';
 
+
+declare var bootstrap: any; 
 
 @Component({
   selector: 'app-armor-list',
@@ -39,12 +42,23 @@ export class ArmorListComponent implements OnInit {
       this.partsToShow = params.get('parts')!;
     })
     this.armorData = await this.service.getArmorData(this.partsToShow);
+
+
   }
 
   public changeToHome () {
     this.router.navigate(['/home']);
   }
 
+
+  public openIncompatibilityModal() {
+    const modalElement = document.getElementById('exampleModal');
+
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement); // Usa el servicio de Bootstrap para abrir el modal
+      modal.show();
+    }
+  }
 
   public checkCompatibility (part: string, data: ArmorData) {
 
@@ -55,7 +69,12 @@ export class ArmorListComponent implements OnInit {
 
     let compatibility = acService.checkCompatibility(data, currentEquipment, part)
 
-    console.log(`Compatibility: ${compatibility}`);
+    console.log(`Compatibility: ${compatibility}`); // Debug
+
+    if (!compatibility) {
+      this.openIncompatibilityModal();
+    }
+
     return compatibility
   }
 

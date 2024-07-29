@@ -53,16 +53,18 @@
 
   <!-- List of armor elemets -->
 
-<div *ngIf="filteredArmorData.length == 0; else itemsListBlock" 
-style="display: flex; justify-content: center; align-items: center;">
-<h1>Data not found</h1>
-</div>
-<ng-template #itemsListBlock >
-    <div class="armor-items-container">
-        <div class="armor-list-container" *ngFor="let item of filteredArmorData">
-            <app-armor-list-item  [item]="item" (equipEvent)="armorEquipedEvent($event)"/>
-        </div>
+    <div *ngIf="filteredArmorData.length == 0; else itemsListBlock" 
+    style="display: flex; justify-content: center; align-items: center;">
+    <h1>Data not found</h1>
     </div>
-</ng-template>
+    <ng-template #itemsListBlock >
+        <div class="armor-items-container">
+            <div class="armor-list-container" *ngFor="let item of filteredArmorData">
+                <app-armor-list-item  [item]="item" (equipEvent)="armorEquipedEvent($event)"/>
+            </div>
+        </div>
+    </ng-template>
 
 </div>
+
+<app-incompatible-modal />
