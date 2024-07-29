@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ArmorData } from '../types/armorData';
+import { type } from 'os';
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +50,24 @@ export class LocalStorageService {
     } else {
       console.warn('localStorage is not available');
     }
+  }
+
+  get currentEquipment () {
+
+    let parts = ['helmet', 'plate', 'guantlets', 'waist', 'leggings'];
+
+    let currentEquipment: Map<string, ArmorData> = new Map<string, ArmorData> ();
+
+    parts.forEach(element => {
+      let part: ArmorData | null = this.getItem(element);
+
+      if (part !== null) {
+        currentEquipment.set(element, part);
+      }
+
+    });
+
+    return currentEquipment;
+
   }
 }

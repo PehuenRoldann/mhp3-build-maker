@@ -1,6 +1,7 @@
-<div class="flex-div">
+<div class="flexdiv">
     <ul class="resources-ul">
-        <li *ngFor="let resource of resources.keys(); let i = index" [ngStyle]="{'animation-delay': i * 0.2 + 's'}">
+        <li *ngFor="let resource of resources.keys(); let i = index"
+        [ngStyle]="{'animation-delay': i * 0.2 + 's'}">
             <span>{{resource}} </span>
             <span>x{{resources.get(resource)}}</span>
         </li>

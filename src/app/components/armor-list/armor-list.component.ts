@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ArmorDataAccessService } from '../../services/armor-data-access.service';
 import { ArmorData } from '../../types/armorData';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { ArmorCompatibilityService } from '../../services/armor-compatibility.service';
 
 
 @Component({
@@ -44,6 +45,20 @@ export class ArmorListComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
+
+  public checkCompatibility (part: string, data: ArmorData) {
+
+    let lsService = new LocalStorageService();
+    let acService = new ArmorCompatibilityService();
+
+    let currentEquipment = lsService.currentEquipment;
+
+    let compatibility = acService.checkCompatibility(data, currentEquipment, part)
+
+    console.log(`Compatibility: ${compatibility}`);
+    return compatibility
+  }
+
   // Event that happens when the user clicks on the Equip button
   public armorEquipedEvent(data: ArmorData){
     
@@ -58,9 +73,11 @@ export class ArmorListComponent implements OnInit {
       case 'leggings': part = 'leggings'; break;
     }
 
-    service.setItem(part, data);
-    this.changeToHome();
-    // return this.armorEquipedEventEmmiter.emit();
+    if(this.checkCompatibility(part, data)){
+      
+      service.setItem(part, data);
+      this.changeToHome();
+    }
   }
 
   // Property to only show the filtered data from the armors data
