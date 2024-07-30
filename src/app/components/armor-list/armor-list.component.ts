@@ -67,11 +67,6 @@ export class ArmorListComponent implements OnInit {
 
     let currentEquipment = lsService.currentEquipment;
 
-    /* console.log("CONTROL COMPATIBILIDAD"); // Debug
-    console.log("part: " + part);
-    console.log("Current Equipment:")
-    console.log(currentEquipment); */
-
     let compatibility = acService.checkCompatibility(data, currentEquipment, part)
 
     console.log(`Compatibility: ${compatibility}`); // Debug

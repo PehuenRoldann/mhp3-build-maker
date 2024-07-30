@@ -25,10 +25,7 @@ export class ArmorCompatibilityService {
 
 
       if (replace !== k && compatibility) {
-        // console.log("Equiped " + k);
-        // console.log(v)
         compatibility = piece.class == v.class || v.class > 1 || piece.class > 1;
-        // console.log(`Compatiblity for ${k}: ${compatibility}`); // Debug
       }
 
     });

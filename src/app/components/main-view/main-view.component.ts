@@ -25,6 +25,20 @@ export class MainViewComponent implements OnInit {
   public selectedPart: string = "";
   public showOnMobile: number = 0;  // Indicates wich stats are going to be shown with ngSwitch. 0 = defenses, 1 = skills, 2 = resources
   public equipedArmor: Map<string, ArmorData> = new Map<string, ArmorData>;
+  
+
+  get equipedArmorArray () {
+
+    let equipedArmorArr: ArmorData[] = [];
+
+    if (this.equipedArmor) {
+      this.equipedArmor.forEach(v => {
+        equipedArmorArr.push(v);
+      })
+    }
+
+    return equipedArmorArr;
+  }
 
 
   constructor(
@@ -77,7 +91,7 @@ export class MainViewComponent implements OnInit {
         break;
     }
 
-    return this.router.navigate([`list/${param}`]);
+    this.router.navigate([`list/${param}`]);
   }
 
 

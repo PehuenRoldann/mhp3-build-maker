@@ -54,9 +54,9 @@
                 [ngClass]="showOnMobile === 2 ? 'dash-btn active' : 'dash-btn'">Resources</button>
             </div>
             <div class="component-container"  [ngSwitch]="showOnMobile">
-               <!--  <app-stats-box *ngSwitchCase="0" [armor]="equipedArmor"></app-stats-box>
-                <app-skills-box *ngSwitchCase="1" [armor]="equipedArmor"></app-skills-box>
-                <app-resources-box *ngSwitchCase="2" [armor]="equipedArmor"></app-resources-box> -->
+                <app-stats-box *ngSwitchCase="0" [armor]="equipedArmorArray"></app-stats-box>
+                <app-skills-box *ngSwitchCase="1" [armor]="equipedArmorArray"></app-skills-box>
+                <app-resources-box *ngSwitchCase="2" [armor]="equipedArmorArray"></app-resources-box>
             </div>
         </div>
 
