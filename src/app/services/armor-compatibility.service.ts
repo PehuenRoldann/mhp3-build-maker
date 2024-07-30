@@ -19,11 +19,18 @@ export class ArmorCompatibilityService {
     equipedArmor: Map<string, ArmorData>,
     replace: string): boolean {
 
-    let compatibility = false;
+    let compatibility = true;
     
     equipedArmor.forEach((v, k) => {
 
-      compatibility = (replace !== k && (piece.class === v.class || piece.class === 2));
+
+      if (replace !== k && compatibility) {
+        // console.log("Equiped " + k);
+        // console.log(v)
+        compatibility = piece.class == v.class || v.class > 1 || piece.class > 1;
+        // console.log(`Compatiblity for ${k}: ${compatibility}`); // Debug
+      }
+
     });
 
     return compatibility;

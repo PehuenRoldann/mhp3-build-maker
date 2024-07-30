@@ -15,6 +15,7 @@ import { ArmorListComponent } from './components/armor-list/armor-list.component
 import { ArmorListItemComponent } from './components/armor-list/armor-list-item/armor-list-item.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { IncompatibleModalComponent } from './components/armor-list/incompatible-modal/incompatible-modal.component';
+import { PieceModalComponent } from './components/main-view/piece-modal/piece-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { IncompatibleModalComponent } from './components/armor-list/incompatible
     // REMOVED: FiltersBarComponent,
     ArmorListItemComponent,
     IncompatibleModalComponent,
+    PieceModalComponent,
   ],
   imports: [
     BrowserModule,

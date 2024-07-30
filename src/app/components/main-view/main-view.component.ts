@@ -8,6 +8,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { ScreenSizeService } from '../../services/screen-size.service';
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-main-view',
   templateUrl: './main-view.component.html',
@@ -20,10 +22,9 @@ export class MainViewComponent implements OnInit {
   
   public isMobile = this.screenSizeService.isMobile$;
   
-  // Indicates wich stats are going to be shown with ngSwitch.
-  // 0 = defenses, 1 = skills, 2 = resources
-  public showOnMobile: number = 0; 
-  public equipedArmor: Array<ArmorData | null> = new Array<ArmorData | null>(5); // Array of armor parts
+  public selectedPart: string = "";
+  public showOnMobile: number = 0;  // Indicates wich stats are going to be shown with ngSwitch. 0 = defenses, 1 = skills, 2 = resources
+  public equipedArmor: Map<string, ArmorData> = new Map<string, ArmorData>;
 
 
   constructor(
@@ -34,21 +35,17 @@ export class MainViewComponent implements OnInit {
 
 
   public selectPart(value: string) {
-    this.router.navigate([`list/${value}`]);
+    this.selectedPart = value;
+    this.openPieceModal();
   }
 
   public UpdateArmor() {
     let service = new LocalStorageService();
-    
-    this.equipedArmor[0] = service.getItem('helmet') ? service.getItem('helmet') : null;
-    this.equipedArmor[1] = service.getItem('plate') ? service.getItem('plate') : null;
-    this.equipedArmor[2] = service.getItem('guantlets') ? service.getItem('guantlets') : null;
-    this.equipedArmor[3] = service.getItem('waist') ? service.getItem('waist') : null;
-    this.equipedArmor[4] = service.getItem('leggings') ? service.getItem('leggings') : null;
+
+    this.equipedArmor = service.currentEquipment;
     
     console.log("Equiped armor:"); // Debug
-    console.log(this.equipedArmor
-    ); // Debug
+    console.log(this.equipedArmor); // Debug
   }
 
   ngOnInit(): void {
@@ -59,24 +56,51 @@ export class MainViewComponent implements OnInit {
     }
   }
 
+  public ChangeSelectedPart() {
 
+    this.closePieceModal();
 
-  
+    let param = "";
 
-  /* ngAfterViewInit(): void {
-    // Check if childs are available to load
-    if (this.statsBox) {
-      this.statsBox.updateStats(this.equipedArmor);
-    } else {
-      console.error("statsBox is not available!");
+    switch (this.selectedPart) {
+      case 'plate':
+        param = 'plates';
+        break;
+      case 'waist':
+        param = 'waists';
+        break;
+      case 'helmet':
+        param = 'helmets';
+        break;
+      default:
+        param = this.selectedPart;
+        break;
     }
 
-    if (this.skillsBox) {
-      this.skillsBox.updateSkills(this.equipedArmor
-      );
+    return this.router.navigate([`list/${param}`]);
+  }
+
+
+  public closePieceModal() {
+    const modalElem = document.getElementById('pieceModal');
+
+    if (modalElem) {
+      let modal = new bootstrap.Modal(modalElem);
+      modal.hide();
+
+      const backdrops = document.querySelectorAll('.modal-backdrop');
+      backdrops.forEach(backdrop => backdrop.parentNode?.removeChild(backdrop));
     }
-    else {
-      console.error("skillsBox is not available!")
+    
+  }
+
+  private openPieceModal () {
+
+    const modalElem = document.getElementById('pieceModal');
+
+    if (modalElem) {
+      let modal = new bootstrap.Modal(modalElem);
+      modal.show();
     }
-  } */
+  }
 }

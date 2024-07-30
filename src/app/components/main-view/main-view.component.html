@@ -8,37 +8,37 @@
         <div class="armor-set-container">
             <app-armor-slot 
                 [bodyPart]="'helmet'" 
-                [_class]="equipedArmor[0] != null ? equipedArmor[0].class : 0"
-                [rare]="equipedArmor[0] ? equipedArmor[0].rare : 1" 
-                [name]="equipedArmor[0] ? equipedArmor[0].name: 'Click to equip'"
-                (pressedArmorSlotEvent)="selectPart('helmets')"
+                [_class]="equipedArmor.get('helmet') ? equipedArmor.get('helmet')!.class : 0"
+                [rare]="equipedArmor.get('helmet') ? equipedArmor.get('helmet')!.rare : 1" 
+                [name]="equipedArmor.get('helmet') ? equipedArmor.get('helmet')!.name : 'Click to equip'"
+                (pressedArmorSlotEvent)="selectPart('helmet')"
                 />
             <app-armor-slot 
                 [bodyPart]="'plate'" 
-                [_class]="equipedArmor[1] ? equipedArmor[1].class : 0"
-                [rare]="equipedArmor[1] ? equipedArmor[1].rare : 1" 
-                [name]="equipedArmor[1] ? equipedArmor[1].name: 'Click to equip'"
-                (pressedArmorSlotEvent)="selectPart('plates')"
+                [_class]="equipedArmor.get('plate') ? equipedArmor.get('plate')!.class : 0"
+                [rare]="equipedArmor.get('plate') ? equipedArmor.get('plate')!.rare : 1" 
+                [name]="equipedArmor.get('plate') ? equipedArmor.get('plate')!.name: 'Click to equip'"
+                (pressedArmorSlotEvent)="selectPart('plate')"
             />
             <app-armor-slot 
                 [bodyPart]="'guantlets'" 
-                [_class]="equipedArmor[2] ? equipedArmor[2].class : 0"
-                [rare]="equipedArmor[2] ? equipedArmor[2].rare : 1" 
-                [name]="equipedArmor[2] ? equipedArmor[2].name: 'Click to equip'"
+                [_class]="equipedArmor.get('guantlets') ? equipedArmor.get('guantlets')!.class : 0"
+                [rare]="equipedArmor.get('guantlets') ? equipedArmor.get('guantlets')!.rare : 1" 
+                [name]="equipedArmor.get('guantlets') ? equipedArmor.get('guantlets')!.name : 'Click to equip'"
                 (pressedArmorSlotEvent)="selectPart('guantlets')"
             />
             <app-armor-slot 
                 [bodyPart]="'waist'" 
-                [_class]="equipedArmor[3] ? equipedArmor[3].class : 0" 
-                [rare]="equipedArmor[3] ? equipedArmor[3].rare : 1" 
-                [name]="equipedArmor[3] ? equipedArmor[3].name: 'Click to equip'"
-                (pressedArmorSlotEvent)="selectPart('waists')"
+                [_class]="equipedArmor.get('waist') ? equipedArmor.get('waist')!.class : 0" 
+                [rare]="equipedArmor.get('waist') ? equipedArmor.get('waist')!.rare : 1" 
+                [name]="equipedArmor.get('waist') ? equipedArmor.get('waist')!.name: 'Click to equip'"
+                (pressedArmorSlotEvent)="selectPart('waist')"
             />
             <app-armor-slot 
                 [bodyPart]="'leggings'" 
-                [_class]="equipedArmor[4] ? equipedArmor[4].class : 0"
-                [rare]="equipedArmor[4] ? equipedArmor[4].rare : 1" 
-                [name]="equipedArmor[4] ? equipedArmor[4].name : 'Click to equip'"
+                [_class]="equipedArmor.get('leggings') ? equipedArmor.get('leggings')!.class : 0"
+                [rare]="equipedArmor.get('leggings') ? equipedArmor.get('leggings')!.rare : 1" 
+                [name]="equipedArmor.get('leggings') ? equipedArmor.get('leggings')!.name : 'Click to equip'"
                 (pressedArmorSlotEvent)="selectPart('leggings')"
                 />
         </div>
@@ -54,9 +54,9 @@
                 [ngClass]="showOnMobile === 2 ? 'dash-btn active' : 'dash-btn'">Resources</button>
             </div>
             <div class="component-container"  [ngSwitch]="showOnMobile">
-                <app-stats-box *ngSwitchCase="0" [armor]="equipedArmor"></app-stats-box>
+               <!--  <app-stats-box *ngSwitchCase="0" [armor]="equipedArmor"></app-stats-box>
                 <app-skills-box *ngSwitchCase="1" [armor]="equipedArmor"></app-skills-box>
-                <app-resources-box *ngSwitchCase="2" [armor]="equipedArmor"></app-resources-box>
+                <app-resources-box *ngSwitchCase="2" [armor]="equipedArmor"></app-resources-box> -->
             </div>
         </div>
 
@@ -64,21 +64,10 @@
             Hola pero desktop
         </ng-template>
 
-        <!-- <div class="dashboard-container">
-
-            <div class="stats-container" #StatsBox>
-                <h1>Stats</h1>
-                <app-stats-box />
-            </div>
-            <div class="stats-container">
-                <h1>Skills</h1>
-                <app-skills-box />
-            </div>
-            <div class="stats-container">
-                <h1>Resources</h1>
-                <app-resources-box />
-            </div>
-        </div> -->
-
     </div>
 </div>
+
+<app-piece-modal 
+    [armor]="equipedArmor.get(selectedPart)!"
+    (changeEventEmitter)="ChangeSelectedPart()"
+/>
