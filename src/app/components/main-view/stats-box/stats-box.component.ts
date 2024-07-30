@@ -19,9 +19,11 @@ export class StatsBoxComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     
+    this.updateStats(this.armor);
+    /* this.resetStats();
     if (this.armor.length > 0) {
       this.updateStats(this.armor);
-    }
+    } */
   }
 
 

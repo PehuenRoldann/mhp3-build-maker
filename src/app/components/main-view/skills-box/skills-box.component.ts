@@ -7,18 +7,18 @@ import { DataFormatService } from '../../../services/data-format.service';
   templateUrl: './skills-box.component.html',
   styleUrl: './skills-box.component.scss'
 })
+
+
 export class SkillsBoxComponent implements OnChanges{
 
-  // Hash map with the skills an its values
-  skills: Map<string,number> = new Map<string,number>();
+  
+  skills: Map<string,number> = new Map<string,number>();// Hash map with the skills an its values to show
 
   @Input() armor: Array<ArmorData | null> = [];
 
   ngOnChanges(changes: SimpleChanges): void {
 
-    if (this.armor.length > 0) {
-      this.updateSkills(this.armor);
-    }
+    this.updateSkills(this.armor);
   }
 
   get skillsArray() {
@@ -26,7 +26,7 @@ export class SkillsBoxComponent implements OnChanges{
     return Array.from(this.skills.entries());
   }
 
-  isPositive = (num: number): boolean => {
+  isPositive = (num: number): boolean => {// let currentSkillsMap = new Map<string,number>(); NO se usa?
     // console.log(num > 0); #DEBUG
     return num > 0;
   }
@@ -34,7 +34,8 @@ export class SkillsBoxComponent implements OnChanges{
   public updateSkills (equipedArmor: Array<ArmorData | null>) {
 
     let service = new DataFormatService();
-    let currentSkillsMap = new Map<string,number>();
+
+    this.skills = new Map<string,number>(); // Reset the skills
 
     // First gets the map for the skills of a equiped armor part,
     // then adds that to the general skills map that is going to be shown

@@ -1,9 +1,14 @@
 <div class="flexdiv">
-    <ul class="resources-ul">
-        <li *ngFor="let resource of resources.keys(); let i = index"
-        [ngStyle]="{'animation-delay': i * 0.2 + 's'}">
-            <span>{{resource}} </span>
-            <span>x{{resources.get(resource)}}</span>
-        </li>
-    </ul>
+
+    <p *ngIf="armor.length < 1; else resourcesTemplate">No resources to show!</p>
+    
+    <ng-template #resourcesTemplate>
+        <ul class="resources-ul">
+            <li *ngFor="let resource of resources.keys(); let i = index"
+            [ngStyle]="{'animation-delay': i * 0.2 + 's'}">
+                <span>{{resource}} </span>
+                <span>x{{resources.get(resource)}}</span>
+            </li>
+        </ul>
+    </ng-template>
 </div>

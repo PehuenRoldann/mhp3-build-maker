@@ -13,6 +13,7 @@ export class ResourcesBoxComponent implements OnChanges {
   resources: Map<string, number> = new Map<string,number>();
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.resources = new Map<string,number>();
     this.updateResources();
   }
 

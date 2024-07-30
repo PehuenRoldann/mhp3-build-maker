@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { ArmorData } from '../../../types/armorData';
 
 @Component({
@@ -6,9 +6,9 @@ import { ArmorData } from '../../../types/armorData';
   templateUrl: './armor-slot.component.html',
   styleUrl: './armor-slot.component.scss'
 })
-export class ArmorSlotComponent implements OnInit {
+export class ArmorSlotComponent implements OnInit, OnChanges {
 
-  @Input({required: true}) bodyPart: string = "helmet" || "plate" || "guantlets" || "waist" || "leggings";
+  @Input({required: true}) bodyPart: string = "";
   @Input({required: true}) rare: number = 1;
   @Input({required: true}) name: string = "";
   @Input({required: true}) _class: number = 0;
@@ -19,6 +19,10 @@ export class ArmorSlotComponent implements OnInit {
   imageUrl: string = '';
 
   ngOnInit() {
+    this.updateImageUrl();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.updateImageUrl();
   }
 

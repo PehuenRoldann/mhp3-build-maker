@@ -94,6 +94,14 @@ export class MainViewComponent implements OnInit {
     this.router.navigate([`list/${param}`]);
   }
 
+  public RemoveSelectedPart() {
+
+    this.closePieceModal();
+
+    let service = new LocalStorageService();
+    service.removeItem(this.selectedPart);
+    this.UpdateArmor();
+  }
 
   public closePieceModal() {
     const modalElem = document.getElementById('pieceModal');
