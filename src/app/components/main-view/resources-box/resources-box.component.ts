@@ -25,18 +25,23 @@ export class ResourcesBoxComponent implements OnChanges {
 
       this.armor.forEach(element => {
 
-        let currentResources = service.getResourcesMap(element!.materials);
+        if (element) {
+          
+          let currentResources = service.getResourcesMap(element!.materials);
 
-        currentResources.forEach((v, k) => {
+          currentResources.forEach((v, k) => {
 
-          if (this.resources.has(k)) {
-            this.resources.set(k, v + this.resources.get(k)!);
-          }
-          else {
-            this.resources.set(k, v);
-          }
+            if (this.resources.has(k)) {
+              this.resources.set(k, v + this.resources.get(k)!);
+            }
+            else {
+              this.resources.set(k, v);
+            }
 
-        })
+          })
+        }
+
+        
       });
     }
   }

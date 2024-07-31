@@ -1,19 +1,32 @@
-<div class="modal fade" id="pieceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div *ngIf="armor != null"
+class="modal fade" id="pieceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
+          <img [src]="imgPath" alt="">
           <h1 class="modal-title fs-5" id="exampleModalLabel">
             {{armor ? armor.name : ""}}
-        </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </h1>
+          <span>
+            <img src="../../../../assets/wepons/greatsword1.png" alt=""
+            [style]="this.armor.class === 0 || this.armor.class === 2? 'display: inline-block': 'display: none'">
+            <img src="../../../../assets/wepons/lightbowgun1.png" alt=""
+            [style]="this.armor.class === 1 || this.armor.class === 2? 'display: inline-block': 'display: none'">
+          </span>
+          <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
         </div>
-        <div class="modal-body">
-          coso
+        <div class="modal-body" data-bs-theme="dark">
+          <h4>Stats</h4>
+          <app-stats-box [armor]="[armor]"/>
+          <h4 style="text-align: end;">Skills</h4>
+          <app-skills-box [armor]="[armor]"/>
+          <h4>Resources</h4>
+          <app-resources-box [armor]="[armor]"/>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onRemovePressed()">Remove</button>
-          <button type="button" class="btn btn-primary" (click)="onChangePressed()">Change</button>
+        <div class="modal-footer my-modal-footer">
+          <button type="button" class="btn btn-secondary" id="closeBtn" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="removeBtn" data-bs-dismiss="modal" (click)="onRemovePressed()">Remove</button>
+          <button type="button" class="btn btn-primary" id="changeBtn" (click)="onChangePressed()">Change</button>
         </div>
       </div>
     </div>

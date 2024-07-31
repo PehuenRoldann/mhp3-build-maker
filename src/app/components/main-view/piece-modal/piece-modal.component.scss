@@ -1,0 +1,84 @@
+@import '../../../../styles.scss';
+
+$right_left_margin: 10vw;
+
+@keyframes h4animation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.modal-header {
+
+    display: flex;
+    justify-content:space-between;
+    background-color: $color1;
+    padding: 5px;
+
+    img {
+        width: 40px;
+        height: 40px;
+    }
+
+    h1 {
+        font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+        color: white;
+    }
+
+    span {
+        img {
+            width: 30px;
+            height: 30px;
+        }
+    }
+}
+
+.modal-body {
+
+    $lateral_margin: 7%;
+    height: 40vh;
+    margin: 0 $lateral_margin 0 $lateral_margin;
+    overflow-y: auto;
+
+    animation-name: h4animation;
+    animation-duration: 0.5s;
+
+    h4 {
+        background-color: $color1;
+        padding: 5px;
+        font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+        color: white;
+
+        
+    }
+
+}
+
+.my-modal-footer {
+
+    padding: 10px;
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    background-color: $color1;
+
+    .btn {
+        width: 25%;
+        height: 80%;
+        border: 0px;
+    }
+}
+
+#removeBtn {
+    background-color: red;
+}
+
+#changeBtn {
+    background-color: green;
+}

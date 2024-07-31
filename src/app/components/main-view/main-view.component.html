@@ -69,6 +69,7 @@
 
 <app-piece-modal 
     [armor]="equipedArmor.get(selectedPart)!"
+    [bodyPart]="selectedPart"
     (changeEventEmitter)="ChangeSelectedPart()"
     (removeEventEmitter)="RemoveSelectedPart()"
 />

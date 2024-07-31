@@ -49,8 +49,17 @@ export class MainViewComponent implements OnInit {
 
 
   public selectPart(value: string) {
+
+
     this.selectedPart = value;
-    this.openPieceModal();
+
+    if (this.equipedArmor.get(this.selectedPart)){
+      this.openPieceModal();
+    }
+    else {
+      this.ChangeSelectedPart();
+    }
+    
   }
 
   public UpdateArmor() {
