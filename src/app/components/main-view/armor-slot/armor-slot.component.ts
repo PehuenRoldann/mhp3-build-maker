@@ -12,9 +12,10 @@ export class ArmorSlotComponent implements OnInit, OnChanges {
   @Input({required: true}) rare: number = 1;
   @Input({required: true}) name: string = "";
   @Input({required: true}) _class: number | null = null;
-  @Input() done: boolean = false;
+  // @Input() done: boolean = false;
 
   @Output() pressedArmorSlotEvent = new EventEmitter<string>();
+  @Output() checkBoxChangeEvent = new EventEmitter<boolean>();
 
   imageUrl: string = '';
 
@@ -27,12 +28,12 @@ export class ArmorSlotComponent implements OnInit, OnChanges {
   }
 
   public onCheckBoxChange(event: any) {
+
     if (event.target.checked) {
-      this.done = true;
+      return this.checkBoxChangeEvent.emit(true);
     }
-    else {
-      this.done = false;
-    }
+    
+    return this.checkBoxChangeEvent.emit(false);
   }
   
   private updateImageUrl() {

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import { ArmorData } from '../../../types/armorData';
 import { DataFormatService } from '../../../services/data-format.service';
 
@@ -7,7 +7,7 @@ import { DataFormatService } from '../../../services/data-format.service';
   templateUrl: './resources-box.component.html',
   styleUrl: './resources-box.component.scss'
 })
-export class ResourcesBoxComponent implements OnChanges {
+export class ResourcesBoxComponent implements  OnChanges {
 
   @Input() armor: Array<ArmorData | null> = [];
   resources: Map<string, number> = new Map<string,number>();
@@ -16,6 +16,8 @@ export class ResourcesBoxComponent implements OnChanges {
     this.resources = new Map<string,number>();
     this.updateResources();
   }
+
+
 
   private updateResources () {
 

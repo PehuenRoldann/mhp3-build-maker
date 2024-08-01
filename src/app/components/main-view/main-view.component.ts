@@ -26,6 +26,11 @@ export class MainViewComponent implements OnInit {
   public showOnMobile: number = 0;  // Indicates wich stats are going to be shown with ngSwitch. 0 = defenses, 1 = skills, 2 = resources
   public equipedArmor: Map<string, ArmorData> = new Map<string, ArmorData>;
   
+  public helmetDone: boolean = false;
+  public plateDone: boolean = false;
+  public guantletsDone: boolean = false;
+  public waistDone: boolean = false;
+  public legginsDone: boolean = false;
 
   get equipedArmorArray () {
 
@@ -36,6 +41,55 @@ export class MainViewComponent implements OnInit {
         equipedArmorArr.push(v);
       })
     }
+
+    return equipedArmorArr;
+  }
+
+  get equipedArmorArrayResources () {
+
+    let equipedArmorArr: ArmorData[] = [];
+
+    if (!this.equipedArmor) {return []}
+
+    let addToArr = false;
+
+    this.equipedArmor.forEach((v, k) => {
+
+      console.log("K es: " + k);
+
+      addToArr = false;
+
+      console.log("Should add " + k + "?");// Debug
+      switch (k) {// Debug
+        case 'helmet':
+          console.log(!this.helmetDone);
+          break;
+        case 'plate':
+          console.log(!this.plateDone);
+          break;
+        case 'waist':
+          console.log(!this.waistDone);
+          break;
+        case 'guantlets':
+          console.log(!this.guantletsDone);
+          break;
+        case 'leggings':
+          console.log(!this.legginsDone);
+          break;
+      }
+
+      addToArr = (k === 'helmet' && !this.helmetDone) || addToArr;
+      addToArr = (k === 'plate' && !this.plateDone) || addToArr;
+      addToArr = (k === 'waist' && !this.waistDone) || addToArr;
+      addToArr = (k === 'guantlets' && !this.guantletsDone) || addToArr;
+      addToArr = (k === 'leggings' && !this.legginsDone) || addToArr;
+
+      if (addToArr) {
+        console.log("Resources to show"); //Debug
+        console.log(v); //Debug
+        equipedArmorArr.push(v);
+      }
+    })
 
     return equipedArmorArr;
   }

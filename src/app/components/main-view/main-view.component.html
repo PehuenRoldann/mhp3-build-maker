@@ -10,6 +10,7 @@
                 [_class]="equipedArmor.get('helmet') ? equipedArmor.get('helmet')!.class : null"
                 [rare]="equipedArmor.get('helmet') ? equipedArmor.get('helmet')!.rare : 1" 
                 [name]="equipedArmor.get('helmet') ? equipedArmor.get('helmet')!.name : 'Click to equip'"
+                (checkBoxChangeEvent)="helmetDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart('helmet')"
                 />
             <app-armor-slot 
@@ -17,6 +18,7 @@
                 [_class]="equipedArmor.get('plate') ? equipedArmor.get('plate')!.class : null"
                 [rare]="equipedArmor.get('plate') ? equipedArmor.get('plate')!.rare : 1" 
                 [name]="equipedArmor.get('plate') ? equipedArmor.get('plate')!.name: 'Click to equip'"
+                (checkBoxChangeEvent)="plateDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart('plate')"
             />
             <app-armor-slot 
@@ -24,6 +26,7 @@
                 [_class]="equipedArmor.get('guantlets') ? equipedArmor.get('guantlets')!.class : null"
                 [rare]="equipedArmor.get('guantlets') ? equipedArmor.get('guantlets')!.rare : 1" 
                 [name]="equipedArmor.get('guantlets') ? equipedArmor.get('guantlets')!.name : 'Click to equip'"
+                (checkBoxChangeEvent)="guantletsDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart('guantlets')"
             />
             <app-armor-slot 
@@ -31,6 +34,7 @@
                 [_class]="equipedArmor.get('waist') ? equipedArmor.get('waist')!.class : null" 
                 [rare]="equipedArmor.get('waist') ? equipedArmor.get('waist')!.rare : 1" 
                 [name]="equipedArmor.get('waist') ? equipedArmor.get('waist')!.name: 'Click to equip'"
+                (checkBoxChangeEvent)="waistDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart('waist')"
             />
             <app-armor-slot 
@@ -38,6 +42,7 @@
                 [_class]="equipedArmor.get('leggings') ? equipedArmor.get('leggings')!.class : null"
                 [rare]="equipedArmor.get('leggings') ? equipedArmor.get('leggings')!.rare : 1" 
                 [name]="equipedArmor.get('leggings') ? equipedArmor.get('leggings')!.name : 'Click to equip'"
+                (checkBoxChangeEvent)="legginsDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart('leggings')"
                 />
         </div>
@@ -58,7 +63,7 @@
             <div class="component-container"  [ngSwitch]="showOnMobile">
                 <app-stats-box *ngSwitchCase="0" [armor]="equipedArmorArray"></app-stats-box>
                 <app-skills-box *ngSwitchCase="1" [armor]="equipedArmorArray"></app-skills-box>
-                <app-resources-box *ngSwitchCase="2" [armor]="equipedArmorArray"></app-resources-box>
+                <app-resources-box *ngSwitchCase="2" [armor]="equipedArmorArrayResources"></app-resources-box>
             </div>
         </div>
 
