@@ -2,7 +2,7 @@
     <img [src]="imageUrl" alt="" (click)="pressedArmorSlot()">
     <div class="mid-container">
         <p (click)="pressedArmorSlot()" > {{name}}</p>
-        <div class="images-container">
+        <div class="images-container" *ngIf="_class !== null">
             <span>
                 <img src="../../../../assets/wepons/greatsword1.png" alt="" 
                 [ngStyle]="{'display': (_class === 0 || _class === 2) ? 'block' : 'none'}"
