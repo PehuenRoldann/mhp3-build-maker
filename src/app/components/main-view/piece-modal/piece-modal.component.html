@@ -16,11 +16,11 @@ class="modal fade" id="pieceModal" tabindex="-1" aria-labelledby="exampleModalLa
           <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
         </div>
         <div class="modal-body" data-bs-theme="dark">
-          <h4>Stats</h4>
+          <div class="title"><h4>Stats</h4></div>
           <app-stats-box [armor]="[armor]"/>
-          <h4 style="text-align: end;">Skills</h4>
+          <div class="title"><h4 style="text-align: end;">Skills</h4></div>
           <app-skills-box [armor]="[armor]"/>
-          <h4>Resources</h4>
+          <div class="title"><h4>Resources</h4></div>
           <app-resources-box [armor]="[armor]"/>
         </div>
         <div class="modal-footer my-modal-footer">

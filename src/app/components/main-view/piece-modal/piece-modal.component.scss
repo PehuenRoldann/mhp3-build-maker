@@ -46,13 +46,20 @@ $right_left_margin: 10vw;
     animation-name: h4animation;
     animation-duration: 0.5s;
 
-    h4 {
-        background-color: $color1;
-        padding: 5px;
-        font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
-        color: white;
+    .title {
 
-        
+        transform: skew(20deg);
+        margin: 0 10px 0 10px;
+        background-color: $color1;
+
+        h4 {
+            
+            padding: 5px 10px 5px 10px;
+            font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+            color: white;
+            transform:skew(-20deg);
+            
+        }
     }
 
 }
