@@ -25,7 +25,9 @@ $right_left_margin: 10vw;
 
     h1 {
         font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+        font-size: 24px;
         color: white;
+        padding: 10px 0 10px 0;
     }
 
     span {
@@ -53,13 +55,24 @@ $right_left_margin: 10vw;
         background-color: $color1;
 
         h4 {
-            
-            padding: 5px 10px 5px 10px;
-            font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
-            color: white;
-            transform:skew(-20deg);
-            
+            transform: skew(-20deg);
         }
+
+    }
+
+    .rev {
+        transform: skew(-20deg);
+        h4 {
+            transform: skew(20deg);
+        }
+    }
+
+    h4 {
+        font-size: 16pt;
+        padding: 5px 10px 5px 10px;
+        font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+        color: white;
+        
     }
 
 }

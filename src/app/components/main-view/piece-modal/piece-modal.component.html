@@ -9,16 +9,16 @@ class="modal fade" id="pieceModal" tabindex="-1" aria-labelledby="exampleModalLa
           </h1>
           <span>
             <img src="../../../../assets/wepons/greatsword1.png" alt=""
-            [style]="this.armor.class === 0 || this.armor.class === 2? 'display: inline-block': 'display: none'">
+            [style]="this.armor.class === 0 || this.armor.class === 2? 'display: block': 'display: none'">
             <img src="../../../../assets/wepons/lightbowgun1.png" alt=""
-            [style]="this.armor.class === 1 || this.armor.class === 2? 'display: inline-block': 'display: none'">
+            [style]="this.armor.class === 1 || this.armor.class === 2? 'display: block': 'display: none'">
           </span>
           <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
         </div>
         <div class="modal-body" data-bs-theme="dark">
           <div class="title"><h4>Stats</h4></div>
           <app-stats-box [armor]="[armor]"/>
-          <div class="title"><h4 style="text-align: end;">Skills</h4></div>
+          <div class="title rev"><h4 style="text-align: end;">Skills</h4></div>
           <app-skills-box [armor]="[armor]"/>
           <div class="title"><h4>Resources</h4></div>
           <app-resources-box [armor]="[armor]"/>
