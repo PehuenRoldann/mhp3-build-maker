@@ -8,6 +8,7 @@ import { DataFormatService } from '../../../services/data-format.service';
   styleUrl: './resources-box.component.scss'
 })
 export class ResourcesBoxComponent implements  OnChanges {
+  
 
   @Input() armor: Array<ArmorData | null> = [];
   resources: Map<string, number> = new Map<string,number>();
@@ -16,7 +17,6 @@ export class ResourcesBoxComponent implements  OnChanges {
     this.resources = new Map<string,number>();
     this.updateResources();
   }
-
 
 
   private updateResources () {

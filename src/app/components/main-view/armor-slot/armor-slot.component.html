@@ -15,5 +15,7 @@
             </span>
         </div>
     </div>
-    <input class="checkbox" type="checkbox" (change)="onCheckBoxChange($event)" name="" id="" >
+    <form action="" autocomplete="off">
+        <input class="checkbox" type="checkbox" (change)="onCheckBoxChange($event)" name="" [id]="bodyPart+'Check'">
+    </form>
 </div>

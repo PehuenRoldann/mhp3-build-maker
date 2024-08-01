@@ -17,10 +17,12 @@ export class ArmorSlotComponent implements OnInit, OnChanges {
   @Output() pressedArmorSlotEvent = new EventEmitter<string>();
   @Output() checkBoxChangeEvent = new EventEmitter<boolean>();
 
+
   imageUrl: string = '';
 
   ngOnInit() {
     this.updateImageUrl();
+  
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -29,11 +31,7 @@ export class ArmorSlotComponent implements OnInit, OnChanges {
 
   public onCheckBoxChange(event: any) {
 
-    if (event.target.checked) {
-      return this.checkBoxChangeEvent.emit(true);
-    }
-    
-    return this.checkBoxChangeEvent.emit(false);
+    return this.checkBoxChangeEvent.emit(event.target.checked);
   }
   
   private updateImageUrl() {
