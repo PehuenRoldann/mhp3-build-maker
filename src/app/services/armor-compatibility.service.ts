@@ -33,4 +33,65 @@ export class ArmorCompatibilityService {
     return compatibility;
     
   }
+
+  /**
+   * This metod recieves two instances of ArmorData an returns a map with the property and the respective values.
+   * @param armorToReplace Current equiped instance.
+   * @param armorToEquip New instance.
+   * @returns A map where key: string value: [number, number, boolean].
+   * The first number is for the current instance value.
+   * The second number is for the new instance value.
+   * The third number represents upgrade = 0, not upgrade = 1 or downgrade = 2.
+   */
+  public compareArmorsMap (armorToReplace: ArmorData, armorToEquip: ArmorData): Map<string,[number,number,number]> {
+
+    let mapToCompare = new Map <string, [number, number, number]>();
+     
+    Object.entries(armorToReplace).forEach(([key1, value1]) => {
+      Object.entries(armorToEquip).forEach(([key2, value2]) => {
+        
+        if (key1 === key2 && key1 !== 'skills' && key1 !== 'materials' && key1 !== 'name') 
+          {
+
+            switch (key1) {
+              case 'name': 
+                key1 = 'Name'; 
+                break;
+              case 'rare': 
+                key1 = 'Rare'; 
+                break;
+              case 'defense': 
+                key1 = 'Defense'; 
+                break;
+              case 'slots': 
+                key1 = 'Slots'; 
+                break;
+              case 'fire_res': 
+                key1 = 'Fire Res'; 
+                break;
+              case 'water_res': 
+                key1 = 'Water Res'; 
+                break;
+              case 'thunder_res': 
+                key1 = 'Thunder Res'; 
+                break;
+              case 'ice_res': 
+                key1 = 'Ice Res'; 
+                break;
+              case 'dragon_res': 
+                key1 = 'Dragon Res'; 
+                break;
+              case 'class': 
+                key1 = 'Class'; 
+                break;
+            }
+
+            mapToCompare.set(key1, [value1, value2,
+               value1 < value2 ? 0 : (value1 > value2 ? 2 : 1)]);
+          }
+      })
+    })
+
+    return mapToCompare;
+  }
 }

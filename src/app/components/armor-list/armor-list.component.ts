@@ -1,10 +1,11 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArmorDataAccessService } from '../../services/armor-data-access.service';
 import { ArmorData } from '../../types/armorData';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { ArmorCompatibilityService } from '../../services/armor-compatibility.service';
-import { bootstrapApplication } from '@angular/platform-browser';
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
 
 
 declare var bootstrap: any; 
@@ -20,8 +21,11 @@ export class ArmorListComponent implements OnInit {
 
   // @Output() armorEquipedEventEmmiter: EventEmitter<ArmorData> = new EventEmitter(); NO NEED WITH ROUTER
 
-  private service = new ArmorDataAccessService();
-  private armorData: ArmorData[] = [];
+  public armorData: ArmorData[] = [];
+
+  public armorToEquip!: ArmorData;
+  public armorToReplace: ArmorData = new ArmorData();
+  public part?: string;
 
   public searchInput: string = "";
 
@@ -34,20 +38,57 @@ export class ArmorListComponent implements OnInit {
   public minIceResFilter?: number;
   public minDragonResFilter?: number;
 
-  constructor (private route: ActivatedRoute, private router: Router) {}
+  constructor (
+    @Inject(PLATFORM_ID) private platformId: any,
+    private route: ActivatedRoute,
+    private router: Router,
+    private localStorageService: LocalStorageService,
+    private armorDataAccessService: ArmorDataAccessService,
+    private armorCompatibilityService: ArmorCompatibilityService
+  ) {}
   
-  async ngOnInit(): Promise<void> {
+  ngOnInit() {
 
-    this.route.paramMap.subscribe(params => {
-      this.partsToShow = params.get('parts')!;
-    })
-    this.armorData = await this.service.getArmorData(this.partsToShow);
+    if (isPlatformBrowser(this.platformId)) {
+
+      this.route.paramMap.subscribe(params => {
+        this.partsToShow = params.get('parts')!;
+      })
+      
+      this.fetchData();
+
+      switch (this.partsToShow){
+        case 'helmets': this.part = 'helmet'; break;
+        case 'plates': this.part = 'plate'; break;
+        case 'waists': this.part = 'waist'; break;
+        default: this.part = this.partsToShow; break;
+      }
 
 
+      this.armorToReplace  = this.localStorageService.getItem(this.part!) || this.armorToReplace;
+      
+    }
+    
+  }
+
+  private async fetchData(): Promise<void> {
+      this.armorData = await this.armorDataAccessService.getArmorData(this.partsToShow);
+      console.log("FETCHED DATA: ");
+      console.log(this.armorData);
   }
 
   public changeToHome () {
     this.router.navigate(['/home']);
+  }
+
+  get propertiesToCompare (): Map <string, [number, number, number]> {
+
+    if (!this.armorToEquip) {
+      return new Map <string, [number, number, number]>();
+    }
+
+    return this.armorCompatibilityService.compareArmorsMap(this.armorToReplace, this.armorToEquip);
+
   }
 
 
@@ -60,14 +101,31 @@ export class ArmorListComponent implements OnInit {
     }
   }
 
+  /**
+   * Opens a the modal with the given ID.
+   * @param modalID Modal ID = incompatibilityModal, comparationModal.
+   */
+  public openModal(modalID: string) {
+    const modalElement = document.getElementById(modalID);
+
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement); // Usa el servicio de Bootstrap para abrir el modal
+      modal.show();
+    }
+  }
+
+  /**
+   * Checks if the armor given as parameter is compatible with the current armor.
+   * @param part helmet, plate, guantlets, waist or leggings.
+   * @param data ArmorData instance that is going the be check for compatibility.
+   * @returns True if compatible. False if not.
+   */
   public checkCompatibility (part: string, data: ArmorData) {
 
-    let lsService = new LocalStorageService();
-    let acService = new ArmorCompatibilityService();
 
-    let currentEquipment = lsService.currentEquipment;
+    let currentEquipment = this.localStorageService.currentEquipment;
 
-    let compatibility = acService.checkCompatibility(data, currentEquipment, part)
+    let compatibility = this.armorCompatibilityService.checkCompatibility(data, currentEquipment, part)
 
     console.log(`Compatibility: ${compatibility}`); // Debug
 
@@ -78,28 +136,32 @@ export class ArmorListComponent implements OnInit {
     return compatibility
   }
 
-  // Event that happens when the user clicks on the Equip button
-  public armorEquipedEvent(data: ArmorData){
-    
-    let service = new LocalStorageService();
-    let part = "";
+  /**
+   * Triggers when the user clicks the equip button on armir-list-item component.
+   * @param data The ArmorData instance to equip.
+   */
+  public equipButtonEvent(data: ArmorData){
 
-    switch (this.partsToShow){
-      case 'helmets': part = 'helmet'; break;
-      case 'plates': part = 'plate'; break;
-      case 'waists': part = 'waist'; break;
-      case 'guantlets': part = 'guantlets'; break;
-      case 'leggings': part = 'leggings'; break;
-    }
+    if(this.checkCompatibility(this.part!, data)){
 
-    if(this.checkCompatibility(part, data)){
-      
-      service.setItem(part, data);
-      this.changeToHome();
+      this.armorToEquip = data;
+      this.openModal('comparationModal');
     }
   }
 
-  // Property to only show the filtered data from the armors data
+  /**
+   * Equips de piece of armor and changes back to main view.
+   */
+  public equipArmor() {
+
+    this.localStorageService.setItem(this.part!, this.armorToEquip!);
+    this.changeToHome();
+  }
+
+
+  /**
+   * Filtered ArmorData Array.
+   */
   get filteredArmorData ( ): ArmorData[] {
 
     let filteredData: ArmorData[] = this.armorData;

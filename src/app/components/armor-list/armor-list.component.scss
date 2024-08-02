@@ -11,6 +11,22 @@
     padding: 5px 0 5px 0;
 }
 
+.triangle-right {
+	width: 0;
+	height: 0;
+	border-top: 8px solid transparent;
+	border-left: 16px solid #555;
+	border-bottom: 8px solid transparent;
+}
+
+.positive-triangle {
+    border-left-color: green;
+}
+
+.negative-triangle {
+    border-left-color: red;
+}
+
 .search-form {
     margin-top: 10px;
 }
@@ -69,3 +85,14 @@
     margin: 0;
 }
 
+.comparation-table {
+
+    width: 100%;
+    tr {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        border-bottom: 1px solid black;
+    }
+}

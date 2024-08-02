@@ -60,7 +60,7 @@
     <ng-template #itemsListBlock >
         <div class="armor-items-container">
             <div class="armor-list-container" *ngFor="let item of filteredArmorData">
-                <app-armor-list-item  [item]="item" (equipEvent)="armorEquipedEvent($event)"/>
+                <app-armor-list-item  [item]="item" (equipEvent)="equipButtonEvent($event)"/>
             </div>
         </div>
     </ng-template>
@@ -74,7 +74,9 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Incompatibility Detected</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Incompatibility Detected!
+          </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -85,6 +87,75 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- Comparation Modal -->
+ <div *ngIf="armorToEquip" class="modal fade" id="comparationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header comp-modal-header">
+           <p>{{armorToReplace.name !== "" ? armorToReplace.name : "None"}} => {{armorToEquip.name}}</p>
+        </div>
+        <div class="modal-body">
+          <h1>Stats</h1>
+          <table class="comparation-table">
+            <!-- <tbody>
+                <tr>
+                  <td>Slots</td>
+                  <td>{{armorToReplace.slots || 0}}</td>
+                  <td>
+                    <div class="triangle-right" 
+                      [ngClass]="{
+                      'positive-triangle': armorToEquip.slots > armorToReplace.slots,
+                      'negative-triangle': armorToEquip.slots < armorToReplace.slots}">
+                    </div>
+                  </td>
+                  <td>{{armorToEquip.slots}}</td>
+                </tr>
+                <tr>
+                  <td>Defense</td>
+                  <td>{{armorToReplace.defense || 0}}</td>
+                  <td>
+                    <div class="triangle-right" 
+                      [ngClass]="{
+                      'positive-triangle': armorToEquip.defense > armorToReplace.defense,
+                      'negative-triangle': armorToEquip.defense < armorToReplace.defense}">
+                    </div>
+                  </td>
+                  <td>{{armorToEquip.defense}}</td>
+                </tr>
+                <tr>
+                    <td>Defense</td>
+                    <td>10</td>
+                    <td><div class="triangle-right positive-triangle"></div></td>
+                    <td>21</td>
+                </tr>
+            </tbody> -->
+            <tbody>
+              <tr *ngFor="let property of propertiesToCompare.keys()">
+                <td>{{property}}</td>
+                <td>{{propertiesToCompare.get(property)?.[0] || 0}}</td>
+                <td>
+                  <div class="triangle-right" 
+                    [ngClass]="{
+                    'positive-triangle': (propertiesToCompare.get(property)?.[2] === 0),
+                    'negative-triangle': (propertiesToCompare.get(property)?.[2] === 2)
+                  }">
+                  </div>
+                </td>
+                <td>{{propertiesToCompare.get(property)?.[1] || 0}}</td>
+              </tr>
+            </tbody>
+            
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss>Acept</button>
         </div>
       </div>
     </div>

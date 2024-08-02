@@ -25,7 +25,7 @@ import { PieceModalComponent } from './components/main-view/piece-modal/piece-mo
     ResourcesBoxComponent,
     ArmorListComponent,
     ArmorListItemComponent,
-    PieceModalComponent,
+    PieceModalComponent
   ],
   imports: [
     BrowserModule,

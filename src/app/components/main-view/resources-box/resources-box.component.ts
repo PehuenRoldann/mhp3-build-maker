@@ -8,6 +8,8 @@ import { DataFormatService } from '../../../services/data-format.service';
   styleUrl: './resources-box.component.scss'
 })
 export class ResourcesBoxComponent implements  OnChanges {
+
+  constructor () {}
   
 
   @Input() armor: Array<ArmorData | null> = [];
@@ -46,6 +48,7 @@ export class ResourcesBoxComponent implements  OnChanges {
         
       });
     }
+
   }
 
 
