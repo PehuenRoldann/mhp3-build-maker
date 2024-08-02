@@ -12,7 +12,6 @@ export class ArmorSlotComponent implements OnInit, OnChanges {
   @Input({required: true}) rare: number = 1;
   @Input({required: true}) name: string = "";
   @Input({required: true}) _class: number | null = null;
-  // @Input() done: boolean = false;
 
   @Output() pressedArmorSlotEvent = new EventEmitter<string>();
   @Output() checkBoxChangeEvent = new EventEmitter<boolean>();

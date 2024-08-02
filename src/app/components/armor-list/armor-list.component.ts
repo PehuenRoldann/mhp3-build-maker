@@ -52,7 +52,7 @@ export class ArmorListComponent implements OnInit {
 
 
   public openIncompatibilityModal() {
-    const modalElement = document.getElementById('exampleModal');
+    const modalElement = document.getElementById('incompatibilityModal');
 
     if (modalElement) {
       const modal = new bootstrap.Modal(modalElement); // Usa el servicio de Bootstrap para abrir el modal
