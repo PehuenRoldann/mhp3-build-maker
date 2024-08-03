@@ -6,6 +6,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 import { ArmorCompatibilityService } from '../../services/armor-compatibility.service';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
+import { DataFormatService } from '../../services/data-format.service';
 
 
 declare var bootstrap: any; 
@@ -44,7 +45,8 @@ export class ArmorListComponent implements OnInit {
     private router: Router,
     private localStorageService: LocalStorageService,
     private armorDataAccessService: ArmorDataAccessService,
-    private armorCompatibilityService: ArmorCompatibilityService
+    private armorCompatibilityService: ArmorCompatibilityService,
+    private armorDataFormatService: DataFormatService
   ) {}
   
   ngOnInit() {
@@ -87,8 +89,24 @@ export class ArmorListComponent implements OnInit {
       return new Map <string, [number, number, number]>();
     }
 
-    return this.armorCompatibilityService.compareArmorsMap(this.armorToReplace, this.armorToEquip);
+    return this.armorCompatibilityService.compareArmorsStatsMap(this.armorToReplace, this.armorToEquip);
 
+  }
+
+  get resourcesForNewEquip () {
+    return this.armorDataFormatService.getResourcesMap(this.armorToEquip.materials) || new Map<string, number>();
+  }
+
+  get skillsToCompare () : Map <string, [number, number, number]> {
+
+    if (!this.armorToEquip) {
+      return new Map<string, [number, number, number]>();
+    }
+
+    let oldSkills = this.armorDataFormatService.getSkillsMap(this.armorToReplace.skills);
+    let newSkills = this.armorDataFormatService.getSkillsMap(this.armorToEquip.skills);
+
+    return this.armorCompatibilityService.compareSkills(oldSkills, newSkills);
   }
 
 

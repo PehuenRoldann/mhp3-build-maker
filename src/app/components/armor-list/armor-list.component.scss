@@ -85,6 +85,11 @@
     margin: 0;
 }
 
+.modal-body {
+    height: 50vh;
+    overflow-y: auto;
+}
+
 .comparation-table {
 
     width: 100%;
@@ -93,6 +98,36 @@
         justify-content: space-between;
         align-items: center;
 
+        margin: 0 0 10px 0;
+
         border-bottom: 1px solid black;
+
+        .property-td {
+            width: 50%;
+        }
+        .value-td {
+            width: 10%;
+            text-align: center;
+        }
+        .increment-td {
+            width: 10%;
+        }
     }
+}
+
+.comparation-skills-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.table-title {
+    background-color: $color1;
+    color: white;
+    font-family: "MonsterHunterFont",Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    width: 100%;
+    padding: 5px;
+
 }

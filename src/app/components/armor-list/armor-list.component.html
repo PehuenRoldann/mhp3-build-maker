@@ -101,45 +101,13 @@
            <p>{{armorToReplace.name !== "" ? armorToReplace.name : "None"}} => {{armorToEquip.name}}</p>
         </div>
         <div class="modal-body">
-          <h1>Stats</h1>
+          <p class="table-title">Stats</p>
           <table class="comparation-table">
-            <!-- <tbody>
-                <tr>
-                  <td>Slots</td>
-                  <td>{{armorToReplace.slots || 0}}</td>
-                  <td>
-                    <div class="triangle-right" 
-                      [ngClass]="{
-                      'positive-triangle': armorToEquip.slots > armorToReplace.slots,
-                      'negative-triangle': armorToEquip.slots < armorToReplace.slots}">
-                    </div>
-                  </td>
-                  <td>{{armorToEquip.slots}}</td>
-                </tr>
-                <tr>
-                  <td>Defense</td>
-                  <td>{{armorToReplace.defense || 0}}</td>
-                  <td>
-                    <div class="triangle-right" 
-                      [ngClass]="{
-                      'positive-triangle': armorToEquip.defense > armorToReplace.defense,
-                      'negative-triangle': armorToEquip.defense < armorToReplace.defense}">
-                    </div>
-                  </td>
-                  <td>{{armorToEquip.defense}}</td>
-                </tr>
-                <tr>
-                    <td>Defense</td>
-                    <td>10</td>
-                    <td><div class="triangle-right positive-triangle"></div></td>
-                    <td>21</td>
-                </tr>
-            </tbody> -->
             <tbody>
               <tr *ngFor="let property of propertiesToCompare.keys()">
-                <td>{{property}}</td>
-                <td>{{propertiesToCompare.get(property)?.[0] || 0}}</td>
-                <td>
+                <td class="property-td">{{property}}</td>
+                <td class="value-td">{{propertiesToCompare.get(property)?.[0] || 0}}</td>
+                <td class="increment-td">
                   <div class="triangle-right" 
                     [ngClass]="{
                     'positive-triangle': (propertiesToCompare.get(property)?.[2] === 0),
@@ -147,10 +115,34 @@
                   }">
                   </div>
                 </td>
-                <td>{{propertiesToCompare.get(property)?.[1] || 0}}</td>
+                <td class="value-td">{{propertiesToCompare.get(property)?.[1] || 0}}</td>
               </tr>
             </tbody>
-            
+          </table>
+          <p class="table-title">Skills</p>
+          <table class="comparation-table">
+            <tbody>
+              <tr *ngFor="let skill of skillsToCompare.keys()">
+                <td class="property-td">{{skill}}</td>
+                <td class="value-td">{{skillsToCompare.get(skill)?.[0] || 0}}</td>
+                <td class="increment-td">
+                  <div class="triangle-right" 
+                    [ngClass]="{
+                    'positive-triangle': (skillsToCompare.get(skill)?.[2] === 0),
+                    'negative-triangle': (skillsToCompare.get(skill)?.[2] === 2)
+                  }">
+                  </div>
+                </td>
+                <td class="value-td">{{skillsToCompare.get(skill)?.[1] || 0}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="table-title">Resources</p>
+          <table class="comparation-table">
+            <tr *ngFor="let resource of resourcesForNewEquip.keys()">
+              <td class="property-td">{{resource}}</td>
+              <td class="value-td">x{{resourcesForNewEquip.get(resource)}}</td>
+            </tr>
           </table>
         </div>
         <div class="modal-footer">

@@ -43,14 +43,14 @@ export class ArmorCompatibilityService {
    * The second number is for the new instance value.
    * The third number represents upgrade = 0, not upgrade = 1 or downgrade = 2.
    */
-  public compareArmorsMap (armorToReplace: ArmorData, armorToEquip: ArmorData): Map<string,[number,number,number]> {
+  public compareArmorsStatsMap (armorToReplace: ArmorData, armorToEquip: ArmorData): Map<string,[number,number,number]> {
 
     let mapToCompare = new Map <string, [number, number, number]>();
      
     Object.entries(armorToReplace).forEach(([key1, value1]) => {
       Object.entries(armorToEquip).forEach(([key2, value2]) => {
         
-        if (key1 === key2 && key1 !== 'skills' && key1 !== 'materials' && key1 !== 'name') 
+        if (key1 === key2 && key1 !== 'skills' && key1 !== 'materials' && key1 !== 'name' && key1 !== 'class') 
           {
 
             switch (key1) {
@@ -93,5 +93,46 @@ export class ArmorCompatibilityService {
     })
 
     return mapToCompare;
+  }
+
+  /**
+   * Compare two skills maps and tells the upgrade or downgrade for a skill.
+   * @param oldSkills old skill map
+   * @param newSkills new skill map
+   * @returns A map where the keys are the skills names, a 3-tupla where:
+   * [0]: old value for the skill.
+   * [1]: new value for the sill.
+   * [2]: Change: 0 = upgrade, 1 = none, 2 = downgrade.
+   */
+  public compareSkills (oldSkills: Map<string, number>, 
+    newSkills: Map<string,number>): Map<string,[number,number,number]> {
+
+    let comparationMap = new Map<string,[number,number,number]>();
+
+    newSkills.forEach((v, k) => {
+
+      let oldValue: number = oldSkills.get(k) || 0;
+
+      comparationMap.set(k, [
+        oldValue,
+        v,
+        oldValue < v ? 0 : (oldValue > v ? 2 : 1)
+      ]);
+
+    });
+
+    oldSkills.forEach((v, k) => {
+      
+      let newValue: number = newSkills.get(k) || 0;
+
+      comparationMap.set(k, [
+        v,
+        newValue,
+        v < newValue ? 0 : (v > newValue ? 2 : 1)
+      ]);
+    });
+
+    return comparationMap;
+
   }
 }
