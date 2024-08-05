@@ -3,7 +3,6 @@
 
 .main-container {
     background: white;
-    
 }
 
 .nav-bg {
@@ -18,6 +17,7 @@
 	border-left: 16px solid #555;
 	border-bottom: 8px solid transparent;
 }
+
 
 .positive-triangle {
     border-left-color: green;
@@ -85,6 +85,34 @@
     margin: 0;
 }
 
+.comp-modal-header {
+    background-color: $color1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    
+    p {
+        color: white;
+        font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+        font-size: 16pt;
+        text-align: center;
+        width: 100%;
+        // padding: 10px;
+        // background-color: red;
+        padding: 0;
+        height: 100%;
+        margin: 10px 0 10px 0;
+        
+    }
+
+    .triangle-right {
+        border-left-color: white;
+    }
+}
+
 .modal-body {
     height: 50vh;
     overflow-y: auto;
@@ -98,7 +126,7 @@
         justify-content: space-between;
         align-items: center;
 
-        margin: 0 0 10px 0;
+        margin: 0 15px 10px 15px;
 
         border-bottom: 1px solid black;
 
@@ -129,5 +157,28 @@
     font-size: 16pt;
     width: 100%;
     padding: 5px;
+
+}
+
+.comp-modal-footer {
+    background-color: $color1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .btn {
+        width: 40%;
+        border: 0px;
+        font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+        font-size: 16pt;
+    }
+
+    .btn-secondary {
+        background-color: red;
+    }
+
+    .btn-primary {
+        background-color: green;
+    }
 
 }

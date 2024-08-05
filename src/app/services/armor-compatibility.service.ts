@@ -121,6 +121,10 @@ export class ArmorCompatibilityService {
 
     });
 
+    if (oldSkills.has("")) { // If the old piece has not skills
+      return comparationMap;
+    }
+
     oldSkills.forEach((v, k) => {
       
       let newValue: number = newSkills.get(k) || 0;
