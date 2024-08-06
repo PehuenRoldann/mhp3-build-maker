@@ -2,7 +2,7 @@
 @import '../../../../styles.scss';
 
 
-$border-radius-value: 15px;
+$border-radius-value: 10px;
 
 .main-container {
     //width: 98%;
@@ -16,23 +16,42 @@ $border-radius-value: 15px;
 }
 
 .item-name {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-radius: $border-radius-value $border-radius-value 0 0;
     // border: 1px solid black;
     border-bottom: 0;
     background-color: $color1;
     // margin: 0 5px 0 5px;
+    padding: 5px 2px 5px 2px;
 
     text-align: center;
     text-justify:distribute;
     color: white;
 
     font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
-    font-size: 20px;
+    font-size: 18pt;
+
+    img {
+        width: 4vh;
+        height: 4vh;
+    }
+
+
+    .flex-col {
+
+        img{
+            width: 4vh;
+            height: 4vh;
+        }
+    }
 
 }
 
 .armor-item-table {
-    background-color: $color4;
+    // background-color: $color4;
     // border: 1px solid rgb(204, 199, 199);
     // border-radius: 0 0 $border-radius-value $border-radius-value;
     padding: 5px 5px 5px 5px;
@@ -47,6 +66,7 @@ $border-radius-value: 15px;
         // background-color: $color2;
         font-weight: bold;
         font-size: 18px;
+        text-align: center;
     }
 
     td {
@@ -74,8 +94,10 @@ $border-radius-value: 15px;
     border: 0;
     border-radius: 0 0 $border-radius-value $border-radius-value;
     padding: 10px 0 10px 0;
-
+    font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+    font-size: 16pt;
     background-color: $color2;
+    width: 100%;
 
     color: white;
     font-weight: bold;

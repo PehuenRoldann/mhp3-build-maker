@@ -11,6 +11,7 @@ import { DataFormatService } from '../../../services/data-format.service';
 export class ArmorListItemComponent implements OnInit {
 
   @Input({ required: true }) item!: ArmorData;
+  @Input({ required: true}) imagePath: string = "";
   skillsMap: [string, number][] | undefined;
 
   @Output() equipEvent: EventEmitter<ArmorData> = new EventEmitter();

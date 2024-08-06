@@ -29,6 +29,13 @@ $box-color: white;
     align-items: center;
 }
 
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .scrolleable-div {
     overflow-y: auto;
 }

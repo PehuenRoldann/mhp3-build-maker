@@ -1,6 +1,19 @@
 <div class="main-container">
     <div class="flex-div">
-        <div class="item-name">{{item.name}}</div>
+        <div class="item-name">
+            <img [src]="imagePath" alt="">
+            <p>{{item.name}}</p>
+            <div class="flex-col">
+                <img 
+                    src="../../../../assets/wepons/greatsword1.png" 
+                    alt="blademaster class"
+                    *ngIf="item.class === 0 || item.class === 2">
+                <img 
+                src="../../../../assets/wepons/lightbowgun1.png" 
+                alt="blademaster class"
+                *ngIf="item.class === 1 || item.class === 2">
+            </div>
+        </div>
         <table class="armor-item-table">
             <tr>
                 <th>Stats</th>
@@ -10,7 +23,7 @@
             <tr>
                 <td>
                     <ul>
-                        <li>Class: {{item.class}}</li>
+                        <!-- <li>Class: {{item.class}}</li> -->
                         <li>Rare: {{item.rare}}</li>
                         <li>Defense: {{item.defense}}</li>
                         <li>Slots: {{item.slots}}</li>

@@ -60,7 +60,10 @@
     <ng-template #itemsListBlock >
         <div class="armor-items-container">
             <div class="armor-list-container" *ngFor="let item of filteredArmorData">
-                <app-armor-list-item  [item]="item" (equipEvent)="equipButtonEvent($event)"/>
+                <app-armor-list-item  
+                  [item]="item"
+                  [imagePath]="'../../../assets/ArmorIcons/'+part+'/rare'+item.rare+'.png'"
+                  (equipEvent)="equipButtonEvent($event)"/>
             </div>
         </div>
     </ng-template>
@@ -149,7 +152,7 @@
         </div>
         <div class="modal-footer comp-modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss>Equip</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal"(click)="equipArmor()">Equip</button>
         </div>
       </div>
     </div>
