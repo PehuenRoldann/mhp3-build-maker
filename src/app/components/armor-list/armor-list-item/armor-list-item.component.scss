@@ -2,7 +2,8 @@
 @import '../../../../styles.scss';
 
 
-$border-radius-value: 10px;
+$border-radius-value: 5px;
+$titles-font-size: 15pt;
 
 .main-container {
     //width: 98%;
@@ -52,7 +53,7 @@ $border-radius-value: 10px;
 
 .armor-item-table {
     // background-color: $color4;
-    // border: 1px solid rgb(204, 199, 199);
+    border: 1px solid rgb(204, 199, 199);
     // border-radius: 0 0 $border-radius-value $border-radius-value;
     padding: 5px 5px 5px 5px;
     font-size: 16px;
@@ -89,6 +90,61 @@ $border-radius-value: 10px;
         // border: 1px solid black;
     }
 }
+
+.armor-item-stats {
+    width: 100%;
+
+    margin: 5px 0 5px 0;
+
+    h1 {
+        font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+        font-size: $titles-font-size;
+        margin: 0 0 10px 5px;
+    }
+
+    ul {
+        display: inline-block;
+        width: 50%;
+        list-style: none;
+        //margin: 0 5px 0 5px;
+        //border: 1px solid black;
+        
+        li {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid black;
+            margin: 0 10px 0 10px;
+        }
+    }
+}
+
+.armor-item-skills {
+
+    margin: 5px 0 5px 0;
+    h1 {
+        font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+        font-size: $titles-font-size;
+        margin: 5px 2px 5px 2px;
+    }
+
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+    li {
+        display: inline-block;
+        margin: 2px;
+        padding: 2px 5px 2px 5px;
+        $radius: 100px;
+        border-radius: $radius $radius $radius $radius;
+
+        color: white;
+        font-size: 11pt;
+    }
+}
+
 
 .equip-btn {
     border: 0;
