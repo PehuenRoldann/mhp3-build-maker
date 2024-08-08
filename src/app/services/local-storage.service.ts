@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ArmorData } from '../types/armorData';
+import { setMaxIdleHTTPParsers } from 'node:http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
+
+  private SETS_BOOK_KEY: string = 'mhp3-build-maker-sets-book';
 
   constructor() { }
 
@@ -14,7 +17,7 @@ export class LocalStorageService {
   }
 
   // Set a value in local storage
-  setItem(key: string, value: ArmorData): void {
+  public setItem(key: string, value: ArmorData): void {
     if (this.isLocalStorageAvailable()) {
       localStorage.setItem(key, JSON.stringify(value));
     } else {
@@ -23,7 +26,7 @@ export class LocalStorageService {
   }
 
   // Get a value from local storage
-  getItem(key: string): ArmorData | null {
+  public getItem(key: string): ArmorData | null {
     if (this.isLocalStorageAvailable()) {
       let item = localStorage.getItem(key);
       return item ? JSON.parse(item) : null;
@@ -34,7 +37,7 @@ export class LocalStorageService {
   }
 
   // Remove a value from local storage
-  removeItem(key: string): void {
+  public removeItem(key: string): void {
     if (this.isLocalStorageAvailable()) {
       localStorage.removeItem(key);
     } else {
@@ -43,7 +46,7 @@ export class LocalStorageService {
   }
 
   // Clear all items from local storage
-  clear(): void {
+  public clear(): void {
     if (this.isLocalStorageAvailable()) {
       localStorage.clear();
     } else {
@@ -51,7 +54,7 @@ export class LocalStorageService {
     }
   }
 
-  get currentEquipment () {
+  get currentEquipment (): Map<string, ArmorData> {
 
     let parts = ['helmet', 'plate', 'guantlets', 'waist', 'leggings'];
 
@@ -68,5 +71,97 @@ export class LocalStorageService {
 
     return currentEquipment;
 
+  }
+
+  /**
+   * Saves a set name in the SetsBook
+   * @param setName Set name to save
+   */
+  private setSetsNames(setName: string) {
+
+    if (!this.isLocalStorageAvailable) {
+      throw("Local storage is not available..");
+    }
+
+    let setsBook =  this.getSetsBook();
+
+    setsBook.push(setName);
+    localStorage.setItem(this.SETS_BOOK_KEY, JSON.stringify(setsBook));
+
+  }
+
+  private getSetsBook(): Array<string>{
+
+    let setsBookStr =  localStorage.getItem(this.SETS_BOOK_KEY
+    );
+
+    if (!setsBookStr) {
+      localStorage.setItem(this.SETS_BOOK_KEY, JSON.stringify([]));
+    }
+
+    setsBookStr =  localStorage.getItem(this.SETS_BOOK_KEY
+    );
+    return JSON.parse(setsBookStr!);
+    
+  }
+
+
+
+  /**
+   * Gets a set from the local storage
+   * @param setName The set name to return
+   * @returns A tupla like [setName: string, setData: Map<string,ArmorData>] or null if the set is not found.
+   */
+  private getSetFromStorage(setName: string): Map<string, ArmorData> | null { // Don't neet storage available because are not call for other object.
+
+    const setStr = localStorage.getItem(setName);
+
+    if (!setStr) {
+      return null;
+    }
+
+    const parsedSetStr = JSON.parse(setStr);
+    const setMap = new Map<string, ArmorData> (Object.entries(parsedSetStr));
+
+    return setMap;
+    
+  }
+
+  /**
+   * Saves the current equiped set.
+   * @param setName Name for the set.
+   */
+  /* public saveCurrentSet(setName: string) {
+
+    if (this.isLocalStorageAvailable()) {
+
+      if (!localStorage.getItem('mhp3-sets')){
+        this.
+      }
+      localStorage.setItem(`mhp3-set:${setName}`, JSON.stringify(this.currentEquipment));
+    } else {
+      console.warn('localStorage is not available');
+    }
+  } */
+
+  get savedSets(): Map<string, Map<string, ArmorData>> {
+
+    if (!this.isLocalStorageAvailable) {
+      throw("Local storage is not available..");
+    }
+
+    let setsBook = this.getSetsBook();
+
+    let setsMap = new Map<string, Map<string, ArmorData>> ();
+
+    setsBook.forEach(setName => {
+
+      let armorSet = this.getSetFromStorage(setName);
+      if (armorSet) {
+        setsMap.set(setName, armorSet)
+      }
+    })
+
+    return setsMap;
   }
 }

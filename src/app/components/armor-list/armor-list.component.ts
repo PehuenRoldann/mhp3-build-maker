@@ -19,18 +19,18 @@ declare var bootstrap: any;
 })
 export class ArmorListComponent implements OnInit {
 
-  partsToShow = "helmets";
+  partsToShow = piecesTypes.helmets.valueOf(); // Type of parts to show (helmets for default)
 
-  // @Output() armorEquipedEventEmmiter: EventEmitter<ArmorData> = new EventEmitter(); NO NEED WITH ROUTER
 
   public armorData: ArmorData[] = [];
 
-  public armorToEquip!: ArmorData;
-  public armorToReplace: ArmorData = new ArmorData();
+  public armorToEquip!: ArmorData; // Armor to equip when the quip button is pressed
+  public armorToReplace: ArmorData = new ArmorData(); // Armor equiped now (could be null so we add a default for that case)
   public part?: string;
 
   public searchInput: string = "";
 
+  // FILTERS USED IN THE NAV
   public minDefenseFilter?: number;
   public minRareFilter?: number;
   public minSlotsFilter?: number;

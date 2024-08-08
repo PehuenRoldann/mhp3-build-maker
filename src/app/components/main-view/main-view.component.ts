@@ -23,6 +23,13 @@ export class MainViewComponent implements OnInit {
     private screenSizeService: ScreenSizeService
   ) {}
 
+  ngOnInit(): void {
+
+    // Checks if the code is running on a browser to execute
+    if (isPlatformBrowser(this.platformId)) {
+      this.UpdateArmor();
+    }
+  }
 
   @ViewChild(StatsBoxComponent, { static: false }) statsBox!: StatsBoxComponent;
   @ViewChild(SkillsBoxComponent, { static: false }) skillsBox!: SkillsBoxComponent;
@@ -40,7 +47,6 @@ export class MainViewComponent implements OnInit {
   public legginsDone: boolean = false;
 
   public partToDisplay = pieceType;
-
 
 
   get equipedArmorArray () {
@@ -85,8 +91,6 @@ export class MainViewComponent implements OnInit {
 
     return equipedArmorArr;
   }
-
-
   
 
   public selectPart(value: string) {
@@ -95,7 +99,7 @@ export class MainViewComponent implements OnInit {
     this.selectedPart = value;
 
     if (this.equipedArmor.get(this.selectedPart)){
-      this.openPieceModal();
+      this.openModal('pieceModal');
     }
     else {
       this.ChangeSelectedPart();
@@ -109,17 +113,11 @@ export class MainViewComponent implements OnInit {
     this.equipedArmor = service.currentEquipment;
   }
 
-  ngOnInit(): void {
-
-    // Checks if the code is running on a browser to execute
-    if (isPlatformBrowser(this.platformId)) {
-      this.UpdateArmor();
-    }
-  }
+  
 
   public ChangeSelectedPart() {
 
-    this.closePieceModal();
+    //this.closePieceModal(); not necesary anymore
 
     let param = "";
 
@@ -141,16 +139,32 @@ export class MainViewComponent implements OnInit {
     this.router.navigate([`list/${param}`]);
   }
 
+  /**
+   * Removes a equiped part of the current set.
+   */
   public RemoveSelectedPart() {
 
-    this.closePieceModal();
+    // this.closePieceModal(); not necessary anymore
 
     let service = new LocalStorageService();
     service.removeItem(this.selectedPart);
     this.UpdateArmor();
   }
 
-  public closePieceModal() {
+   /**
+   * Opens a the modal with the given ID.
+   * @param modalID Modal ID = incompatibilityModal, comparationModal.
+   */
+   public openModal(modalID: string) {
+    const modalElement = document.getElementById(modalID);
+
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement); // Usa el servicio de Bootstrap para abrir el modal
+      modal.show();
+    }
+  }
+
+/*   public closePieceModal() { NOT NECESESSARY ANYMORE
     const modalElem = document.getElementById('pieceModal');
 
     if (modalElem) {
@@ -161,15 +175,15 @@ export class MainViewComponent implements OnInit {
       backdrops.forEach(backdrop => backdrop.parentNode?.removeChild(backdrop));
     }
     
-  }
+  } */
 
-  private openPieceModal () {
+/*   private openModal (modalId: string) {
 
-    const modalElem = document.getElementById('pieceModal');
+    const modalElem = document.getElementById(modalId);
 
     if (modalElem) {
       let modal = new bootstrap.Modal(modalElem);
       modal.show();
     }
-  }
+  } */
 }

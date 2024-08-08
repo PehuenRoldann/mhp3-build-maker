@@ -83,3 +83,26 @@
     (changeEventEmitter)="ChangeSelectedPart()"
     (removeEventEmitter)="RemoveSelectedPart()"
 />
+
+<!-- SAVE SET MODAL -->
+<div class="modal fade" id="saveSetModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Incompatibility Detected!
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p style="color: red;">
+            You have pieces of armor that aren't compatible with this one.<br>
+            Check the class of your current armor pieces.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
