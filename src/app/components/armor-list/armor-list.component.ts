@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArmorDataAccessService } from '../../services/armor-data-access.service';
-import { ArmorData } from '../../types/armorData';
+import { ArmorData, piecesTypes, pieceType } from '../../types/armorData';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { ArmorCompatibilityService } from '../../services/armor-compatibility.service';
 import { isPlatformBrowser } from '@angular/common';
@@ -62,9 +62,9 @@ export class ArmorListComponent implements OnInit {
       this.fetchData();
 
       switch (this.partsToShow){
-        case 'helmets': this.part = 'helmet'; break;
-        case 'plates': this.part = 'plate'; break;
-        case 'waists': this.part = 'waist'; break;
+        case piecesTypes.helmets: this.part = pieceType.helmet; break;
+        case piecesTypes.plates: this.part = piecesTypes.plates; break;
+        case piecesTypes.waists: this.part = pieceType.waist; break;
         default: this.part = this.partsToShow; break;
       }
 
@@ -77,8 +77,6 @@ export class ArmorListComponent implements OnInit {
 
   private async fetchData(): Promise<void> {
       this.armorData = await this.csvDataAccess.getArmorData(this.partsToShow);
-      console.log("CSV Data: ");
-      console.log(this.armorData);
   }
 
   public changeToHome () {
@@ -99,6 +97,11 @@ export class ArmorListComponent implements OnInit {
     return this.armorDataFormatService.getResourcesMap(this.armorToEquip.materials) || new Map<string, number>();
   }
 
+
+  /**
+   * Returns a map where key = skill name, and the value is a 3-tupla where [0] value for old piece, [1] value for new piece, 
+   * [2] change implcations (0 = upgrade, 1 = same, 2 = downgrade)
+   */
   get skillsToCompare () : Map <string, [number, number, number]> {
 
     if (!this.armorToEquip) {
@@ -109,16 +112,6 @@ export class ArmorListComponent implements OnInit {
     let newSkills = this.armorDataFormatService.getSkillsMap(this.armorToEquip.skills);
 
     return this.armorCompatibilityService.compareSkills(oldSkills, newSkills);
-  }
-
-
-  public openIncompatibilityModal() {
-    const modalElement = document.getElementById('incompatibilityModal');
-
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement); // Usa el servicio de Bootstrap para abrir el modal
-      modal.show();
-    }
   }
 
   /**
@@ -150,7 +143,7 @@ export class ArmorListComponent implements OnInit {
     console.log(`Compatibility: ${compatibility}`); // Debug
 
     if (!compatibility) {
-      this.openIncompatibilityModal();
+      this.openModal('incompatibilityModal');
     }
 
     return compatibility

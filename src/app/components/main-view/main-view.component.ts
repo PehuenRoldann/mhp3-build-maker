@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, AfterViewInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { ArmorData } from '../../types/armorData';
+import { ArmorData, piecesTypes, pieceType } from '../../types/armorData';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { StatsBoxComponent } from './stats-box/stats-box.component';
 import { SkillsBoxComponent } from './skills-box/skills-box.component';
@@ -17,6 +17,13 @@ declare var bootstrap: any;
 })
 export class MainViewComponent implements OnInit {
 
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
+    private router: Router,
+    private screenSizeService: ScreenSizeService
+  ) {}
+
+
   @ViewChild(StatsBoxComponent, { static: false }) statsBox!: StatsBoxComponent;
   @ViewChild(SkillsBoxComponent, { static: false }) skillsBox!: SkillsBoxComponent;
   
@@ -32,6 +39,10 @@ export class MainViewComponent implements OnInit {
   public waistDone: boolean = false;
   public legginsDone: boolean = false;
 
+  public partToDisplay = pieceType;
+
+
+
   get equipedArmorArray () {
 
     let equipedArmorArr: ArmorData[] = [];
@@ -45,6 +56,10 @@ export class MainViewComponent implements OnInit {
     return equipedArmorArr;
   }
 
+
+  /**
+   * Returns the armor pieces that are not done to know what resources are needed.
+   */
   get equipedArmorArrayResources () {
 
     let equipedArmorArr: ArmorData[] = [];
@@ -55,38 +70,15 @@ export class MainViewComponent implements OnInit {
 
     this.equipedArmor.forEach((v, k) => {
 
-      console.log("K es: " + k);
-
       addToArr = false;
 
-      console.log("Should add " + k + "?");// Debug
-      switch (k) {// Debug
-        case 'helmet':
-          console.log(!this.helmetDone);
-          break;
-        case 'plate':
-          console.log(!this.plateDone);
-          break;
-        case 'waist':
-          console.log(!this.waistDone);
-          break;
-        case 'guantlets':
-          console.log(!this.guantletsDone);
-          break;
-        case 'leggings':
-          console.log(!this.legginsDone);
-          break;
-      }
-
-      addToArr = (k === 'helmet' && !this.helmetDone) || addToArr;
-      addToArr = (k === 'plate' && !this.plateDone) || addToArr;
-      addToArr = (k === 'waist' && !this.waistDone) || addToArr;
-      addToArr = (k === 'guantlets' && !this.guantletsDone) || addToArr;
-      addToArr = (k === 'leggings' && !this.legginsDone) || addToArr;
+      addToArr = (k === pieceType.helmet && !this.helmetDone) || addToArr;
+      addToArr = (k === pieceType.plate && !this.plateDone) || addToArr;
+      addToArr = (k === pieceType.waist && !this.waistDone) || addToArr;
+      addToArr = (k === pieceType.guantlets && !this.guantletsDone) || addToArr;
+      addToArr = (k === pieceType.leggings && !this.legginsDone) || addToArr;
 
       if (addToArr) {
-        console.log("Resources to show"); //Debug
-        console.log(v); //Debug
         equipedArmorArr.push(v);
       }
     })
@@ -95,12 +87,7 @@ export class MainViewComponent implements OnInit {
   }
 
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: any,
-    private router: Router,
-    private screenSizeService: ScreenSizeService
-  ) {}
-
+  
 
   public selectPart(value: string) {
 
@@ -120,9 +107,6 @@ export class MainViewComponent implements OnInit {
     let service = new LocalStorageService();
 
     this.equipedArmor = service.currentEquipment;
-    
-    console.log("Equiped armor:"); // Debug
-    console.log(this.equipedArmor); // Debug
   }
 
   ngOnInit(): void {
@@ -140,14 +124,14 @@ export class MainViewComponent implements OnInit {
     let param = "";
 
     switch (this.selectedPart) {
-      case 'plate':
-        param = 'plates';
+      case pieceType.plate:
+        param = piecesTypes.plates;
         break;
-      case 'waist':
-        param = 'waists';
+      case pieceType.waist:
+        param = piecesTypes.waists;
         break;
-      case 'helmet':
-        param = 'helmets';
+      case pieceType.helmet:
+        param = piecesTypes.helmets;
         break;
       default:
         param = this.selectedPart;

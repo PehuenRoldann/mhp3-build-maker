@@ -33,6 +33,23 @@ $main_color: #17153B;
     }
 }
 
+.save-div {
+    
+    button {
+
+        border: 0px;
+        background-color: $color2;
+        padding:5px;
+
+        font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+        color: white;
+        img {
+            width: 2vh;
+            height: 2vh;
+        }
+    }
+}
+
 .main-container{
 
     width: 90%;

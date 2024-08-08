@@ -14,3 +14,19 @@ export class ArmorData {
     public materials: string = "";
     
 };
+
+export enum piecesTypes {
+    helmets = "helmets",
+    plates = "plates",
+    guantlets = "guantlets",
+    waists = "waists",
+    leggings = "leggings"
+}
+
+export enum pieceType {
+    helmet = "helmet",
+    plate = "plate",
+    guantlets = "guantlets",
+    waist = "waist",
+    leggings = "leggings"
+}
