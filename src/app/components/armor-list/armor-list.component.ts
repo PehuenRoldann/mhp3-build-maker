@@ -63,7 +63,7 @@ export class ArmorListComponent implements OnInit {
 
       switch (this.partsToShow){
         case piecesTypes.helmets: this.part = pieceType.helmet; break;
-        case piecesTypes.plates: this.part = piecesTypes.plates; break;
+        case piecesTypes.plates: this.part = pieceType.plate; break;
         case piecesTypes.waists: this.part = pieceType.waist; break;
         default: this.part = this.partsToShow; break;
       }
