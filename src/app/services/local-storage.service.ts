@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ArmorData } from '../types/armorData';
-import { type } from 'os';
 
 @Injectable({
   providedIn: 'root'

@@ -7,6 +7,7 @@ import { ArmorCompatibilityService } from '../../services/armor-compatibility.se
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { DataFormatService } from '../../services/data-format.service';
+import { CsvDataAccessService } from '../../services/csv-data-access.service';
 
 
 declare var bootstrap: any; 
@@ -45,6 +46,7 @@ export class ArmorListComponent implements OnInit {
     private router: Router,
     private localStorageService: LocalStorageService,
     private armorDataAccessService: ArmorDataAccessService,
+    private csvDataAccess: CsvDataAccessService,
     private armorCompatibilityService: ArmorCompatibilityService,
     private armorDataFormatService: DataFormatService
   ) {}
@@ -74,8 +76,8 @@ export class ArmorListComponent implements OnInit {
   }
 
   private async fetchData(): Promise<void> {
-      this.armorData = await this.armorDataAccessService.getArmorData(this.partsToShow);
-      console.log("FETCHED DATA: ");
+      this.armorData = await this.csvDataAccess.getArmorData(this.partsToShow);
+      console.log("CSV Data: ");
       console.log(this.armorData);
   }
 

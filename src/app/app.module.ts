@@ -15,6 +15,8 @@ import { ArmorListItemComponent } from './components/armor-list/armor-list-item/
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { PieceModalComponent } from './components/main-view/piece-modal/piece-modal.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,8 @@ import { PieceModalComponent } from './components/main-view/piece-modal/piece-mo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration(),
