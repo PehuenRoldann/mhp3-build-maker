@@ -74,10 +74,10 @@ export class LocalStorageService {
   }
 
   /**
-   * Saves a set name in the SetsBook
+   * Saves a set name in the SetsBook to be found later.
    * @param setName Set name to save
    */
-  private setSetsNames(setName: string) {
+  private saveSetName(setName: string) {
 
     if (!this.isLocalStorageAvailable) {
       throw("Local storage is not available..");
@@ -90,6 +90,10 @@ export class LocalStorageService {
 
   }
 
+  /**
+   * The SetsBooks array saves all names (keys) of the users sets.
+   * @returns Array with the sets names (keys) to find them.
+   */
   private getSetsBook(): Array<string>{
 
     let setsBookStr =  localStorage.getItem(this.SETS_BOOK_KEY
@@ -115,36 +119,40 @@ export class LocalStorageService {
   private getSetFromStorage(setName: string): Map<string, ArmorData> | null { // Don't neet storage available because are not call for other object.
 
     const setStr = localStorage.getItem(setName);
+    console.log("set string: ");
+    console.log(setStr);
 
     if (!setStr) {
       return null;
     }
 
-    const parsedSetStr = JSON.parse(setStr);
-    const setMap = new Map<string, ArmorData> (Object.entries(parsedSetStr));
+    const parsedArrSet: [string, ArmorData][] = JSON.parse(setStr);
+    const setMap = new Map<string, ArmorData> (parsedArrSet);
 
     return setMap;
     
   }
 
+
   /**
-   * Saves the current equiped set.
-   * @param setName Name for the set.
+   * Saves a new set in the local storage.
+   * @param setName Name for the new set. Should be unique.
+   * @param setData Set armor data.
    */
-  /* public saveCurrentSet(setName: string) {
+  public saveSet(setName: string, setData: Map<string, ArmorData>) {
 
-    if (this.isLocalStorageAvailable()) {
-
-      if (!localStorage.getItem('mhp3-sets')){
-        this.
-      }
-      localStorage.setItem(`mhp3-set:${setName}`, JSON.stringify(this.currentEquipment));
-    } else {
-      console.warn('localStorage is not available');
+    if (!this.isLocalStorageAvailable) {
+      throw('Local storage is not available!');
     }
-  } */
 
-  get savedSets(): Map<string, Map<string, ArmorData>> {
+    this.saveSetName(setName); // Saves the set key in the book to search later
+    
+    const setArray = Array.from(setData.entries());
+    console.log("Guardando: " + JSON.stringify(setArray));
+    localStorage.setItem(setName, JSON.stringify(setArray)); // Saves set into the local storage
+  }
+
+  public getSavedSets(): [string, Map<string, ArmorData>][] {
 
     if (!this.isLocalStorageAvailable) {
       throw("Local storage is not available..");
@@ -152,16 +160,16 @@ export class LocalStorageService {
 
     let setsBook = this.getSetsBook();
 
-    let setsMap = new Map<string, Map<string, ArmorData>> ();
+    let setsArr: [string, Map<string, ArmorData>][] = [];
 
     setsBook.forEach(setName => {
 
       let armorSet = this.getSetFromStorage(setName);
       if (armorSet) {
-        setsMap.set(setName, armorSet)
+        setsArr.push([setName, armorSet]);
       }
     })
 
-    return setsMap;
+    return setsArr;
   }
 }

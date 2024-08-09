@@ -20,7 +20,8 @@ export class MainViewComponent implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     private router: Router,
-    private screenSizeService: ScreenSizeService
+    private screenSizeService: ScreenSizeService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +29,11 @@ export class MainViewComponent implements OnInit {
     // Checks if the code is running on a browser to execute
     if (isPlatformBrowser(this.platformId)) {
       this.UpdateArmor();
+      console.log("-----SAVED SETS------");
+      console.log(this.localStorageService.getSavedSets());
     }
+
+    
   }
 
   @ViewChild(StatsBoxComponent, { static: false }) statsBox!: StatsBoxComponent;
@@ -37,6 +42,7 @@ export class MainViewComponent implements OnInit {
   public isMobile = this.screenSizeService.isMobile$;
   
   public selectedPart: string = "";
+  public savedSetName: string = '';
   public showOnMobile: number = 0;  // Indicates wich stats are going to be shown with ngSwitch. 0 = defenses, 1 = skills, 2 = resources
   public equipedArmor: Map<string, ArmorData> = new Map<string, ArmorData>;
   
@@ -45,6 +51,7 @@ export class MainViewComponent implements OnInit {
   public guantletsDone: boolean = false;
   public waistDone: boolean = false;
   public legginsDone: boolean = false;
+  
 
   public partToDisplay = pieceType;
 
@@ -111,6 +118,8 @@ export class MainViewComponent implements OnInit {
     let service = new LocalStorageService();
 
     this.equipedArmor = service.currentEquipment;
+    console.log("Equiped Armor: ");
+    console.log(this.equipedArmor);
   }
 
   
@@ -153,7 +162,7 @@ export class MainViewComponent implements OnInit {
 
    /**
    * Opens a the modal with the given ID.
-   * @param modalID Modal ID = incompatibilityModal, comparationModal.
+   * @param modalID Modal ID = pieceModal, saveSetModal.
    */
    public openModal(modalID: string) {
     const modalElement = document.getElementById(modalID);
@@ -163,6 +172,20 @@ export class MainViewComponent implements OnInit {
       modal.show();
     }
   }
+
+  public onSaveButtonClick() {
+    this.openModal('saveSetModal');
+  }
+
+  public onSaveConfirmBtnClick() {
+    console.log(this.savedSetName);
+    console.log(this.equipedArmor);
+    this.localStorageService.saveSet(this.savedSetName, this.equipedArmor);
+
+    console.log("-----SAVED SETS------");
+    console.log(this.localStorageService.getSavedSets());
+  }
+  
 
 /*   public closePieceModal() { NOT NECESESSARY ANYMORE
     const modalElem = document.getElementById('pieceModal');

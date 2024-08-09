@@ -1,6 +1,6 @@
 <div class="main-div">
     <div class="title-container">
-        <img src="../../../assets/images/MHP3rd_Logo.webp" alt="Mhlogo">
+        <img src="assets/images/MHP3rd_Logo.webp" alt="Mhlogo">
         <h1>Build Maker</h1>
     </div>
     <div class="main-container">
@@ -51,7 +51,7 @@
         </p>
 
         <div class="save-div">
-            <button><img src="assets/images/save2.png" alt=""> Save!</button>
+            <button (click)="onSaveButtonClick()"><img src="assets/images/save2.png" alt=""> Save!</button>
         </div>
 
         <div class="dashboard-container-mobile" *ngIf="(isMobile | async); else desktopTemplate">
@@ -86,22 +86,32 @@
 
 <!-- SAVE SET MODAL -->
 <div class="modal fade" id="saveSetModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">
-            Incompatibility Detected!
+            Saving current set..
           </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <p style="color: red;">
-            You have pieces of armor that aren't compatible with this one.<br>
-            Check the class of your current armor pieces.
-          </p>
+        <div class="modal-body save-set-modal-body">
+          <div><label for="">Set Name: </label><input type="text" [(ngModel)]="savedSetName" placeholder="Your new set"></div>
+          <div>
+            <ul>
+                <li *ngFor="let key of equipedArmor.keys()">
+                    <img [src]=" 'assets/ArmorIcons/'+ key +'/rare'+ equipedArmor.get(key)!.rare +'.png' " alt="">
+                    <h3>{{equipedArmor.get(key)?.name}}</h3>
+                    <span>
+                        <img src="assets/wepons/greatsword1.png" alt="class: Blade Master" *ngIf="[0, 2].includes(equipedArmor.get(key)!.class)" >
+                        <img src="assets/wepons/lightbowgun1.png" alt="class: Gunner" *ngIf="[1, 2].includes(equipedArmor.get(key)!.class)">
+                    </span>
+                </li>
+            </ul>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+        <div class="modal-footer save-set-modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="savedSetName=''">Close</button>
+          <button type="button" class="btn btn-primary" (click)="onSaveConfirmBtnClick()" [disabled]="savedSetName === ''"data-bs-dismiss="modal">Save</button>
         </div>
       </div>
     </div>

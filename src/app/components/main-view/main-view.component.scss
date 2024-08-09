@@ -96,3 +96,52 @@ $main_color: #17153B;
     // padding: 0 15px 0 5px;
     width: 33vw;
 }
+
+.save-set-modal-body {
+    margin: 0 5px 0 5px;
+    img {
+        width: 15%;
+        // height: 10%;
+        display: inline-block;
+    }
+
+    span {
+        display: flex;
+        width: 15%;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: 50%;
+        }
+    }
+
+    h3 {
+        text-align: center;
+        width: 70%;
+    }
+
+    li {
+        border-bottom: 1px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.save-set-modal-footer {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+
+    padding: 10px;
+
+    background-color: $color1;
+
+    .btn {
+        font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+        font-size: 20pt;
+        width: 30%;
+    }
+}
