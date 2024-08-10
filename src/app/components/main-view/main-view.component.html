@@ -51,7 +51,8 @@
         </p>
 
         <div class="save-div">
-            <button (click)="onSaveButtonClick()"><img src="assets/images/save2.png" alt=""> Save!</button>
+            <button (click)="onSaveButtonClick()"><img src="assets/images/save2.png" alt=""> Save Set!</button>
+            <button (click)="onLoadBtnClick()">Load Set</button>
         </div>
 
         <div class="dashboard-container-mobile" *ngIf="(isMobile | async); else desktopTemplate">
@@ -95,18 +96,12 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body save-set-modal-body">
-          <div><label for="">Set Name: </label><input type="text" [(ngModel)]="savedSetName" placeholder="Your new set"></div>
           <div>
-            <ul>
-                <li *ngFor="let key of equipedArmor.keys()">
-                    <img [src]=" 'assets/ArmorIcons/'+ key +'/rare'+ equipedArmor.get(key)!.rare +'.png' " alt="">
-                    <h3>{{equipedArmor.get(key)?.name}}</h3>
-                    <span>
-                        <img src="assets/wepons/greatsword1.png" alt="class: Blade Master" *ngIf="[0, 2].includes(equipedArmor.get(key)!.class)" >
-                        <img src="assets/wepons/lightbowgun1.png" alt="class: Gunner" *ngIf="[1, 2].includes(equipedArmor.get(key)!.class)">
-                    </span>
-                </li>
-            </ul>
+            <label for="">Set Name: </label><input type="text" [(ngModel)]="savedSetName" placeholder="Your new set"></div>
+          <div>
+          <div>
+            <app-armor-set-modal [equipedArmor]="equipedArmor"></app-armor-set-modal>
+          </div>
         </div>
         </div>
         <div class="modal-footer save-set-modal-footer">
@@ -116,3 +111,27 @@
       </div>
     </div>
   </div>
+
+
+<!-- LOAD SETS MODAL -->
+<div class="modal fade" id="loadSetModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Saved sets</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div *ngFor="let armorSet of savedArmorSets">
+            <h1>{{armorSet[0]}}</h1>
+            <app-armor-set-modal [equipedArmor]="armorSet[1]"/>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+</div>
+  

@@ -16,6 +16,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { PieceModalComponent } from './components/main-view/piece-modal/piece-modal.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ArmorSetModalComponent } from './components/main-view/armor-set-modal/armor-set-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     ResourcesBoxComponent,
     ArmorListComponent,
     ArmorListItemComponent,
-    PieceModalComponent
+    PieceModalComponent,
+    ArmorSetModalComponent
   ],
   imports: [
     BrowserModule,

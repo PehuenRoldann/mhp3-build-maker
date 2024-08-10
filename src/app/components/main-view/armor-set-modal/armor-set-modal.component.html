@@ -1,0 +1,12 @@
+<div>
+    <ul>
+        <li *ngFor="let key of equipedArmor.keys()">
+            <img [src]=" 'assets/ArmorIcons/'+ key +'/rare'+ equipedArmor.get(key)!.rare +'.png' " alt="">
+            <h3>{{equipedArmor.get(key)?.name}}</h3>
+            <span>
+                <img src="assets/wepons/greatsword1.png" alt="class: Blade Master" *ngIf="[0, 2].includes(equipedArmor.get(key)!.class)" >
+                <img src="assets/wepons/lightbowgun1.png" alt="class: Gunner" *ngIf="[1, 2].includes(equipedArmor.get(key)!.class)">
+            </span>
+        </li>
+    </ul>
+</div>

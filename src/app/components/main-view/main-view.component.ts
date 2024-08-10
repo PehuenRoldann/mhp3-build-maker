@@ -45,7 +45,9 @@ export class MainViewComponent implements OnInit {
   public savedSetName: string = '';
   public showOnMobile: number = 0;  // Indicates wich stats are going to be shown with ngSwitch. 0 = defenses, 1 = skills, 2 = resources
   public equipedArmor: Map<string, ArmorData> = new Map<string, ArmorData>;
-  
+  public savedArmorSets: [string, Map<string,ArmorData>][] = [];
+
+
   public helmetDone: boolean = false;
   public plateDone: boolean = false;
   public guantletsDone: boolean = false;
@@ -162,7 +164,7 @@ export class MainViewComponent implements OnInit {
 
    /**
    * Opens a the modal with the given ID.
-   * @param modalID Modal ID = pieceModal, saveSetModal.
+   * @param modalID Modal ID = pieceModal, saveSetModal, loadSetModal.
    */
    public openModal(modalID: string) {
     const modalElement = document.getElementById(modalID);
@@ -174,39 +176,23 @@ export class MainViewComponent implements OnInit {
   }
 
   public onSaveButtonClick() {
+
     this.openModal('saveSetModal');
   }
 
   public onSaveConfirmBtnClick() {
-    console.log(this.savedSetName);
-    console.log(this.equipedArmor);
-    this.localStorageService.saveSet(this.savedSetName, this.equipedArmor);
 
-    console.log("-----SAVED SETS------");
-    console.log(this.localStorageService.getSavedSets());
+    /* console.log(this.savedSetName);
+    console.log(this.equipedArmor); */
+    this.localStorageService.saveSet(this.savedSetName, this.equipedArmor);
   }
   
+  public onLoadBtnClick() {
 
-/*   public closePieceModal() { NOT NECESESSARY ANYMORE
-    const modalElem = document.getElementById('pieceModal');
+    this.savedArmorSets = this.localStorageService.getSavedSets();
+    console.log(this.savedArmorSets);
+    this.openModal('loadSetModal');
 
-    if (modalElem) {
-      let modal = new bootstrap.Modal(modalElem);
-      modal.hide();
+  }
 
-      const backdrops = document.querySelectorAll('.modal-backdrop');
-      backdrops.forEach(backdrop => backdrop.parentNode?.removeChild(backdrop));
-    }
-    
-  } */
-
-/*   private openModal (modalId: string) {
-
-    const modalElem = document.getElementById(modalId);
-
-    if (modalElem) {
-      let modal = new bootstrap.Modal(modalElem);
-      modal.show();
-    }
-  } */
 }

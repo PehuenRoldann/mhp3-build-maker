@@ -119,8 +119,6 @@ export class LocalStorageService {
   private getSetFromStorage(setName: string): Map<string, ArmorData> | null { // Don't neet storage available because are not call for other object.
 
     const setStr = localStorage.getItem(setName);
-    console.log("set string: ");
-    console.log(setStr);
 
     if (!setStr) {
       return null;

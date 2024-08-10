@@ -1,0 +1,40 @@
+*{
+    border: 1px solid black;
+}
+
+ul {
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 15%;
+    // height: 10%;
+    display: inline-block;
+}
+
+span {
+    display: flex;
+    width: 15%;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 50%;
+    }
+}
+
+h3 {
+    text-align: center;
+    width: 70%;
+}
+
+li {
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
