@@ -42,7 +42,7 @@ export class MainViewComponent implements OnInit {
   public isMobile = this.screenSizeService.isMobile$;
   
   public selectedPart: string = "";
-  public savedSetName: string = '';
+  public setNameToSave: string = '';
   public showOnMobile: number = 0;  // Indicates wich stats are going to be shown with ngSwitch. 0 = defenses, 1 = skills, 2 = resources
   public equipedArmor: Map<string, ArmorData> = new Map<string, ArmorData>;
   public savedArmorSets: [string, Map<string,ArmorData>][] = [];
@@ -165,7 +165,7 @@ export class MainViewComponent implements OnInit {
 
    /**
    * Opens a the modal with the given ID.
-   * @param modalID Modal ID = pieceModal, saveSetModal, loadSetModal, removeConfModal.
+   * @param modalID Modal ID = pieceModal, saveSetModal, loadSetModal, removeConfModal, setNameNotAvailableModal.
    */
    public openModal(modalID: string) {
     const modalElement = document.getElementById(modalID);
@@ -182,10 +182,23 @@ export class MainViewComponent implements OnInit {
   }
 
   public onSaveConfirmBtnClick() {
+    
+    this.savedArmorSets = this.localStorageService.getSavedSets();
+    let nameUsed = false;
 
-    /* console.log(this.savedSetName);
-    console.log(this.equipedArmor); */
-    this.localStorageService.saveSet(this.savedSetName, this.equipedArmor);
+    for (let set of this.savedArmorSets) {
+
+      if(this.setNameToSave === set[0]) {
+        nameUsed = true;
+      }
+    }
+
+    if (nameUsed) {
+      this.openModal('setNameNotAvailableModal');
+    }
+    else {
+      this.localStorageService.saveSet(this.setNameToSave, this.equipedArmor);
+    }
   }
   
   public onLoadBtnClick() {
@@ -214,14 +227,18 @@ export class MainViewComponent implements OnInit {
 
     this.openModal('removeConfModal');
     this.setToRemoveName = setName;
-    /* this.localStorageService.removeItem(setName);
-    this.savedArmorSets = this.localStorageService.getSavedSets(); */
+  }
+
+  public onOverwriteSetClickBtn() {
+    this.localStorageService.saveSet(this.setNameToSave, this.equipedArmor);
   }
 
   public removeSet() {
-    
+
     this.localStorageService.removeSet(this.setToRemoveName);
     this.savedArmorSets = this.localStorageService.getSavedSets();
   }
+
+
 
 }

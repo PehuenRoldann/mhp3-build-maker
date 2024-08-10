@@ -85,8 +85,11 @@ export class LocalStorageService {
 
     let setsBook =  this.getSetsBook();
 
-    setsBook.push(setName);
-    localStorage.setItem(this.SETS_BOOK_KEY, JSON.stringify(setsBook));
+    // Checks if the name isn't already registered, in case of overwrited sets.
+    if (!setsBook.includes(setName)) {
+      setsBook.push(setName);
+      localStorage.setItem(this.SETS_BOOK_KEY, JSON.stringify(setsBook));
+    }
 
   }
 

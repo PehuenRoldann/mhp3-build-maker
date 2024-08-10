@@ -97,7 +97,7 @@
         </div>
         <div class="modal-body save-set-modal-body">
           <div>
-            <label for="">Set Name: </label><input type="text" [(ngModel)]="savedSetName" placeholder="Your new set"></div>
+            <label for="">Set Name: </label><input type="text" [(ngModel)]="setNameToSave" placeholder="Your new set"></div>
           <div>
           <div>
             <app-armor-set-modal [equipedArmor]="equipedArmor"></app-armor-set-modal>
@@ -105,12 +105,35 @@
         </div>
         </div>
         <div class="modal-footer save-set-modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="savedSetName=''">Close</button>
-          <button type="button" class="btn btn-primary" (click)="onSaveConfirmBtnClick()" [disabled]="savedSetName === ''"data-bs-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="setNameToSave=''">Close</button>
+          <button type="button" class="btn btn-primary" (click)="onSaveConfirmBtnClick()" [disabled]="setNameToSave === ''"data-bs-dismiss="modal">Save</button>
         </div>
       </div>
     </div>
-  </div>
+</div>
+
+
+<!-- SET NAME NOT AVAILABLE MODAL -->
+<div class="modal fade" id="setNameNotAvailableModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Set name used!
+          </h1>
+        </div>
+        <div class="modal-body">
+          <p>You have a set named "{{setNameToSave}}" already, do you want to overwrite it?</p>
+          <button (click)="onOverwriteSetClickBtn()" data-bs-dismiss="modal">Yes</button>
+          <button data-bs-dismiss="modal">No</button>
+        </div>
+        <div class="modal-footer save-set-modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="setNameToSave=''">Close</button>
+          <button type="button" class="btn btn-primary" (click)="onSaveConfirmBtnClick()" [disabled]="setNameToSave === ''"data-bs-dismiss="modal">Save</button>
+        </div>
+      </div>
+    </div>
+</div>
 
 
 <!-- LOAD SETS MODAL -->
