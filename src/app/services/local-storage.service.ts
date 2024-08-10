@@ -170,4 +170,12 @@ export class LocalStorageService {
 
     return setsArr;
   }
+
+  public removeSet(setName: string) {
+
+    let setsBook = this.getSetsBook();
+
+    setsBook.splice(setsBook.indexOf(setName), 1);
+    localStorage.setItem(this.SETS_BOOK_KEY, JSON.stringify(setsBook));
+  }
 }

@@ -46,6 +46,7 @@ export class MainViewComponent implements OnInit {
   public showOnMobile: number = 0;  // Indicates wich stats are going to be shown with ngSwitch. 0 = defenses, 1 = skills, 2 = resources
   public equipedArmor: Map<string, ArmorData> = new Map<string, ArmorData>;
   public savedArmorSets: [string, Map<string,ArmorData>][] = [];
+  private setToRemoveName: string = '';
 
 
   public helmetDone: boolean = false;
@@ -164,7 +165,7 @@ export class MainViewComponent implements OnInit {
 
    /**
    * Opens a the modal with the given ID.
-   * @param modalID Modal ID = pieceModal, saveSetModal, loadSetModal.
+   * @param modalID Modal ID = pieceModal, saveSetModal, loadSetModal, removeConfModal.
    */
    public openModal(modalID: string) {
     const modalElement = document.getElementById(modalID);
@@ -193,6 +194,34 @@ export class MainViewComponent implements OnInit {
     console.log(this.savedArmorSets);
     this.openModal('loadSetModal');
 
+  }
+
+  /**
+   * Sets the current set as the saved set.
+   * @param set Saved set to set as current.
+   */
+  public onClickSetBtn(set: Map<string, ArmorData>) {
+
+    this.equipedArmor = set;
+    
+    for (let key of set.keys()) {
+      this.localStorageService.setItem(key, set.get(key)!);
+    }
+    
+  }
+
+  public onClickRemoveBtn(setName: string) {
+
+    this.openModal('removeConfModal');
+    this.setToRemoveName = setName;
+    /* this.localStorageService.removeItem(setName);
+    this.savedArmorSets = this.localStorageService.getSavedSets(); */
+  }
+
+  public removeSet() {
+    
+    this.localStorageService.removeSet(this.setToRemoveName);
+    this.savedArmorSets = this.localStorageService.getSavedSets();
   }
 
 }
