@@ -154,6 +154,10 @@ export class LocalStorageService {
     localStorage.setItem(setName, JSON.stringify(setArray)); // Saves set into the local storage
   }
 
+  /**
+   * Returns the sets saved on the browser local storage.
+   * @returns an array of tuplas [set name, set map]
+   */
   public getSavedSets(): [string, Map<string, ArmorData>][] {
 
     if (!this.isLocalStorageAvailable) {
@@ -175,6 +179,10 @@ export class LocalStorageService {
     return setsArr;
   }
 
+  /**
+   * Removes a set with the given set name.
+   * @param setName Name of the set to remove.
+   */
   public removeSet(setName: string) {
 
     let setsBook = this.getSetsBook();

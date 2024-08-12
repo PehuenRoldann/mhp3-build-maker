@@ -1,8 +1,13 @@
-@import url('../../../fonts.scss');
+@import '../../../fonts.scss';
 @import '../../../styles.scss';
 
 $main_color: #17153B;
 
+
+$modal_buttons_width: 25%;
+$modal_buttons_padding_v: 5px;
+$modal_buttons_font_size: 14pt;
+$modal_buttons_radio: 5px;
 
 .main-div{
     display: flex;
@@ -16,7 +21,7 @@ $main_color: #17153B;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+    font-family: $mh_font;
     background-color: $color1;
     width: 100%;
     padding: 5px;
@@ -34,19 +39,28 @@ $main_color: #17153B;
 }
 
 .save-div {
-    
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+
+    margin: 10px 0 10px 0;
+
+    img {
+        width: 3vh;
+        height: 3vh;
+        margin: 0 5px 0 5px;
+    }
+
     button {
-
-        border: 0px;
         background-color: $color2;
-        padding:5px;
-
-        font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+        border: 2px solid $color2;
+        border-radius: 5px;
         color: white;
-        img {
-            width: 2vh;
-            height: 2vh;
-        }
+        padding: 5px 10px 5px 5px;
+        margin: 0 0 0 5px;
+
     }
 }
 
@@ -58,7 +72,7 @@ $main_color: #17153B;
 
 .stats-container {
     h1 {
-        font-family: 'MonsterHunterFont',Arial, Helvetica, sans-serif;
+        font-family: $mh_font;
         font-style: italic;
     }
 }
@@ -79,7 +93,7 @@ $main_color: #17153B;
     margin: 0 1px 0 0;
     
     font-size: 14pt;
-    font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+    font-family: $mh_font;
 
     color: grey;
     background-color: $color1;
@@ -101,19 +115,133 @@ $main_color: #17153B;
     margin: 0 5px 0 5px;
 } */
 
-.save-set-modal-footer {
+#saveSetModal {
+
+    .modal-header {
+
+        background-color: $color1;
+        padding: 10px;
+
+        h1 {
+            color: white;
+            width: 100%;
+            text-align: center;
+            font-family: $mh_font;
+            font-size: 20pt;
+        }
+    }
+
+    .modal-body {
+
+        input {
+            width: 100%;
+            
+            margin-bottom: 10px;
+
+            font-size: 16pt;
+            font-family: $mh_font;
+            text-align: center;
+
+        }
+
+    }
+
+    button {
+
+     &:disabled {
+        opacity: 0.5;
+        background-color: grey;
+        border-color: grey;
+     } 
+    }
+
+}
+
+#removeConfModal {
+
+    .modal-header {
+        background-color: $main_color;
+        padding: 10px 0 10px 0;
+        
+        
+        
+        h5{
+            color:white;
+            width: 100%;
+            text-align: center;    
+            font-family: $mh_font;
+        }
+    }
+
+    .modal-body {
+        h6{
+            text-align: center;
+            margin: 20px;
+        }
+    }
+}
+
+#setNameNotAvailableModal {
+
+
+    .modal-header {
+
+        background-color: $color1;
+
+        font-family: $mh_font;
+        color: white;
+
+        h1 {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    .modal-body {
+        padding: 10px;
+        text-align: center;
+    }
+
+}
+
+.flex-modal-body {
+    // background-color: $color1;
+}
+
+.flex-modal-footer {
     display: flex;
-    width: 100%;
     justify-content: space-around;
     align-items: center;
-
-    padding: 10px;
-
     background-color: $color1;
+    padding: 5px;
+}
 
-    .btn {
-        font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
-        font-size: 20pt;
-        width: 30%;
+.modal-btn {
+
+    width: $modal_buttons_width;
+
+    font-size: $modal_buttons_font_size;
+    font-family: $mh_font;
+    color: white;
+    padding: $modal_buttons_padding_v 0 $modal_buttons_padding_v 0;
+    border-radius: $modal_buttons_radio;
+}
+
+.red-bg-btn {
+    background-color: red;
+    border: 0;
+
+    &:hover{
+        background-color: rgb(252, 64, 64);
     }
+}
+
+.green-bg-btn {
+    background-color: green;
+    border: 1px solid green;
+}
+
+.blue-bg-btn {
+    background-color: $color2;
+    border: 1px solid $color2;
 }

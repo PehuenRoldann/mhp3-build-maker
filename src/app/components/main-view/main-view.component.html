@@ -46,13 +46,13 @@
                 (pressedArmorSlotEvent)="selectPart(partToDisplay.leggings)"
                 />
         </div>
-        <p style="font-size: 12px; color: grey; text-align: center;">
+        <p style="font-size: 12px; color: grey; text-align: center; margin: 10px">
             Mark the checkbox as done if you have the part arleady.
         </p>
 
         <div class="save-div">
-            <button (click)="onSaveButtonClick()"><img src="assets/images/save2.png" alt=""> Save Set!</button>
-            <button (click)="onLoadBtnClick()"><img src="assets/images/book2.png" alt="">View saved sets</button>
+            <button (click)="onSaveButtonClick()"><img src="assets/images/save-floppy.svg" alt=""> Save Set</button>
+            <button (click)="onLoadBtnClick()"><img src="assets/images/bookmark.svg" alt="">Saved Sets</button>
         </div>
 
         <div class="dashboard-container-mobile" *ngIf="(isMobile | async); else desktopTemplate">
@@ -90,23 +90,17 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">
+          <h1 id="exampleModalLabel">
             Saving current set..
           </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body save-set-modal-body">
-          <div>
-            <label for="">Set Name: </label><input type="text" [(ngModel)]="setNameToSave" placeholder="Your new set"></div>
-          <div>
-          <div>
-            <app-armor-set-modal [equipedArmor]="equipedArmor"></app-armor-set-modal>
-          </div>
+        <div class="modal-body flex-modal-body">
+          <input type="text" [(ngModel)]="setNameToSave" placeholder="New set name">
+          <app-armor-set-modal [equipedArmor]="equipedArmor"></app-armor-set-modal>
         </div>
-        </div>
-        <div class="modal-footer save-set-modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="setNameToSave=''">Close</button>
-          <button type="button" class="btn btn-primary" (click)="onSaveConfirmBtnClick()" [disabled]="setNameToSave === ''"data-bs-dismiss="modal">Save</button>
+        <div class="modal-footer flex-modal-footer">
+          <button type="button" class="btn btn-secondary modal-btn" data-bs-dismiss="modal" (click)="setNameToSave=''">Close</button>
+          <button type="button" class="btn btn-primary modal-btn blue-bg-btn" (click)="onSaveConfirmBtnClick()" [disabled]="setNameToSave === ''"data-bs-dismiss="modal">Save</button>
         </div>
       </div>
     </div>
@@ -123,13 +117,11 @@
           </h1>
         </div>
         <div class="modal-body">
-          <p>You have a set named "{{setNameToSave}}" already, do you want to overwrite it?</p>
-          <button (click)="onOverwriteSetClickBtn()" data-bs-dismiss="modal">Yes</button>
-          <button data-bs-dismiss="modal">No</button>
+          <p>You have a set named <strong>"{{setNameToSave}}"</strong> already, do you want to overwrite it?</p>
         </div>
-        <div class="modal-footer save-set-modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="setNameToSave=''">Close</button>
-          <button type="button" class="btn btn-primary" (click)="onSaveConfirmBtnClick()" [disabled]="setNameToSave === ''"data-bs-dismiss="modal">Save</button>
+        <div class="modal-footer flex-modal-footer">
+          <button class="modal-btn red-bg-btn" data-bs-dismiss="modal">No</button>
+          <button class="modal-btn green-bg-btn" (click)="onOverwriteSetClickBtn()" data-bs-dismiss="modal">Yes</button>
         </div>
       </div>
     </div>
@@ -142,7 +134,6 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Saved sets</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div *ngIf="savedArmorSets.length > 0; else noSavedSets">
@@ -164,8 +155,8 @@
             </p>
           </ng-template>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <div class="modal-footer flex-modal-footer">
+          <button type="button" class="btn btn-secondary modal-btn" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -179,12 +170,11 @@
         <h5 class="modal-title">Remove confirmation</h5>
       </div>
       <div class="modal-body">
-        <h1>Are you sure you want to remove this set?</h1>
-        <button data-bs-dismiss="modal" (click)="removeSet()">Acept</button>
-        <button data-bs-dismiss="modal">Cancel</button>
+        <h6><strong>Are you sure you want to remove this set?</strong></h6>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <div class="modal-footer flex-modal-footer">
+        <button class="btn btn-secondary modal-btn" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn modal-btn red-bg-btn" data-bs-dismiss="modal" (click)="removeSet()">Remove</button>
       </div>
     </div>
   </div>
