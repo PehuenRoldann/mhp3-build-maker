@@ -182,22 +182,17 @@ export class MainViewComponent implements OnInit {
   }
 
   public onSaveConfirmBtnClick() {
-    
-    this.savedArmorSets = this.localStorageService.getSavedSets();
-    let nameUsed = false;
 
-    for (let set of this.savedArmorSets) {
+    let nameAvailable = this.localStorageService.isSetNameAvailable(this.setNameToSave);
 
-      if(this.setNameToSave === set[0]) {
-        nameUsed = true;
-      }
-    }
+    console.log("Name used: " + nameAvailable);
 
-    if (nameUsed) {
+    if (!nameAvailable) {
       this.openModal('setNameNotAvailableModal');
     }
     else {
       this.localStorageService.saveSet(this.setNameToSave, this.equipedArmor);
+      
     }
   }
   

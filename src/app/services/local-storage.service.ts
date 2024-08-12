@@ -146,6 +146,7 @@ export class LocalStorageService {
       throw('Local storage is not available!');
     }
 
+    setName = setName.toLocaleLowerCase();
     this.saveSetName(setName); // Saves the set key in the book to search later
     
     const setArray = Array.from(setData.entries());
@@ -180,5 +181,24 @@ export class LocalStorageService {
 
     setsBook.splice(setsBook.indexOf(setName), 1);
     localStorage.setItem(this.SETS_BOOK_KEY, JSON.stringify(setsBook));
+  }
+
+  /**
+   * Checks if there is not a set with the given name.
+   * @param setName Name to search
+   * @returns TRUE if the name is available, FALSE if not.
+   */
+  public isSetNameAvailable(setName: string): boolean {
+
+    let nameUsed = false;
+
+    for (let set of this.getSetsBook()) {
+
+      if(setName.toLocaleLowerCase() === set) {
+        nameUsed = true;
+      }
+    }
+
+    return !nameUsed;
   }
 }
