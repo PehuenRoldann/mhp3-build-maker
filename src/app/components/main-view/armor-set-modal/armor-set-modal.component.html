@@ -1,5 +1,5 @@
 <div>
-    <div class="item fade-in" *ngFor="let key of equipedArmor.keys();">
+    <div class="item fade-in" *ngFor="let key of equipedArmorKeys">
         <img [src]=" 'assets/ArmorIcons/'+ key +'/rare'+ equipedArmor.get(key)!.rare +'.png' " alt="">
         <h6>{{equipedArmor.get(key)?.name}}</h6>
         <span>

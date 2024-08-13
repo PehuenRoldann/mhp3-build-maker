@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { ArmorData } from '../../../types/armorData';
 
 @Component({
@@ -16,16 +16,18 @@ export class ArmorSlotComponent implements OnInit, OnChanges {
   @Output() pressedArmorSlotEvent = new EventEmitter<string>();
   @Output() checkBoxChangeEvent = new EventEmitter<boolean>();
 
+  constructor( private cd: ChangeDetectorRef ) {}
 
   imageUrl: string = '';
 
   ngOnInit() {
     this.updateImageUrl();
-  
+    this.cd.detectChanges();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.updateImageUrl();
+    this.cd.detectChanges();
   }
 
   public onCheckBoxChange(event: any) {

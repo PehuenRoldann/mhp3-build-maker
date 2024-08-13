@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, AfterViewInit, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit, ViewChild, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ArmorData, piecesTypes, pieceType } from '../../types/armorData';
 import { LocalStorageService } from '../../services/local-storage.service';
@@ -15,25 +15,39 @@ declare var bootstrap: any;
   templateUrl: './main-view.component.html',
   styleUrls: ['./main-view.component.scss']
 })
-export class MainViewComponent implements OnInit {
+export class MainViewComponent implements OnInit, AfterViewInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     private router: Router,
     private screenSizeService: ScreenSizeService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private cd: ChangeDetectorRef
   ) {}
+
+
+  ngAfterViewInit(): void {
+
+    // this.cd.detectChanges();
+  }
 
   ngOnInit(): void {
 
     // Checks if the code is running on a browser to execute
     if (isPlatformBrowser(this.platformId)) {
+
       this.UpdateArmor();
       console.log("-----SAVED SETS------");
       console.log(this.localStorageService.getSavedSets());
+      /* setTimeout(() => {
+        this.UpdateArmor();
+        console.log("-----SAVED SETS------");
+        console.log(this.localStorageService.getSavedSets());
+      }, 0); */
+      
     }
 
-    
+    // this.cd.detectChanges();
   }
 
   @ViewChild(StatsBoxComponent, { static: false }) statsBox!: StatsBoxComponent;
