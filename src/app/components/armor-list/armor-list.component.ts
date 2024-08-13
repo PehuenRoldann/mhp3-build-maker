@@ -93,10 +93,17 @@ export class ArmorListComponent implements OnInit {
 
   }
 
+  get propertiesToCompareKeys () : string[] {
+    return Array.from(this.propertiesToCompare.keys()) || [];
+  }
+
   get resourcesForNewEquip () {
     return this.armorDataFormatService.getResourcesMap(this.armorToEquip.materials) || new Map<string, number>();
   }
 
+  get resourcesForNewEquipKeys () : string[] {
+    return Array.from(this.resourcesForNewEquip.keys()) || [];
+  }
 
   /**
    * Returns a map where key = skill name, and the value is a 3-tupla where [0] value for old piece, [1] value for new piece, 
@@ -112,6 +119,10 @@ export class ArmorListComponent implements OnInit {
     let newSkills = this.armorDataFormatService.getSkillsMap(this.armorToEquip.skills);
 
     return this.armorCompatibilityService.compareSkills(oldSkills, newSkills);
+  }
+
+  get skillsToCompareKeys () : string[] {
+    return Array.from(this.skillsToCompare.keys()) || [];
   }
 
   /**

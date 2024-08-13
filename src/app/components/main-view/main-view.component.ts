@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, AfterViewInit, ViewChild, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ArmorData, piecesTypes, pieceType } from '../../types/armorData';
 import { LocalStorageService } from '../../services/local-storage.service';
@@ -21,8 +21,7 @@ export class MainViewComponent implements OnInit, AfterViewInit {
     @Inject(PLATFORM_ID) private platformId: any,
     private router: Router,
     private screenSizeService: ScreenSizeService,
-    private localStorageService: LocalStorageService,
-    private cd: ChangeDetectorRef
+    private localStorageService: LocalStorageService
   ) {}
 
 

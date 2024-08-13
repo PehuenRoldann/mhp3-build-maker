@@ -108,7 +108,7 @@
           <p class="table-title">Stats</p>
           <table class="comparation-table">
             <tbody>
-              <tr *ngFor="let property of propertiesToCompare.keys()">
+              <tr *ngFor="let property of propertiesToCompareKeys">
                 <td class="property-td">{{property}}</td>
                 <td class="value-td">{{propertiesToCompare.get(property)?.[0] || 0}}</td>
                 <td class="increment-td">
@@ -126,7 +126,7 @@
           <p class="table-title">Skills</p>
           <table class="comparation-table">
             <tbody>
-              <tr *ngFor="let skill of skillsToCompare.keys()">
+              <tr *ngFor="let skill of skillsToCompareKeys">
                 <td class="property-td">{{skill}}</td>
                 <td class="value-td">{{skillsToCompare.get(skill)?.[0] || 0}}</td>
                 <td class="increment-td">
@@ -143,7 +143,7 @@
           </table>
           <p class="table-title">Resources</p>
           <table class="comparation-table">
-            <tr *ngFor="let resource of resourcesForNewEquip.keys()">
+            <tr *ngFor="let resource of resourcesForNewEquipKeys">
               <td class="property-td">{{resource}}</td>
               <td class="value-td">x{{resourcesForNewEquip.get(resource)}}</td>
             </tr>

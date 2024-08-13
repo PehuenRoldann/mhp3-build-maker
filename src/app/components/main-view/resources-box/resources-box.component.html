@@ -4,7 +4,7 @@
     
     <ng-template #resourcesTemplate>
         <ul class="resources-ul">
-            <li *ngFor="let resource of resources.keys(); let i = index"
+            <li *ngFor="let resource of resourcesKeys; let i = index"
             [ngStyle]="{'animation-delay': i * 0.2 + 's'}">
                 <span>{{resource}} </span>
                 <span>x{{resources.get(resource)}}</span>

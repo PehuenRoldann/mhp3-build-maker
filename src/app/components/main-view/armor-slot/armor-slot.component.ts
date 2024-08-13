@@ -1,12 +1,11 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
-import { ArmorData } from '../../../types/armorData';
+import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-armor-slot',
   templateUrl: './armor-slot.component.html',
   styleUrl: './armor-slot.component.scss'
 })
-export class ArmorSlotComponent implements OnInit, OnChanges {
+export class ArmorSlotComponent implements OnInit {
 
   @Input({required: true}) bodyPart: string = "";
   @Input({required: true}) rare: number = 1;
@@ -16,18 +15,12 @@ export class ArmorSlotComponent implements OnInit, OnChanges {
   @Output() pressedArmorSlotEvent = new EventEmitter<string>();
   @Output() checkBoxChangeEvent = new EventEmitter<boolean>();
 
-  constructor( private cd: ChangeDetectorRef ) {}
+  constructor() {}
 
   imageUrl: string = '';
 
   ngOnInit() {
     this.updateImageUrl();
-    this.cd.detectChanges();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.updateImageUrl();
-    this.cd.detectChanges();
   }
 
   public onCheckBoxChange(event: any) {

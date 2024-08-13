@@ -14,13 +14,22 @@ export class ResourcesBoxComponent implements  OnChanges {
 
   @Input() armor: Array<ArmorData | null> = [];
   resources: Map<string, number> = new Map<string,number>();
+  resourcesKeys: string[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.resources = new Map<string,number>();
-    this.updateResources();
+
+    if (changes['armor']) {
+      this.resources = new Map<string,number>();
+      this.updateResources();
+      this.resourcesKeys = Array.from(this.resources.keys());
+    }
+    
   }
 
 
+  /**
+   * Updates the resources map parsing the resources given string in armor input.
+   */
   private updateResources () {
 
     let service = new DataFormatService();
@@ -41,6 +50,7 @@ export class ResourcesBoxComponent implements  OnChanges {
             else {
               this.resources.set(k, v);
             }
+            
 
           })
         }
@@ -48,6 +58,7 @@ export class ResourcesBoxComponent implements  OnChanges {
         
       });
     }
+
 
   }
 
