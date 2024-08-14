@@ -9,7 +9,7 @@
                 [bodyPart]="partToDisplay.helmet" 
                 [_class]="equipedArmor.get(partToDisplay.helmet) ? equipedArmor.get(partToDisplay.helmet)!.class : null"
                 [rare]="equipedArmor.get(partToDisplay.helmet) ? equipedArmor.get(partToDisplay.helmet)!.rare : 1" 
-                [name]="equipedArmor.get(partToDisplay.helmet) ? equipedArmor.get(partToDisplay.helmet)!.name : 'Click to equip'"
+                [name]="equipedArmor.get(partToDisplay.helmet) ? equipedArmor.get(partToDisplay.helmet)!.name : ''"
                 (checkBoxChangeEvent)="helmetDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart(partToDisplay.helmet)"
                 />
@@ -17,7 +17,7 @@
                 [bodyPart]="partToDisplay.plate" 
                 [_class]="equipedArmor.get(partToDisplay.plate) ? equipedArmor.get(partToDisplay.plate)!.class : null"
                 [rare]="equipedArmor.get(partToDisplay.plate) ? equipedArmor.get(partToDisplay.plate)!.rare : 1" 
-                [name]="equipedArmor.get(partToDisplay.plate) ? equipedArmor.get(partToDisplay.plate)!.name: 'Click to equip'"
+                [name]="equipedArmor.get(partToDisplay.plate) ? equipedArmor.get(partToDisplay.plate)!.name: ''"
                 (checkBoxChangeEvent)="plateDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart(partToDisplay.plate)"
             />
@@ -25,7 +25,7 @@
                 [bodyPart]="partToDisplay.guantlets" 
                 [_class]="equipedArmor.get(partToDisplay.guantlets) ? equipedArmor.get(partToDisplay.guantlets)!.class : null"
                 [rare]="equipedArmor.get(partToDisplay.guantlets) ? equipedArmor.get(partToDisplay.guantlets)!.rare : 1" 
-                [name]="equipedArmor.get(partToDisplay.guantlets) ? equipedArmor.get(partToDisplay.guantlets)!.name : 'Click to equip'"
+                [name]="equipedArmor.get(partToDisplay.guantlets) ? equipedArmor.get(partToDisplay.guantlets)!.name : ''"
                 (checkBoxChangeEvent)="guantletsDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart(partToDisplay.guantlets)"
             />
@@ -33,7 +33,7 @@
                 [bodyPart]="partToDisplay.waist" 
                 [_class]="equipedArmor.get(partToDisplay.waist) ? equipedArmor.get(partToDisplay.waist)!.class : null" 
                 [rare]="equipedArmor.get(partToDisplay.waist) ? equipedArmor.get(partToDisplay.waist)!.rare : 1" 
-                [name]="equipedArmor.get(partToDisplay.waist) ? equipedArmor.get(partToDisplay.waist)!.name: 'Click to equip'"
+                [name]="equipedArmor.get(partToDisplay.waist) ? equipedArmor.get(partToDisplay.waist)!.name: ''"
                 (checkBoxChangeEvent)="waistDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart(partToDisplay.waist)"
             />
@@ -41,7 +41,7 @@
                 [bodyPart]="partToDisplay.leggings" 
                 [_class]="equipedArmor.get(partToDisplay.leggings) ? equipedArmor.get(partToDisplay.leggings)!.class : null"
                 [rare]="equipedArmor.get(partToDisplay.leggings) ? equipedArmor.get(partToDisplay.leggings)!.rare : 1" 
-                [name]="equipedArmor.get(partToDisplay.leggings) ? equipedArmor.get(partToDisplay.leggings)!.name : 'Click to equip'"
+                [name]="equipedArmor.get(partToDisplay.leggings) ? equipedArmor.get(partToDisplay.leggings)!.name : ''"
                 (checkBoxChangeEvent)="legginsDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart(partToDisplay.leggings)"
                 />
@@ -55,7 +55,7 @@
             <button (click)="onLoadBtnClick()"><img src="assets/images/bookmark.svg" alt="">Saved Sets</button>
         </div>
 
-        <div class="dashboard-container-mobile" *ngIf="(isMobile | async); else desktopTemplate">
+        <div class="dashboard-container-mobile">
             <div>
                 <button (click)="[showOnMobile = 0]"
                 [ngClass]="showOnMobile === 0 ? 'dash-btn active' : 'dash-btn'">Stats</button>
@@ -70,11 +70,6 @@
                 <app-resources-box *ngSwitchCase="2" [armor]="equipedArmorArrayResources"></app-resources-box>
             </div>
         </div>
-
-        <ng-template #desktopTemplate>
-            Hola pero desktop
-        </ng-template>
-
     </div>
 </div>
 
@@ -133,16 +128,22 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Saved sets</h5>
+          <p>Your saved sets</p>
+          <img src="assets/images/VillageIcon15.png" alt="">
+
         </div>
         <div class="modal-body">
           <div *ngIf="savedArmorSets.length > 0; else noSavedSets">
 
-            <div *ngFor="let armorSet of savedArmorSets">
-              <h1>{{armorSet[0]}}</h1>
-              <app-armor-set-modal [equipedArmor]="armorSet[1]"/>
-              <button (click)="onClickSetBtn(armorSet[1])" data-bs-dismiss="modal">Equip</button>
-              <button (click)="onClickRemoveBtn(armorSet[0])">Remove</button>
+            <div *ngFor="let armorSet of savedArmorSets" class="main-set-container">
+              <p class="set-name">{{armorSet[0]}}</p>
+              <div class="armor-set-modal-container">
+                <app-armor-set-modal [equipedArmor]="armorSet[1]"/>
+              </div>
+              <div class="set-buttons-container">
+                <button (click)="onClickSetBtn(armorSet[1])" data-bs-dismiss="modal" class="modal-btn blue-bg-btn">Equip</button>
+                <button (click)="onClickRemoveBtn(armorSet[0])" class="modal-btn red-bg-btn">Remove</button>
+              </div>
             </div>
 
           </div>

@@ -204,6 +204,67 @@ $modal_buttons_radio: 5px;
 
 }
 
+#loadSetModal {
+
+    .modal-header {
+        background-color: $color1;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        img {
+            height: 5vh;
+        }
+
+        p {
+            //width: 10%;
+            text-align: center;
+            color: white;
+            font-family: $mh_font;
+            font-size: 20pt;
+        }
+    }
+
+    .modal-body {
+        height: 60vh;
+    }
+
+    .main-set-container {
+        background-color: $color1;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 15px;
+    }
+
+    .armor-set-modal-container {
+        background-color: white;
+        padding: 5px;
+
+        border-radius: 10px;
+    }
+
+    .set-name {
+        width: 100%;
+        margin-bottom: 10px;
+        background-color: $color1;
+        font-family: $mh_font;
+        font-size: 16pt;
+        text-align: center;
+        color: white;
+
+        border-bottom: 1px solid white;
+    }
+
+    .set-buttons-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        //padding: 10px 0 10px 0;
+        margin-top: 10px;
+    }
+}
+
 .flex-modal-body {
     // background-color: $color1;
 }
@@ -224,7 +285,7 @@ $modal_buttons_radio: 5px;
     font-family: $mh_font;
     color: white;
     padding: $modal_buttons_padding_v 0 $modal_buttons_padding_v 0;
-    border-radius: $modal_buttons_radio;
+    border-radius: 20px;
 }
 
 .red-bg-btn {
@@ -242,6 +303,10 @@ $modal_buttons_radio: 5px;
 }
 
 .blue-bg-btn {
-    background-color: $color2;
-    border: 1px solid $color2;
+    background-color: rgb(52, 52, 240);
+    border: 0;
+
+    &:hover{
+        background-color: rgb(84, 84, 245);
+    }
 }

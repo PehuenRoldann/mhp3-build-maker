@@ -1,7 +1,8 @@
 <div class="main-container">
-    <img [src]="imageUrl" alt="" (click)="pressedArmorSlot()">
+    <img [src]="imageUrl" alt="" (click)="pressedArmorSlot()"
+        [ngStyle]="{'opacity': (name !== '') ? '1' : '0.2'}">
     <div class="mid-container">
-        <p (click)="pressedArmorSlot()" > {{name}}</p>
+        <p (click)="pressedArmorSlot()" > {{name || 'Click to equip'}}</p>
         <div class="images-container" *ngIf="_class !== null">
             <span>
                 <img src="../../../../assets/wepons/greatsword1.png" alt="" 
