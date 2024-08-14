@@ -49,3 +49,25 @@
   width: 3vh;
   height: 3vh;
 }
+
+
+@media screen and (min-width: 1270px) {
+
+  .main-container {
+    img {
+        width: 10vh;
+        height: 10vh;
+    }
+
+
+}
+
+  .images-container {
+    img {
+      width: 5vh;
+      height: 5vh;
+      // vertical-align: middle; /* Alinea verticalmente con el texto */
+    }
+  }
+  
+}

@@ -1,10 +1,12 @@
 <div class="main-div">
-    <div class="title-container">
+    <nav class="nav-bar">
         <img src="assets/images/MHP3rd_Logo.webp" alt="Mhlogo">
         <h1>Build Maker</h1>
-    </div>
+    </nav>
     <div class="main-container">
-        <div class="armor-set-container">
+        <div class="first-container">
+
+          <div class="armor-set-container">
             <app-armor-slot 
                 [bodyPart]="partToDisplay.helmet" 
                 [_class]="equipedArmor.get(partToDisplay.helmet) ? equipedArmor.get(partToDisplay.helmet)!.class : null"
@@ -45,14 +47,15 @@
                 (checkBoxChangeEvent)="legginsDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart(partToDisplay.leggings)"
                 />
-        </div>
-        <p style="font-size: 12px; color: grey; text-align: center; margin: 10px">
-            Mark the checkbox as done if you have the part arleady.
-        </p>
+          </div>
+          <p style="font-size: 12px; color: grey; text-align: center; margin: 10px">
+              Mark the checkbox as done if you have the part arleady.
+          </p>
 
-        <div class="save-div">
-            <button (click)="onSaveButtonClick()"><img src="assets/images/save-floppy.svg" alt=""> Save Set</button>
-            <button (click)="onLoadBtnClick()"><img src="assets/images/bookmark.svg" alt="">Saved Sets</button>
+          <div class="save-div">
+              <button (click)="onSaveButtonClick()"><img src="assets/images/save-floppy.svg" alt=""> Save Set</button>
+              <button (click)="onLoadBtnClick()"><img src="assets/images/bookmark.svg" alt="">Saved Sets</button>
+          </div>
         </div>
 
         <div class="dashboard-container-mobile">
@@ -69,6 +72,25 @@
                 <app-skills-box *ngSwitchCase="1" [armor]="equipedArmorArray"></app-skills-box>
                 <app-resources-box *ngSwitchCase="2" [armor]="equipedArmorArrayResources"></app-resources-box>
             </div>
+        </div>
+
+        <div class="dashboard-container-desktop">
+          <div style="width: 40%;">
+            <div class="stats-box-div">
+              <h1>Stats</h1>
+              <app-stats-box [armor]="equipedArmorArray"></app-stats-box>
+            </div>
+            <div class="resources-box-div">
+              <h1>Resources</h1>
+              <div>
+                <app-resources-box [armor]="equipedArmorArrayResources"></app-resources-box>
+              </div>
+            </div>
+          </div>
+          <div class="skills-box-div" style="width: 40%;">
+            <h1>Skills</h1>
+            <app-skills-box [armor]="equipedArmorArray"></app-skills-box>
+          </div>
         </div>
     </div>
 </div>

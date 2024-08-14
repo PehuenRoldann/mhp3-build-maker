@@ -17,7 +17,7 @@ $modal_buttons_radio: 5px;
 }
 
 
-.title-container{
+.nav-bar{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,7 +28,7 @@ $modal_buttons_radio: 5px;
 
     img {
         width: 30%;
-        height: 30%;
+        aspect-ratio: 16 / 9;
     }
 
     h1 {
@@ -84,6 +84,11 @@ $modal_buttons_radio: 5px;
         border: 1px solid $color1;
         border-radius: 5px;
     }
+}
+
+.dashboard-container-desktop {
+    display: none;
+    
 }
 
 .dash-btn {
@@ -310,3 +315,71 @@ $modal_buttons_radio: 5px;
         background-color: rgb(84, 84, 245);
     }
 }
+
+
+@media screen and (min-width: 1000px) {
+
+    .main-container {
+      display: flex;
+      justify-content: space-around;
+
+      .first-container {
+
+        display: flex;
+        flex-direction: column;
+        //justify-content: space-around;
+        justify-content: center;
+        width: 30%;
+        height: 80vh;
+        //background-color: red;
+        
+      }
+    }
+
+    .nav-bar {
+        height: 10vh;
+
+        img {
+            width: 9%;
+        }
+    
+    }
+
+    .dashboard-container-mobile {
+        display: none;
+    }
+
+    .dashboard-container-desktop{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 70%;
+        margin-top: 10px;
+        //background-color: aqua;
+        
+        h1 {
+            font-size: 20pt;
+            width: 100%;
+            background-color: $color1;
+            color: white;
+            font-family: $mh_font;
+            padding-left: 20px;
+            font-style: italic;
+        }
+
+        .resources-box-div {
+            
+            height: 45vh;
+
+            div {
+                overflow-y: auto;
+            }
+        }
+
+        .skills-box-div {
+            overflow-y: auto;
+            height: 90vh;
+        }
+    }
+    
+  }
