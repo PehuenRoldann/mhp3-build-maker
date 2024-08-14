@@ -327,11 +327,9 @@ $modal_buttons_radio: 5px;
 
         display: flex;
         flex-direction: column;
-        //justify-content: space-around;
         justify-content: center;
         width: 30%;
         height: 80vh;
-        //background-color: red;
         
       }
     }
@@ -339,8 +337,15 @@ $modal_buttons_radio: 5px;
     .nav-bar {
         height: 10vh;
 
+        $childs_margin: 20px;
         img {
             width: 9%;
+            margin-left: $childs_margin;
+        }
+
+        h1 {
+            margin-right: $childs_margin;
+            user-select: none;
         }
     
     }
@@ -350,14 +355,44 @@ $modal_buttons_radio: 5px;
     }
 
     .dashboard-container-desktop{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        width: 70%;
-        margin-top: 10px;
-        //background-color: aqua;
+
+        display: block;
+        margin-top: 5vh;
+        height: 80vh;
+        width: 30vw;
+        //background-color: red;
+        $childs_width: 30vw;
+
+        .accordion-body{
+            width: $childs_width;
+            max-height:65vh;
+            overflow-y: scroll;
+
+        }
+
+        .accordion-header{
+            width: $childs_width;
+            
+            background-color: $color1;
+            border: 0;
+
+            h2 {
+                height: 5vh;
+            }
+            button{
+                background-color: $color1;
+                border: 0;
+                padding-left: 10px;
+                color: white;
+                text-align: center;
+                
+                font-family:$mh_font;
+                font-style: italic;
+                font-size: 20pt;
+            }
+        }
         
-        h1 {
+        /* h1 {
             font-size: 20pt;
             width: 100%;
             background-color: $color1;
@@ -365,6 +400,10 @@ $modal_buttons_radio: 5px;
             font-family: $mh_font;
             padding-left: 20px;
             font-style: italic;
+
+            user-select: none;
+            cursor: pointer;
+
         }
 
         .resources-box-div {
@@ -379,7 +418,7 @@ $modal_buttons_radio: 5px;
         .skills-box-div {
             overflow-y: auto;
             height: 90vh;
-        }
+        } */
     }
     
   }
