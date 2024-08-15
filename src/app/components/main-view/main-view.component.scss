@@ -4,7 +4,7 @@
 $main_color: #17153B;
 
 
-$modal_buttons_width: 25%;
+$modal_buttons_width: 30%;
 $modal_buttons_padding_v: 5px;
 $modal_buttons_font_size: 14pt;
 $modal_buttons_radio: 5px;
@@ -165,7 +165,7 @@ $modal_buttons_radio: 5px;
 #removeConfModal {
 
     .modal-header {
-        background-color: $main_color;
+        background-color: $color1;
         padding: 10px 0 10px 0;
         
         
@@ -179,9 +179,11 @@ $modal_buttons_radio: 5px;
     }
 
     .modal-body {
+        background-color: $color1;
         h6{
             text-align: center;
             margin: 20px;
+            color: white;
         }
     }
 }
@@ -210,6 +212,10 @@ $modal_buttons_radio: 5px;
 }
 
 #loadSetModal {
+
+    p{
+        user-select: none;
+    }
 
     .modal-header {
         background-color: $color1;
@@ -290,7 +296,7 @@ $modal_buttons_radio: 5px;
     font-family: $mh_font;
     color: white;
     padding: $modal_buttons_padding_v 0 $modal_buttons_padding_v 0;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .red-bg-btn {
@@ -392,33 +398,49 @@ $modal_buttons_radio: 5px;
             }
         }
         
-        /* h1 {
-            font-size: 20pt;
-            width: 100%;
-            background-color: $color1;
-            color: white;
-            font-family: $mh_font;
-            padding-left: 20px;
-            font-style: italic;
-
-            user-select: none;
-            cursor: pointer;
-
-        }
-
-        .resources-box-div {
-            
-            height: 45vh;
-
-            div {
-                overflow-y: auto;
-            }
-        }
-
-        .skills-box-div {
-            overflow-y: auto;
-            height: 90vh;
-        } */
     }
+
+    .modal {
+
+        .modal-horizontal-center {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+        }
+      }
+
+      #loadSetModal {
+
+        &.modal {
+            width: 100vw;
+            // background-color: red;
+        }
+
+        .modal-dialog{
+            max-width: 80vw;
+            // background-color: blue;
+        }
+
+        .sets-container {
+            display: grid;
+            grid-template-columns: 20vw 20vw 20vw;
+        }
+
+        .main-set-container {
+            width: 19vw;
+            height: fit-content;
+        }
+
+        .armor-set-modal-container {
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+      }
+      
+      
+      
     
   }

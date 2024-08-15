@@ -75,6 +75,7 @@
         </div>
 
         <div class="dashboard-container-desktop">
+
           <div class="accordion" id="accordionExample">
             <div class="accordion-item">
               <h2 class="accordion-header">
@@ -115,31 +116,35 @@
           </div>
 
         </div>
-</div>
 
-<app-piece-modal 
+        <app-piece-modal 
     [armor]="equipedArmor.get(selectedPart)!"
     [bodyPart]="selectedPart"
     (changeEventEmitter)="ChangeSelectedPart()"
     (removeEventEmitter)="RemoveSelectedPart()"
 />
+</div>
+
+
 
 <!-- SAVE SET MODAL -->
 <div class="modal fade" id="saveSetModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 id="exampleModalLabel">
-            Saving current set..
-          </h1>
-        </div>
-        <div class="modal-body flex-modal-body">
-          <input type="text" [(ngModel)]="setNameToSave" placeholder="New set name">
-          <app-armor-set-modal [equipedArmor]="equipedArmor"></app-armor-set-modal>
-        </div>
-        <div class="modal-footer flex-modal-footer">
-          <button type="button" class="btn btn-secondary modal-btn" data-bs-dismiss="modal" (click)="setNameToSave=''">Close</button>
-          <button type="button" class="btn btn-primary modal-btn blue-bg-btn" (click)="onSaveConfirmBtnClick()" [disabled]="setNameToSave === ''"data-bs-dismiss="modal">Save</button>
+    <div class="modal-horizontal-center">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 id="exampleModalLabel" style="user-select: none;">
+              Saving current set..
+            </h1>
+          </div>
+          <div class="modal-body flex-modal-body">
+            <input type="text" [(ngModel)]="setNameToSave" placeholder="New set name">
+            <app-armor-set-modal [equipedArmor]="equipedArmor"></app-armor-set-modal>
+          </div>
+          <div class="modal-footer flex-modal-footer">
+            <button type="button" class="btn btn-secondary modal-btn" data-bs-dismiss="modal" (click)="setNameToSave=''">Close</button>
+            <button type="button" class="btn btn-primary modal-btn blue-bg-btn" (click)="onSaveConfirmBtnClick()" [disabled]="setNameToSave === ''"data-bs-dismiss="modal">Save</button>
+          </div>
         </div>
       </div>
     </div>
@@ -148,10 +153,11 @@
 
 <!-- SET NAME NOT AVAILABLE MODAL -->
 <div class="modal fade" id="setNameNotAvailableModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-horizontal-center">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">
+          <h1 class="modal-title fs-5" id="exampleModalLabel" style="user-select: none;">
             Set name used!
           </h1>
         </div>
@@ -164,23 +170,25 @@
         </div>
       </div>
     </div>
+  </div>
 </div>
 
 
 <!-- LOAD SETS MODAL -->
 <div class="modal fade" id="loadSetModal" tabindex="-1">
+
+  <div class="modal-horizontal-center">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <p>Your saved sets</p>
           <img src="assets/images/VillageIcon15.png" alt="">
-
         </div>
         <div class="modal-body">
-          <div *ngIf="savedArmorSets.length > 0; else noSavedSets">
+          <div class="sets-container" *ngIf="savedArmorSets.length > 0; else noSavedSets">
 
             <div *ngFor="let armorSet of savedArmorSets" class="main-set-container">
-              <p class="set-name">{{armorSet[0]}}</p>
+              <p class="set-name" style="user-select: none;">{{armorSet[0]}}</p>
               <div class="armor-set-modal-container">
                 <app-armor-set-modal [equipedArmor]="armorSet[1]"/>
               </div>
@@ -192,7 +200,7 @@
 
           </div>
           <ng-template #noSavedSets>
-            <h1>No saved sets found.</h1>
+            <h1 style="user-select: none;">No saved sets found.</h1>
             <p>
               Remember that the stets are saved in your local browser storage. <br>
               If you changed your browser or device you won't be able to access your saved sets. <br>
@@ -205,21 +213,25 @@
         </div>
       </div>
     </div>
+  </div>
 </div>
 
 <!-- CONFIRM SET REMOVE MODAL -->
 <div class="modal fade" id="removeConfModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Remove confirmation</h5>
-      </div>
-      <div class="modal-body">
-        <h6><strong>Are you sure you want to remove this set?</strong></h6>
-      </div>
-      <div class="modal-footer flex-modal-footer">
-        <button class="btn btn-secondary modal-btn" data-bs-dismiss="modal">Cancel</button>
-        <button class="btn modal-btn red-bg-btn" data-bs-dismiss="modal" (click)="removeSet()">Remove</button>
+
+  <div class="modal-horizontal-center">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Remove confirmation</h5>
+        </div>
+        <div class="modal-body">
+          <h6><strong>Are you sure you want to remove this set?</strong></h6>
+        </div>
+        <div class="modal-footer flex-modal-footer">
+          <button class="btn btn-secondary modal-btn" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn modal-btn red-bg-btn" data-bs-dismiss="modal" (click)="removeSet()">Remove</button>
+        </div>
       </div>
     </div>
   </div>
