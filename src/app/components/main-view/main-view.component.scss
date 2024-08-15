@@ -120,47 +120,6 @@ $modal_buttons_radio: 5px;
     margin: 0 5px 0 5px;
 } */
 
-#saveSetModal {
-
-    .modal-header {
-
-        background-color: $color1;
-        padding: 10px;
-
-        h1 {
-            color: white;
-            width: 100%;
-            text-align: center;
-            font-family: $mh_font;
-            font-size: 20pt;
-        }
-    }
-
-    .modal-body {
-
-        input {
-            width: 100%;
-            
-            margin-bottom: 10px;
-
-            font-size: 16pt;
-            font-family: $mh_font;
-            text-align: center;
-
-        }
-
-    }
-
-    button {
-
-     &:disabled {
-        opacity: 0.5;
-        background-color: grey;
-        border-color: grey;
-     } 
-    }
-
-}
 
 #removeConfModal {
 
@@ -366,12 +325,11 @@ $modal_buttons_radio: 5px;
         margin-top: 5vh;
         height: 80vh;
         width: 30vw;
-        //background-color: red;
         $childs_width: 30vw;
 
         .accordion-body{
             width: $childs_width;
-            max-height:65vh;
+            max-height: 60vh;
             overflow-y: scroll;
 
         }
@@ -408,37 +366,7 @@ $modal_buttons_radio: 5px;
             height: 100%;
             justify-content: center;
         }
-      }
-
-      #loadSetModal {
-
-        &.modal {
-            width: 100vw;
-            // background-color: red;
-        }
-
-        .modal-dialog{
-            max-width: 80vw;
-            // background-color: blue;
-        }
-
-        .sets-container {
-            display: grid;
-            grid-template-columns: 20vw 20vw 20vw;
-        }
-
-        .main-set-container {
-            width: 19vw;
-            height: fit-content;
-        }
-
-        .armor-set-modal-container {
-            height: 40vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-      }
+    }
       
       
       

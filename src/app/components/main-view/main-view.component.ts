@@ -13,7 +13,8 @@ declare var bootstrap: any;
 @Component({
   selector: 'app-main-view',
   templateUrl: './main-view.component.html',
-  styleUrls: ['./main-view.component.scss']
+  styleUrls: ['./main-view.component.scss', './piece-modal.scss',
+     './load-sets-modal.scss', './save-sets-modal.scss']
 })
 export class MainViewComponent implements OnInit, AfterViewInit {
 

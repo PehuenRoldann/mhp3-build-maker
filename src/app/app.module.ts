@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { ArmorListComponent } from './components/armor-list/armor-list.component';
 import { ArmorListItemComponent } from './components/armor-list/armor-list-item/armor-list-item.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { PieceModalComponent } from './components/main-view/piece-modal/piece-modal.component';
+// import { PieceModalComponent } from './components/main-view/piece-modal/piece-modal.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ArmorSetModalComponent } from './components/main-view/armor-set-modal/armor-set-modal.component';
@@ -28,7 +28,7 @@ import { ArmorSetModalComponent } from './components/main-view/armor-set-modal/a
     ResourcesBoxComponent,
     ArmorListComponent,
     ArmorListItemComponent,
-    PieceModalComponent,
+    // PieceModalComponent,
     ArmorSetModalComponent
   ],
   imports: [

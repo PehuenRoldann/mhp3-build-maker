@@ -1,0 +1,33 @@
+@media screen and (min-width: 1270px) {
+
+    #loadSetModal {
+
+        &.modal {
+            width: 100vw;
+            // background-color: red;
+        }
+
+        .modal-dialog{
+            max-width: 80vw;
+            // background-color: blue;
+        }
+
+        .sets-container {
+            display: grid;
+            grid-template-columns: 20vw 20vw 20vw;
+        }
+
+        .main-set-container {
+            width: 19vw;
+            height: fit-content;
+        }
+
+        .armor-set-modal-container {
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+      }
+    
+}

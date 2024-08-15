@@ -1,6 +1,8 @@
-@import '../../../../styles.scss';
+@import '../../../styles.scss';
+@import '../../../fonts.scss';
 
-$right_left_margin: 10vw;
+#pieceModal{
+    $right_left_margin: 10vw;
 
 @keyframes h4animation {
     0% {
@@ -96,10 +98,12 @@ $right_left_margin: 10vw;
     }
 }
 
-#removeBtn {
+    #removeBtn {
     background-color: red;
-}
+    }
 
-#changeBtn {
+    #changeBtn {
     background-color: green;
+    }
+
 }

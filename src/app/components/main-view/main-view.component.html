@@ -116,14 +116,53 @@
           </div>
 
         </div>
-
-        <app-piece-modal 
-    [armor]="equipedArmor.get(selectedPart)!"
-    [bodyPart]="selectedPart"
-    (changeEventEmitter)="ChangeSelectedPart()"
-    (removeEventEmitter)="RemoveSelectedPart()"
-/>
 </div>
+
+<!-- <app-piece-modal 
+[armor]="equipedArmor.get(selectedPart)!"
+[bodyPart]="selectedPart"
+(changeEventEmitter)="ChangeSelectedPart()"
+(removeEventEmitter)="RemoveSelectedPart()"
+/> -->
+
+<!-- ONE PART MODAL -->
+
+<div *ngIf="equipedArmor.get(selectedPart) != null"
+class="modal fade" id="pieceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-horizontal-center">
+
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <img [src]="'assets/ArmorIcons/'+selectedPart+'/rare'+equipedArmor.get(selectedPart)?.rare+'.png'" alt="">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              {{equipedArmor.get(selectedPart) ? equipedArmor.get(selectedPart)!.name : ""}}
+            </h1>
+            <span>
+              <img src="assets/wepons/greatsword1.png" alt=""
+              [style]="equipedArmor.get(selectedPart)!.class === 0 || equipedArmor.get(selectedPart)!.class === 2? 'display: block': 'display: none'">
+              <img src="assets/wepons/lightbowgun1.png" alt=""
+              [style]="equipedArmor.get(selectedPart)!.class === 1 || equipedArmor.get(selectedPart)!.class === 2? 'display: block': 'display: none'">
+            </span>
+            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+          </div>
+          <div class="modal-body" data-bs-theme="dark">
+            <div class="title"><h4>Stats</h4></div>
+            <app-stats-box [armor]="[equipedArmor.get(selectedPart)!]"/>
+            <div class="title rev"><h4 style="text-align: end;">Skills</h4></div>
+            <app-skills-box [armor]="[equipedArmor.get(selectedPart)!]"/>
+            <div class="title"><h4>Resources</h4></div>
+            <app-resources-box [armor]="[equipedArmor.get(selectedPart)!]"/>
+          </div>
+          <div class="modal-footer my-modal-footer">
+            <button type="button" class="btn btn-secondary" id="closeBtn" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="removeBtn" data-bs-dismiss="modal" (click)="RemoveSelectedPart()">Remove</button>
+            <button type="button" class="btn btn-primary" id="changeBtn" data-bs-dismiss="modal" (click)="ChangeSelectedPart()">Change</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
