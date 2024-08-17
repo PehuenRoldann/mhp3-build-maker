@@ -2,7 +2,7 @@
 @import './../../../styles.scss';
 
 .main-container {
-    background: white;
+    // background: white;
 }
 
 .nav-bg {
@@ -83,6 +83,7 @@
     width: 100%;
     padding: 0;
     margin: 0;
+
 }
 
 .comp-modal-header {
@@ -181,4 +182,26 @@
         background-color: green;
     }
 
+}
+
+.armor-list-container {
+    width: 90%;
+}
+
+@media screen and (min-width: 1270px) {
+
+    .armor-items-container {
+        margin: 0;
+        padding: 0;
+        // background-color: red;
+        display: grid;
+        grid-template-columns: 29% 29% 29%;
+        gap: 20px;
+        
+        /* .armor-list-container {
+            width: 10vw;
+        } */
+    }
+
+    
 }

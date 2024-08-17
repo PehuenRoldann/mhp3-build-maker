@@ -52,14 +52,14 @@
 
   <!-- List of armor elemets -->
 
-    <div *ngIf="filteredArmorData.length == 0; else itemsListBlock" 
+    <div *ngIf="filteredArmorData.length == 0; else itemsListBlock"
     style="display: flex; justify-content: center; align-items: center;">
     <h1>Data not found</h1>
     </div>
-    <ng-template #itemsListBlock >
+    <ng-template #itemsListBlock>
         <div class="armor-items-container">
             <div class="armor-list-container" *ngFor="let item of filteredArmorData">
-                <app-armor-list-item  
+                <app-armor-list-item
                   [item]="item"
                   [imagePath]="'../../../assets/ArmorIcons/'+part+'/rare'+item.rare+'.png'"
                   (equipEvent)="equipButtonEvent($event)"/>
@@ -112,7 +112,7 @@
                 <td class="property-td">{{property}}</td>
                 <td class="value-td">{{propertiesToCompare.get(property)?.[0] || 0}}</td>
                 <td class="increment-td">
-                  <div class="triangle-right" 
+                  <div class="triangle-right"
                     [ngClass]="{
                     'positive-triangle': (propertiesToCompare.get(property)?.[2] === 0),
                     'negative-triangle': (propertiesToCompare.get(property)?.[2] === 2)
@@ -130,7 +130,7 @@
                 <td class="property-td">{{skill}}</td>
                 <td class="value-td">{{skillsToCompare.get(skill)?.[0] || 0}}</td>
                 <td class="increment-td">
-                  <div class="triangle-right" 
+                  <div class="triangle-right"
                     [ngClass]="{
                     'positive-triangle': (skillsToCompare.get(skill)?.[2] === 0),
                     'negative-triangle': (skillsToCompare.get(skill)?.[2] === 2)

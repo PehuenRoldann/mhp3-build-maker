@@ -239,12 +239,15 @@ class="modal fade" id="pieceModal" tabindex="-1" aria-labelledby="exampleModalLa
 
           </div>
           <ng-template #noSavedSets>
-            <h1 style="user-select: none;">No saved sets found.</h1>
-            <p>
-              Remember that the stets are saved in your local browser storage. <br>
-              If you changed your browser or device you won't be able to access your saved sets. <br>
-              If you deleted your storage data for this site, your sets should have been deleted.
-            </p>
+            <div class="no-saves-div">
+              <h1 style="user-select: none; width: 100%; text-align: center;">No saved sets found</h1>
+              <img src="assets/images/mh404.png" alt="not found palico" style="width: 30vh; aspect-ratio: 1/1;">
+              <p style="width: 80%; text-align: center; margin: 10px 10% 0 10%">
+                Remember that the stets are saved in your local browser storage. <br>
+                If you changed your browser or device you won't be able to access your saved sets. <br>
+                If you deleted your storage data for this site, your sets should have been deleted.
+              </p>
+            </div>
           </ng-template>
         </div>
         <div class="modal-footer flex-modal-footer">

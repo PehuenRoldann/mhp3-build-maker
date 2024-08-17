@@ -6,8 +6,10 @@ $border-radius-value: 5px;
 $titles-font-size: 15pt;
 
 .main-container {
-    //width: 98%;
-    width: 98vw;
+    width: 100%;
+    height: fit-content;
+    box-shadow: 5px 6px #c5c3c3;
+    border-radius: 10px;
 }
 
 .flex-div{
@@ -93,7 +95,6 @@ $titles-font-size: 15pt;
 
 .armor-item-stats {
     width: 100%;
-
     margin: 5px 0 5px 0;
 
     h1 {
@@ -121,6 +122,7 @@ $titles-font-size: 15pt;
 .armor-item-skills {
 
     margin: 5px 0 5px 0;
+
     h1 {
         font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
         font-size: $titles-font-size;
@@ -132,7 +134,9 @@ $titles-font-size: 15pt;
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
+        // background-color: red;
     }
+
     li {
         display: inline-block;
         margin: 2px;
@@ -157,4 +161,8 @@ $titles-font-size: 15pt;
 
     color: white;
     font-weight: bold;
+}
+
+@media screen and (min-width: 1270px) {
+    
 }
