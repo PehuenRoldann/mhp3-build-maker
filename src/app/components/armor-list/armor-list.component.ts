@@ -10,17 +10,15 @@ import { DataFormatService } from '../../services/data-format.service';
 import { CsvDataAccessService } from '../../services/csv-data-access.service';
 
 
-declare var bootstrap: any; 
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-armor-list',
   templateUrl: './armor-list.component.html',
-  styleUrl: './armor-list.component.scss'
+  styleUrls: ['./armor-list.component.scss', './comparation-modal.scss']
 })
 export class ArmorListComponent implements OnInit {
-
   partsToShow = piecesTypes.helmets.valueOf(); // Type of parts to show (helmets for default)
-
 
   public armorData: ArmorData[] = [];
 
@@ -28,7 +26,7 @@ export class ArmorListComponent implements OnInit {
   public armorToReplace: ArmorData = new ArmorData(); // Armor equiped now (could be null so we add a default for that case)
   public part?: string;
 
-  public searchInput: string = "";
+  public searchInput: string = '';
 
   // FILTERS USED IN THE NAV
   public minDefenseFilter?: number;
@@ -40,7 +38,7 @@ export class ArmorListComponent implements OnInit {
   public minIceResFilter?: number;
   public minDragonResFilter?: number;
 
-  constructor (
+  constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     private route: ActivatedRoute,
     private router: Router,
@@ -50,78 +48,90 @@ export class ArmorListComponent implements OnInit {
     private armorCompatibilityService: ArmorCompatibilityService,
     private armorDataFormatService: DataFormatService
   ) {}
-  
+
   ngOnInit() {
-
     if (isPlatformBrowser(this.platformId)) {
-
-      this.route.paramMap.subscribe(params => {
+      this.route.paramMap.subscribe((params) => {
         this.partsToShow = params.get('parts')!;
-      })
-      
+      });
+
       this.fetchData();
 
-      switch (this.partsToShow){
-        case piecesTypes.helmets: this.part = pieceType.helmet; break;
-        case piecesTypes.plates: this.part = pieceType.plate; break;
-        case piecesTypes.waists: this.part = pieceType.waist; break;
-        default: this.part = this.partsToShow; break;
+      switch (this.partsToShow) {
+        case piecesTypes.helmets:
+          this.part = pieceType.helmet;
+          break;
+        case piecesTypes.plates:
+          this.part = pieceType.plate;
+          break;
+        case piecesTypes.waists:
+          this.part = pieceType.waist;
+          break;
+        default:
+          this.part = this.partsToShow;
+          break;
       }
 
-
-      this.armorToReplace  = this.localStorageService.getItem(this.part!) || this.armorToReplace;
-      
+      this.armorToReplace = this.localStorageService.getItem(this.part!) || this.armorToReplace;
+      this.bootstrapFixModal();
     }
-    
   }
 
   private async fetchData(): Promise<void> {
-      this.armorData = await this.csvDataAccess.getArmorData(this.partsToShow);
+    this.armorData = await this.csvDataAccess.getArmorData(this.partsToShow);
   }
 
-  public changeToHome () {
+  public changeToHome() {
     this.router.navigate(['/home']);
   }
 
-  get propertiesToCompare (): Map <string, [number, number, number]> {
-
-    if (!this.armorToEquip) {
-      return new Map <string, [number, number, number]>();
-    }
-
-    return this.armorCompatibilityService.compareArmorsStatsMap(this.armorToReplace, this.armorToEquip);
-
-  }
-
-  get propertiesToCompareKeys () : string[] {
-    return Array.from(this.propertiesToCompare.keys()) || [];
-  }
-
-  get resourcesForNewEquip () {
-    return this.armorDataFormatService.getResourcesMap(this.armorToEquip.materials) || new Map<string, number>();
-  }
-
-  get resourcesForNewEquipKeys () : string[] {
-    return Array.from(this.resourcesForNewEquip.keys()) || [];
-  }
-
-  /**
-   * Returns a map where key = skill name, and the value is a 3-tupla where [0] value for old piece, [1] value for new piece, 
-   * [2] change implcations (0 = upgrade, 1 = same, 2 = downgrade)
-   */
-  get skillsToCompare () : Map <string, [number, number, number]> {
-
+  get propertiesToCompare(): Map<string, [number, number, number]> {
     if (!this.armorToEquip) {
       return new Map<string, [number, number, number]>();
     }
 
-    let oldSkills = this.armorDataFormatService.getSkillsMap(this.armorToReplace.skills);
-    let newSkills = this.armorDataFormatService.getSkillsMap(this.armorToEquip.skills);
+    return this.armorCompatibilityService.compareArmorsStatsMap(
+      this.armorToReplace,
+      this.armorToEquip
+    );
+  }
+
+  get propertiesToCompareKeys(): string[] {
+    return Array.from(this.propertiesToCompare.keys()) || [];
+  }
+
+  get resourcesForNewEquip() {
+    return (
+      this.armorDataFormatService.getResourcesMap(
+        this.armorToEquip.materials
+      ) || new Map<string, number>()
+    );
+  }
+
+  get resourcesForNewEquipKeys(): string[] {
+    return Array.from(this.resourcesForNewEquip.keys()) || [];
+  }
+
+  /**
+   * Returns a map where key = skill name, and the value is a 3-tupla where [0] value for old piece, [1] value for new piece,
+   * [2] change implcations (0 = upgrade, 1 = same, 2 = downgrade)
+   */
+  get skillsToCompare(): Map<string, [number, number, number]> {
+    if (!this.armorToEquip) {
+      return new Map<string, [number, number, number]>();
+    }
+
+    let oldSkills = this.armorDataFormatService.getSkillsMap(
+      this.armorToReplace.skills
+    );
+    let newSkills = this.armorDataFormatService.getSkillsMap(
+      this.armorToEquip.skills
+    );
 
     return this.armorCompatibilityService.compareSkills(oldSkills, newSkills);
   }
 
-  get skillsToCompareKeys () : string[] {
+  get skillsToCompareKeys(): string[] {
     return Array.from(this.skillsToCompare.keys()) || [];
   }
 
@@ -144,30 +154,30 @@ export class ArmorListComponent implements OnInit {
    * @param data ArmorData instance that is going the be check for compatibility.
    * @returns True if compatible. False if not.
    */
-  public checkCompatibility (part: string, data: ArmorData) {
-
-
+  public checkCompatibility(part: string, data: ArmorData) {
     let currentEquipment = this.localStorageService.currentEquipment;
 
-    let compatibility = this.armorCompatibilityService.checkCompatibility(data, currentEquipment, part)
+    let compatibility = this.armorCompatibilityService.checkCompatibility(
+      data,
+      currentEquipment,
+      part
+    );
 
-    console.log(`Compatibility: ${compatibility}`); // Debug
+    // console.log(`Compatibility: ${compatibility}`); // Debug
 
     if (!compatibility) {
       this.openModal('incompatibilityModal');
     }
 
-    return compatibility
+    return compatibility;
   }
 
   /**
    * Triggers when the user clicks the equip button on armir-list-item component.
    * @param data The ArmorData instance to equip.
    */
-  public equipButtonEvent(data: ArmorData){
-
-    if(this.checkCompatibility(this.part!, data)){
-
+  public equipButtonEvent(data: ArmorData) {
+    if (this.checkCompatibility(this.part!, data)) {
       this.armorToEquip = data;
       this.openModal('comparationModal');
     }
@@ -177,61 +187,105 @@ export class ArmorListComponent implements OnInit {
    * Equips de piece of armor and changes back to main view.
    */
   public equipArmor() {
-
     this.localStorageService.setItem(this.part!, this.armorToEquip!);
     this.changeToHome();
   }
 
-
   /**
    * Filtered ArmorData Array.
    */
-  get filteredArmorData ( ): ArmorData[] {
-
+  get filteredArmorData(): ArmorData[] {
     let filteredData: ArmorData[] = this.armorData;
 
     if (this.searchInput) {
-      filteredData = filteredData.filter(u => {
-        return u.name.toLowerCase().includes(this.searchInput.toLocaleLowerCase()) ||
-        u.skills.toLowerCase().includes(this.searchInput.toLowerCase());
+      filteredData = filteredData.filter((u) => {
+        return (
+          u.name.toLowerCase().includes(this.searchInput.toLocaleLowerCase()) ||
+          u.skills.toLowerCase().includes(this.searchInput.toLowerCase())
+        );
       });
     }
 
-
     if (this.minRareFilter) {
-      filteredData = filteredData.filter(u => u.rare >= this.minRareFilter!);
+      filteredData = filteredData.filter((u) => u.rare >= this.minRareFilter!);
     }
 
     if (this.minDefenseFilter) {
-      filteredData = filteredData.filter(u => u.defense >= this.minDefenseFilter!);
+      filteredData = filteredData.filter(
+        (u) => u.defense >= this.minDefenseFilter!
+      );
     }
 
     if (this.minSlotsFilter) {
-      filteredData = filteredData.filter(u => u.slots >= this.minSlotsFilter!);
+      filteredData = filteredData.filter(
+        (u) => u.slots >= this.minSlotsFilter!
+      );
     }
 
     if (this.minFireResFilter != undefined) {
-      filteredData = filteredData.filter(u => u.fire_res >= this.minFireResFilter!);
+      filteredData = filteredData.filter(
+        (u) => u.fire_res >= this.minFireResFilter!
+      );
     }
 
     if (this.minWaterResFilter != undefined) {
-      filteredData = filteredData.filter(u => u.water_res >= this.minWaterResFilter!);
+      filteredData = filteredData.filter(
+        (u) => u.water_res >= this.minWaterResFilter!
+      );
     }
 
     if (this.minThunderResFilter != undefined) {
-      filteredData = filteredData.filter(u => u.thunder_res >= this.minThunderResFilter!);
+      filteredData = filteredData.filter(
+        (u) => u.thunder_res >= this.minThunderResFilter!
+      );
     }
 
     if (this.minIceResFilter != undefined) {
-      filteredData = filteredData.filter(u => u.ice_res >= this.minIceResFilter!);
+      filteredData = filteredData.filter(
+        (u) => u.ice_res >= this.minIceResFilter!
+      );
     }
 
     if (this.minDragonResFilter != undefined) {
-      filteredData = filteredData.filter(u => u.dragon_res >= this.minDragonResFilter!);
+      filteredData = filteredData.filter(
+        (u) => u.dragon_res >= this.minDragonResFilter!
+      );
     }
 
     return filteredData;
   }
 
 
+  private bootstrapFixModal() {
+    // Adds an event listener to clean the modal if the user press the back button
+    // and a modal is open.
+    window.addEventListener('popstate', () => {
+      let modals = document.getElementsByClassName(
+        'modal'
+      ) as HTMLCollectionOf<HTMLDivElement>;
+
+      console.log('MODALS: ' + modals.length); // DEBUG
+      for (let i = 0; i < modals.length; i++) {
+        // modals.item(i)?.style.setProperty('display', 'none');
+        let modal = new bootstrap.Modal(modals.item(i));
+        modal.hide();
+      }
+
+      // If you don't use this, the semi-transparent grey modal background will remain.
+      let backdrops = document.getElementsByClassName(
+        'modal-backdrop'
+      ) as HTMLCollectionOf<HTMLDivElement>;
+      console.log('BACKDROPS: ' + backdrops.length); // DEBUG
+      for (let i = 0; i < backdrops.length; i++) {
+        backdrops.item(i)?.remove();
+      }
+
+      // THE BODY WILL THINK THAT THE MODAL IS STILL OPEN
+      const body = document.body;
+      if (body.classList.contains('modal-open')) {
+        body.classList.remove('modal-open');
+        body.style.removeProperty('overflow');
+      }
+    });
+  }
 }

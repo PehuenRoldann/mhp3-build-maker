@@ -7,42 +7,42 @@
         <div class="first-container">
 
           <div class="armor-set-container">
-            <app-armor-slot 
-                [bodyPart]="partToDisplay.helmet" 
+            <app-armor-slot
+                [bodyPart]="partToDisplay.helmet"
                 [_class]="equipedArmor.get(partToDisplay.helmet) ? equipedArmor.get(partToDisplay.helmet)!.class : null"
-                [rare]="equipedArmor.get(partToDisplay.helmet) ? equipedArmor.get(partToDisplay.helmet)!.rare : 1" 
+                [rare]="equipedArmor.get(partToDisplay.helmet) ? equipedArmor.get(partToDisplay.helmet)!.rare : 1"
                 [name]="equipedArmor.get(partToDisplay.helmet) ? equipedArmor.get(partToDisplay.helmet)!.name : ''"
                 (checkBoxChangeEvent)="helmetDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart(partToDisplay.helmet)"
                 />
-            <app-armor-slot 
-                [bodyPart]="partToDisplay.plate" 
+            <app-armor-slot
+                [bodyPart]="partToDisplay.plate"
                 [_class]="equipedArmor.get(partToDisplay.plate) ? equipedArmor.get(partToDisplay.plate)!.class : null"
-                [rare]="equipedArmor.get(partToDisplay.plate) ? equipedArmor.get(partToDisplay.plate)!.rare : 1" 
+                [rare]="equipedArmor.get(partToDisplay.plate) ? equipedArmor.get(partToDisplay.plate)!.rare : 1"
                 [name]="equipedArmor.get(partToDisplay.plate) ? equipedArmor.get(partToDisplay.plate)!.name: ''"
                 (checkBoxChangeEvent)="plateDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart(partToDisplay.plate)"
             />
-            <app-armor-slot 
-                [bodyPart]="partToDisplay.guantlets" 
+            <app-armor-slot
+                [bodyPart]="partToDisplay.guantlets"
                 [_class]="equipedArmor.get(partToDisplay.guantlets) ? equipedArmor.get(partToDisplay.guantlets)!.class : null"
-                [rare]="equipedArmor.get(partToDisplay.guantlets) ? equipedArmor.get(partToDisplay.guantlets)!.rare : 1" 
+                [rare]="equipedArmor.get(partToDisplay.guantlets) ? equipedArmor.get(partToDisplay.guantlets)!.rare : 1"
                 [name]="equipedArmor.get(partToDisplay.guantlets) ? equipedArmor.get(partToDisplay.guantlets)!.name : ''"
                 (checkBoxChangeEvent)="guantletsDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart(partToDisplay.guantlets)"
             />
-            <app-armor-slot 
-                [bodyPart]="partToDisplay.waist" 
-                [_class]="equipedArmor.get(partToDisplay.waist) ? equipedArmor.get(partToDisplay.waist)!.class : null" 
-                [rare]="equipedArmor.get(partToDisplay.waist) ? equipedArmor.get(partToDisplay.waist)!.rare : 1" 
+            <app-armor-slot
+                [bodyPart]="partToDisplay.waist"
+                [_class]="equipedArmor.get(partToDisplay.waist) ? equipedArmor.get(partToDisplay.waist)!.class : null"
+                [rare]="equipedArmor.get(partToDisplay.waist) ? equipedArmor.get(partToDisplay.waist)!.rare : 1"
                 [name]="equipedArmor.get(partToDisplay.waist) ? equipedArmor.get(partToDisplay.waist)!.name: ''"
                 (checkBoxChangeEvent)="waistDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart(partToDisplay.waist)"
             />
-            <app-armor-slot 
-                [bodyPart]="partToDisplay.leggings" 
+            <app-armor-slot
+                [bodyPart]="partToDisplay.leggings"
                 [_class]="equipedArmor.get(partToDisplay.leggings) ? equipedArmor.get(partToDisplay.leggings)!.class : null"
-                [rare]="equipedArmor.get(partToDisplay.leggings) ? equipedArmor.get(partToDisplay.leggings)!.rare : 1" 
+                [rare]="equipedArmor.get(partToDisplay.leggings) ? equipedArmor.get(partToDisplay.leggings)!.rare : 1"
                 [name]="equipedArmor.get(partToDisplay.leggings) ? equipedArmor.get(partToDisplay.leggings)!.name : ''"
                 (checkBoxChangeEvent)="legginsDone = $event.valueOf()"
                 (pressedArmorSlotEvent)="selectPart(partToDisplay.leggings)"
@@ -85,7 +85,7 @@
               </h2>
               <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  <app-stats-box [armor]="equipedArmorArray"></app-stats-box>  
+                  <app-stats-box [armor]="equipedArmorArray"></app-stats-box>
                 </div>
               </div>
             </div>
@@ -118,15 +118,7 @@
         </div>
 </div>
 
-<!-- <app-piece-modal 
-[armor]="equipedArmor.get(selectedPart)!"
-[bodyPart]="selectedPart"
-(changeEventEmitter)="ChangeSelectedPart()"
-(removeEventEmitter)="RemoveSelectedPart()"
-/> -->
-
 <!-- ONE PART MODAL -->
-
 <div *ngIf="equipedArmor.get(selectedPart) != null"
 class="modal fade" id="pieceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-horizontal-center">

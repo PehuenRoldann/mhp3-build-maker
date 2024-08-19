@@ -37,14 +37,7 @@ export class MainViewComponent implements OnInit, AfterViewInit {
     if (isPlatformBrowser(this.platformId)) {
 
       this.UpdateArmor();
-      console.log("-----SAVED SETS------");
-      console.log(this.localStorageService.getSavedSets());
-      /* setTimeout(() => {
-        this.UpdateArmor();
-        console.log("-----SAVED SETS------");
-        console.log(this.localStorageService.getSavedSets());
-      }, 0); */
-      
+
     }
 
     // this.cd.detectChanges();
@@ -52,9 +45,9 @@ export class MainViewComponent implements OnInit, AfterViewInit {
 
   @ViewChild(StatsBoxComponent, { static: false }) statsBox!: StatsBoxComponent;
   @ViewChild(SkillsBoxComponent, { static: false }) skillsBox!: SkillsBoxComponent;
-  
+
   public isMobile = this.screenSizeService.isMobile$;
-  
+
   public selectedPart: string = "";
   public setNameToSave: string = '';
   public showOnMobile: number = 0;  // Indicates wich stats are going to be shown with ngSwitch. 0 = defenses, 1 = skills, 2 = resources
@@ -68,7 +61,7 @@ export class MainViewComponent implements OnInit, AfterViewInit {
   public guantletsDone: boolean = false;
   public waistDone: boolean = false;
   public legginsDone: boolean = false;
-  
+
 
   public partToDisplay = pieceType;
 
@@ -115,7 +108,7 @@ export class MainViewComponent implements OnInit, AfterViewInit {
 
     return equipedArmorArr;
   }
-  
+
 
   public selectPart(value: string) {
 
@@ -128,18 +121,18 @@ export class MainViewComponent implements OnInit, AfterViewInit {
     else {
       this.ChangeSelectedPart();
     }
-    
+
   }
 
   public UpdateArmor() {
     let service = new LocalStorageService();
 
     this.equipedArmor = service.currentEquipment;
-    console.log("Equiped Armor: ");
-    console.log(this.equipedArmor);
+    // console.log("Equiped Armor: "); DEBUG
+    // console.log(this.equipedArmor); DEBUG
   }
 
-  
+
 
   public ChangeSelectedPart() {
 
@@ -199,21 +192,22 @@ export class MainViewComponent implements OnInit, AfterViewInit {
 
     let nameAvailable = this.localStorageService.isSetNameAvailable(this.setNameToSave);
 
-    console.log("Name used: " + nameAvailable);
+    // console.log("Name used: " + nameAvailable); DEBUG
 
     if (!nameAvailable) {
       this.openModal('setNameNotAvailableModal');
     }
     else {
       this.localStorageService.saveSet(this.setNameToSave, this.equipedArmor);
-      
+
     }
   }
-  
+
   public onLoadBtnClick() {
 
     this.savedArmorSets = this.localStorageService.getSavedSets();
-    console.log(this.savedArmorSets);
+
+    // console.log(this.savedArmorSets); DEBUG
     this.openModal('loadSetModal');
 
   }
@@ -225,11 +219,11 @@ export class MainViewComponent implements OnInit, AfterViewInit {
   public onClickSetBtn(set: Map<string, ArmorData>) {
 
     this.equipedArmor = set;
-    
+
     for (let key of set.keys()) {
       this.localStorageService.setItem(key, set.get(key)!);
     }
-    
+
   }
 
   public onClickRemoveBtn(setName: string) {

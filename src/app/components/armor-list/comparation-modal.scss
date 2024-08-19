@@ -1,0 +1,114 @@
+@import '../../../styles.scss';
+@import '../../../fonts.scss';
+
+.armor-items-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+
+}
+
+.comp-modal-header {
+  background-color: $color1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+
+  p {
+    color: white;
+    font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+    text-align: center;
+    width: 100%;
+    // padding: 10px;
+    // background-color: red;
+    padding: 0;
+    height: 100%;
+    margin: 10px 0 10px 0;
+
+  }
+
+  .triangle-right {
+    border-left-color: white;
+  }
+}
+
+.modal-body {
+  height: 50vh;
+  overflow-y: auto;
+}
+
+.comparation-table {
+
+  width: 100%;
+
+  tr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0 15px 10px 15px;
+
+    border-bottom: 1px solid black;
+
+    .property-td {
+      width: 50%;
+    }
+
+    .value-td {
+      width: 10%;
+      text-align: center;
+    }
+
+    .increment-td {
+      width: 10%;
+    }
+  }
+}
+
+.comparation-skills-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table-title {
+  background-color: $color1;
+  color: white;
+  font-family: "MonsterHunterFont", Arial, Helvetica, sans-serif;
+  font-size: 16pt;
+  width: 100%;
+  padding: 5px;
+
+}
+
+.comp-modal-footer {
+  background-color: $color1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .btn {
+    width: 40%;
+    border: 0px;
+    font-family: 'MonsterHunterFont', Arial, Helvetica, sans-serif;
+    font-size: 16pt;
+  }
+
+  .btn-secondary {
+    background-color: red;
+  }
+
+  .btn-primary {
+    background-color: green;
+  }
+
+}
