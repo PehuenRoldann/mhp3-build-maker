@@ -52,8 +52,7 @@
 
   <!-- List of armor elemets -->
 
-    <div *ngIf="filteredArmorData.length == 0; else itemsListBlock"
-    style="display: flex; justify-content: center; align-items: center;">
+    <div class="armor-not-found" *ngIf="filteredArmorData.length == 0; else itemsListBlock">
     <h1>Data not found</h1>
     </div>
     <ng-template #itemsListBlock>

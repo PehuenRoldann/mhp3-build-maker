@@ -74,18 +74,40 @@
     }
 }
 
+.armor-not-found{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: red;
+}
+
 .armor-list-container {
     width: 90%;
+    // background-color: blue;
 }
+
+.armor-items-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+
+}
+
 
 @media screen and (min-width: 1270px) {
 
     .armor-items-container {
+        // background-color: red;
         margin: 0;
         padding: 0;
         // background-color: red;
         display: grid;
-        grid-template-columns: 29% 29% 29%;
+        grid-template-columns: 30% 30% 30%;
         gap: 20px;
 
         /* .armor-list-container {
