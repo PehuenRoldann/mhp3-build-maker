@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ArmorData, piecesTypes, pieceType } from '../../types/armorData';
+import { ArmorSet } from '../../types/armorSet';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { StatsBoxComponent } from './stats-box/stats-box.component';
 import { SkillsBoxComponent } from './skills-box/skills-box.component';
@@ -55,6 +56,7 @@ export class MainViewComponent implements OnInit, AfterViewInit {
   public savedArmorSets: [string, Map<string,ArmorData>][] = [];
   private setToRemoveName: string = '';
 
+  public armorSet: ArmorSet = new ArmorSet(this.equipedArmor);
 
   public helmetDone: boolean = false;
   public plateDone: boolean = false;
@@ -127,7 +129,9 @@ export class MainViewComponent implements OnInit, AfterViewInit {
   public UpdateArmor() {
     let service = new LocalStorageService();
 
-    this.equipedArmor = service.currentEquipment;
+    this.equipedArmor = service.currentEquipment; // TO REMOVE
+
+    this.armorSet = new ArmorSet(service.currentEquipment);
     // console.log("Equiped Armor: "); DEBUG
     // console.log(this.equipedArmor); DEBUG
   }

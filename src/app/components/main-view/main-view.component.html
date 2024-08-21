@@ -85,7 +85,85 @@
               </h2>
               <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  <app-stats-box [armor]="equipedArmorArray"></app-stats-box>
+                  <!-- <app-stats-box [armor]="equipedArmorArray"></app-stats-box> -->
+                   <table id="stats-table">
+                    <thead>
+                      <tr>
+                        <td><div class="empty-span"></div></td>
+                        <td><img src="assets/ArmorIcons/helmet/rare1.png" alt="helmet icon"></td>
+                        <td><img src="assets/ArmorIcons/plate/rare1.png" alt="plate icon"></td>
+                        <td><img src="assets/ArmorIcons/guantlets/rare1.png" alt="guantlets icon"></td>
+                        <td><img src="assets/ArmorIcons/waist/rare1.png" alt="waist icon"></td>
+                        <td><img src="assets/ArmorIcons/leggings/rare1.png" alt="leggins icon"></td>
+                        <td><div>TOTAL</div></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Defense</td>
+                        <td>{{armorSet.getDefense(partToDisplay.helmet)}}</td>
+                        <td>{{armorSet.getDefense(partToDisplay.plate)}}</td>
+                        <td>{{armorSet.getDefense(partToDisplay.guantlets)}}</td>
+                        <td>{{armorSet.getDefense(partToDisplay.waist)}}</td>
+                        <td>{{armorSet.getDefense(partToDisplay.leggings)}}</td>
+                        <td>{{armorSet.getTotalDefense()}}</td>
+                      </tr>
+                      <tr>
+                        <td>Slots</td>
+                        <td>{{armorSet.getSlots(partToDisplay.helmet)}}</td>
+                        <td>{{armorSet.getSlots(partToDisplay.plate)}}</td>
+                        <td>{{armorSet.getSlots(partToDisplay.guantlets)}}</td>
+                        <td>{{armorSet.getSlots(partToDisplay.waist)}}</td>
+                        <td>{{armorSet.getSlots(partToDisplay.leggings)}}</td>
+                        <td>{{armorSet.getTotalSlots()}}</td>
+                      </tr>
+                      <tr>
+                        <td>Fire</td>
+                        <td>{{armorSet.getFireRes(partToDisplay.helmet)}}</td>
+                        <td>{{armorSet.getFireRes(partToDisplay.plate)}}</td>
+                        <td>{{armorSet.getFireRes(partToDisplay.guantlets)}}</td>
+                        <td>{{armorSet.getFireRes(partToDisplay.waist)}}</td>
+                        <td>{{armorSet.getFireRes(partToDisplay.leggings)}}</td>
+                        <td>{{armorSet.getTotalFireRes()}}</td>
+                      </tr>
+                      <tr>
+                        <td>Water</td>
+                        <td>{{armorSet.getWaterRes(partToDisplay.helmet)}}</td>
+                        <td>{{armorSet.getWaterRes(partToDisplay.plate)}}</td>
+                        <td>{{armorSet.getWaterRes(partToDisplay.guantlets)}}</td>
+                        <td>{{armorSet.getWaterRes(partToDisplay.waist)}}</td>
+                        <td>{{armorSet.getWaterRes(partToDisplay.leggings)}}</td>
+                        <td>{{armorSet.getTotalWaterRes()}}</td>
+                      </tr>
+                      <tr>
+                        <td>Thunder</td>
+                        <td>{{armorSet.getThunderRes(partToDisplay.helmet)}}</td>
+                        <td>{{armorSet.getThunderRes(partToDisplay.plate)}}</td>
+                        <td>{{armorSet.getThunderRes(partToDisplay.guantlets)}}</td>
+                        <td>{{armorSet.getThunderRes(partToDisplay.waist)}}</td>
+                        <td>{{armorSet.getThunderRes(partToDisplay.leggings)}}</td>
+                        <td>{{armorSet.getTotalThunderRes()}}</td>
+                      </tr>
+                      <tr>
+                        <td>Ice</td>
+                        <td>{{armorSet.getIceRes(partToDisplay.helmet)}}</td>
+                        <td>{{armorSet.getIceRes(partToDisplay.plate)}}</td>
+                        <td>{{armorSet.getIceRes(partToDisplay.guantlets)}}</td>
+                        <td>{{armorSet.getIceRes(partToDisplay.waist)}}</td>
+                        <td>{{armorSet.getIceRes(partToDisplay.leggings)}}</td>
+                        <td>{{armorSet.getTotalIceRes()}}</td>
+                      </tr>
+                      <tr>
+                        <td>Dragon</td>
+                        <td>{{armorSet.getDragonRes(partToDisplay.helmet)}}</td>
+                        <td>{{armorSet.getDragonRes(partToDisplay.plate)}}</td>
+                        <td>{{armorSet.getDragonRes(partToDisplay.guantlets)}}</td>
+                        <td>{{armorSet.getDragonRes(partToDisplay.waist)}}</td>
+                        <td>{{armorSet.getDragonRes(partToDisplay.leggings)}}</td>
+                        <td>{{armorSet.getTotalDragonRes()}}</td>
+                      </tr>
+                    </tbody>
+                   </table>
                 </div>
               </div>
             </div>
