@@ -8,6 +8,10 @@ export class ArmorSet {
     this._armorSet = armorSet;
   }
 
+  public getPart(part: pieceType): ArmorData | null {
+    return this._armorSet.get(part) || null;
+  }
+
   public getName(part: pieceType): string {
     return this._armorSet.get(part)?.name || '';
   }

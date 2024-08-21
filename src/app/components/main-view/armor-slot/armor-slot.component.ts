@@ -27,7 +27,7 @@ export class ArmorSlotComponent implements OnChanges {
 
     return this.checkBoxChangeEvent.emit(event.target.checked);
   }
-  
+
   private updateImageUrl() {
     this.imageUrl = `../../../../../assets/ArmorIcons/${this.bodyPart}/rare${this.rare}.png`;
   }
