@@ -197,32 +197,31 @@
 </div>
 
 <!-- ONE PART MODAL -->
-<div *ngIf="equipedArmor.get(selectedPart) != null"
-class="modal fade" id="pieceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<div  class="modal fade" id="pieceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-horizontal-center">
 
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <img [src]="'assets/ArmorIcons/'+selectedPart+'/rare'+equipedArmor.get(selectedPart)?.rare+'.png'" alt="">
+            <img [src]="'assets/ArmorIcons/'+selectedPart+'/rare'+armorSet.getRare(selectedPart || partToDisplay.helmet)+'.png'" alt="">
             <h1 class="modal-title fs-5" id="exampleModalLabel">
-              {{equipedArmor.get(selectedPart) ? equipedArmor.get(selectedPart)!.name : ""}}
+              {{armorSet.getName(selectedPart || partToDisplay.helmet)}}
             </h1>
             <span>
               <img src="assets/wepons/greatsword1.png" alt=""
-              [style]="equipedArmor.get(selectedPart)!.class === 0 || equipedArmor.get(selectedPart)!.class === 2? 'display: block': 'display: none'">
+              [style]="armorSet.getClass(selectedPart || partToDisplay.helmet) === 0 || armorSet.getClass(selectedPart || partToDisplay.helmet) === 2? 'display: block': 'display: none'">
               <img src="assets/wepons/lightbowgun1.png" alt=""
-              [style]="equipedArmor.get(selectedPart)!.class === 1 || equipedArmor.get(selectedPart)!.class === 2? 'display: block': 'display: none'">
+              [style]="armorSet.getClass(selectedPart || partToDisplay.helmet) === 1 || armorSet.getClass(selectedPart || partToDisplay.helmet) === 2? 'display: block': 'display: none'">
             </span>
-            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
           </div>
           <div class="modal-body" data-bs-theme="dark">
             <div class="title"><h4>Stats</h4></div>
-            <app-stats-box [armor]="[equipedArmor.get(selectedPart)!]"/>
+            <app-stats-box [armor]="[armorSet.getPart(selectedPart || partToDisplay.helmet)]"/>
             <div class="title rev"><h4 style="text-align: end;">Skills</h4></div>
-            <app-skills-box [armor]="[equipedArmor.get(selectedPart)!]"/>
+            <app-skills-box [armor]="[armorSet.getPart(selectedPart || partToDisplay.helmet)]"/>
             <div class="title"><h4>Resources</h4></div>
-            <app-resources-box [armor]="[equipedArmor.get(selectedPart)!]"/>
+            <app-resources-box [armor]="[armorSet.getPart(selectedPart || partToDisplay.helmet)]"/>
           </div>
           <div class="modal-footer my-modal-footer">
             <button type="button" class="btn btn-secondary" id="closeBtn" data-bs-dismiss="modal">Close</button>

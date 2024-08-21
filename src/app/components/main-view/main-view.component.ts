@@ -17,6 +17,7 @@ declare var bootstrap: any;
   styleUrls: ['./main-view.component.scss', './piece-modal.scss',
      './load-sets-modal.scss', './save-sets-modal.scss']
 })
+
 export class MainViewComponent implements OnInit, AfterViewInit {
 
   constructor(
@@ -49,7 +50,7 @@ export class MainViewComponent implements OnInit, AfterViewInit {
 
   public isMobile = this.screenSizeService.isMobile$;
 
-  public selectedPart: string = "";
+  public selectedPart?: pieceType;
   public setNameToSave: string = '';
   public showOnMobile: number = 0;  // Indicates wich stats are going to be shown with ngSwitch. 0 = defenses, 1 = skills, 2 = resources
   public equipedArmor: Map<string, ArmorData> = new Map<string, ArmorData>;
@@ -114,8 +115,8 @@ export class MainViewComponent implements OnInit, AfterViewInit {
 
   public selectPart(value: string) {
 
+    this.selectedPart = value as pieceType;
 
-    this.selectedPart = value;
 
     if (this.equipedArmor.get(this.selectedPart)){
       this.openModal('pieceModal');
@@ -138,26 +139,13 @@ export class MainViewComponent implements OnInit, AfterViewInit {
 
 
 
+  /**
+   * Changes the view to a list of the selected armor piece to show.
+   */
   public ChangeSelectedPart() {
 
-    //this.closePieceModal(); not necesary anymore
 
-    let param = "";
-
-    switch (this.selectedPart) {
-      case pieceType.plate:
-        param = piecesTypes.plates;
-        break;
-      case pieceType.waist:
-        param = piecesTypes.waists;
-        break;
-      case pieceType.helmet:
-        param = piecesTypes.helmets;
-        break;
-      default:
-        param = this.selectedPart;
-        break;
-    }
+    let param: string = (this.selectedPart === pieceType.leggings || this.selectedPart === pieceType.guantlets) ? this.selectedPart : this.selectedPart+'s';
 
     this.router.navigate([`list/${param}`]);
   }
@@ -170,7 +158,7 @@ export class MainViewComponent implements OnInit, AfterViewInit {
     // this.closePieceModal(); not necessary anymore
 
     let service = new LocalStorageService();
-    service.removeItem(this.selectedPart);
+    service.removeItem(this.selectedPart!);
     this.UpdateArmor();
   }
 
@@ -245,7 +233,5 @@ export class MainViewComponent implements OnInit, AfterViewInit {
     this.localStorageService.removeSet(this.setToRemoveName);
     this.savedArmorSets = this.localStorageService.getSavedSets();
   }
-
-
 
 }
