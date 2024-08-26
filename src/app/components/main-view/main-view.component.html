@@ -86,7 +86,7 @@
               <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                   <!-- <app-stats-box [armor]="equipedArmorArray"></app-stats-box> -->
-                   <table id="stats-table">
+                   <table id="stats-table" class="table table-striped">
                     <thead>
                       <tr>
                         <td><div class="empty-span"></div></td>
@@ -305,7 +305,6 @@
                 <button (click)="onClickRemoveBtn(armorSet[0])" class="modal-btn red-bg-btn">Remove</button>
               </div>
             </div>
-
           </div>
           <ng-template #noSavedSets>
             <div class="no-saves-div">

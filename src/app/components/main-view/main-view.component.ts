@@ -1,61 +1,65 @@
-import { Component, OnInit, Inject, AfterViewInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { ArmorData, piecesTypes, pieceType } from '../../types/armorData';
-import { ArmorSet } from '../../types/armorSet';
-import { LocalStorageService } from '../../services/local-storage.service';
-import { StatsBoxComponent } from './stats-box/stats-box.component';
-import { SkillsBoxComponent } from './skills-box/skills-box.component';
-import { isPlatformBrowser } from '@angular/common';
-import { PLATFORM_ID } from '@angular/core';
-import { ScreenSizeService } from '../../services/screen-size.service';
+import {
+  Component,
+  OnInit,
+  Inject,
+  AfterViewInit,
+  ViewChild,
+} from "@angular/core";
+import { Router } from "@angular/router";
+import { ArmorData, piecesTypes, pieceType } from "../../types/armorData";
+import { ArmorSet } from "../../types/armorSet";
+import { LocalStorageService } from "../../services/local-storage.service";
+import { StatsBoxComponent } from "./stats-box/stats-box.component";
+import { SkillsBoxComponent } from "./skills-box/skills-box.component";
+import { isPlatformBrowser } from "@angular/common";
+import { PLATFORM_ID } from "@angular/core";
+import { ScreenSizeService } from "../../services/screen-size.service";
 
 declare var bootstrap: any;
 
 @Component({
-  selector: 'app-main-view',
-  templateUrl: './main-view.component.html',
-  styleUrls: ['./main-view.component.scss', './piece-modal.scss',
-     './load-sets-modal.scss', './save-sets-modal.scss']
+  selector: "app-main-view",
+  templateUrl: "./main-view.component.html",
+  styleUrls: [
+    "./main-view.component.scss",
+    "./piece-modal.scss",
+    "./load-sets-modal.scss",
+    "./save-sets-modal.scss",
+  ],
 })
-
 export class MainViewComponent implements OnInit, AfterViewInit {
-
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     private router: Router,
     private screenSizeService: ScreenSizeService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
   ) {}
 
-
   ngAfterViewInit(): void {
-
     // this.cd.detectChanges();
   }
 
   ngOnInit(): void {
-
     // Checks if the code is running on a browser to execute
     if (isPlatformBrowser(this.platformId)) {
-
       this.UpdateArmor();
-
     }
 
     // this.cd.detectChanges();
   }
 
   @ViewChild(StatsBoxComponent, { static: false }) statsBox!: StatsBoxComponent;
-  @ViewChild(SkillsBoxComponent, { static: false }) skillsBox!: SkillsBoxComponent;
+  @ViewChild(SkillsBoxComponent, { static: false })
+  skillsBox!: SkillsBoxComponent;
 
   public isMobile = this.screenSizeService.isMobile$;
 
   public selectedPart?: pieceType;
-  public setNameToSave: string = '';
-  public showOnMobile: number = 0;  // Indicates wich stats are going to be shown with ngSwitch. 0 = defenses, 1 = skills, 2 = resources
-  public equipedArmor: Map<string, ArmorData> = new Map<string, ArmorData>;
-  public savedArmorSets: [string, Map<string,ArmorData>][] = [];
-  private setToRemoveName: string = '';
+  public setNameToSave: string = "";
+  public showOnMobile: number = 0; // Indicates wich stats are going to be shown with ngSwitch. 0 = defenses, 1 = skills, 2 = resources
+  public equipedArmor: Map<string, ArmorData> = new Map<string, ArmorData>();
+  public savedArmorSets: [string, Map<string, ArmorData>][] = [];
+  private setToRemoveName: string = "";
 
   public armorSet: ArmorSet = new ArmorSet(this.equipedArmor);
 
@@ -65,37 +69,33 @@ export class MainViewComponent implements OnInit, AfterViewInit {
   public waistDone: boolean = false;
   public legginsDone: boolean = false;
 
-
   public partToDisplay = pieceType;
 
-
-  get equipedArmorArray () {
-
+  get equipedArmorArray() {
     let equipedArmorArr: ArmorData[] = [];
 
     if (this.equipedArmor) {
-      this.equipedArmor.forEach(v => {
+      this.equipedArmor.forEach((v) => {
         equipedArmorArr.push(v);
-      })
+      });
     }
 
     return equipedArmorArr;
   }
 
-
   /**
    * Returns the armor pieces that are not done to know what resources are needed.
    */
-  get equipedArmorArrayResources () {
-
+  get equipedArmorArrayResources() {
     let equipedArmorArr: ArmorData[] = [];
 
-    if (!this.equipedArmor) {return []}
+    if (!this.equipedArmor) {
+      return [];
+    }
 
     let addToArr = false;
 
     this.equipedArmor.forEach((v, k) => {
-
       addToArr = false;
 
       addToArr = (k === pieceType.helmet && !this.helmetDone) || addToArr;
@@ -107,24 +107,19 @@ export class MainViewComponent implements OnInit, AfterViewInit {
       if (addToArr) {
         equipedArmorArr.push(v);
       }
-    })
+    });
 
     return equipedArmorArr;
   }
 
-
   public selectPart(value: string) {
-
     this.selectedPart = value as pieceType;
 
-
-    if (this.equipedArmor.get(this.selectedPart)){
-      this.openModal('pieceModal');
-    }
-    else {
+    if (this.equipedArmor.get(this.selectedPart)) {
+      this.openModal("pieceModal");
+    } else {
       this.ChangeSelectedPart();
     }
-
   }
 
   public UpdateArmor() {
@@ -137,15 +132,15 @@ export class MainViewComponent implements OnInit, AfterViewInit {
     // console.log(this.equipedArmor); DEBUG
   }
 
-
-
   /**
    * Changes the view to a list of the selected armor piece to show.
    */
   public ChangeSelectedPart() {
-
-
-    let param: string = (this.selectedPart === pieceType.leggings || this.selectedPart === pieceType.guantlets) ? this.selectedPart : this.selectedPart+'s';
+    let param: string =
+      this.selectedPart === pieceType.leggings ||
+      this.selectedPart === pieceType.guantlets
+        ? this.selectedPart
+        : this.selectedPart + "s";
 
     this.router.navigate([`list/${param}`]);
   }
@@ -154,7 +149,6 @@ export class MainViewComponent implements OnInit, AfterViewInit {
    * Removes a equiped part of the current set.
    */
   public RemoveSelectedPart() {
-
     // this.closePieceModal(); not necessary anymore
 
     let service = new LocalStorageService();
@@ -162,11 +156,11 @@ export class MainViewComponent implements OnInit, AfterViewInit {
     this.UpdateArmor();
   }
 
-   /**
+  /**
    * Opens a the modal with the given ID.
    * @param modalID Modal ID = pieceModal, saveSetModal, loadSetModal, removeConfModal, setNameNotAvailableModal.
    */
-   public openModal(modalID: string) {
+  public openModal(modalID: string) {
     const modalElement = document.getElementById(modalID);
 
     if (modalElement) {
@@ -176,32 +170,28 @@ export class MainViewComponent implements OnInit, AfterViewInit {
   }
 
   public onSaveButtonClick() {
-
-    this.openModal('saveSetModal');
+    this.openModal("saveSetModal");
   }
 
   public onSaveConfirmBtnClick() {
-
-    let nameAvailable = this.localStorageService.isSetNameAvailable(this.setNameToSave);
+    let nameAvailable = this.localStorageService.isSetNameAvailable(
+      this.setNameToSave,
+    );
 
     // console.log("Name used: " + nameAvailable); DEBUG
 
     if (!nameAvailable) {
-      this.openModal('setNameNotAvailableModal');
-    }
-    else {
+      this.openModal("setNameNotAvailableModal");
+    } else {
       this.localStorageService.saveSet(this.setNameToSave, this.equipedArmor);
-
     }
   }
 
   public onLoadBtnClick() {
-
     this.savedArmorSets = this.localStorageService.getSavedSets();
 
     // console.log(this.savedArmorSets); DEBUG
-    this.openModal('loadSetModal');
-
+    this.openModal("loadSetModal");
   }
 
   /**
@@ -209,18 +199,15 @@ export class MainViewComponent implements OnInit, AfterViewInit {
    * @param set Saved set to set as current.
    */
   public onClickSetBtn(set: Map<string, ArmorData>) {
-
     this.equipedArmor = set;
 
     for (let key of set.keys()) {
       this.localStorageService.setItem(key, set.get(key)!);
     }
-
   }
 
   public onClickRemoveBtn(setName: string) {
-
-    this.openModal('removeConfModal');
+    this.openModal("removeConfModal");
     this.setToRemoveName = setName;
   }
 
@@ -229,9 +216,7 @@ export class MainViewComponent implements OnInit, AfterViewInit {
   }
 
   public removeSet() {
-
     this.localStorageService.removeSet(this.setToRemoveName);
     this.savedArmorSets = this.localStorageService.getSavedSets();
   }
-
 }
